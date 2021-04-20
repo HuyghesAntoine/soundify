@@ -10,6 +10,12 @@
 - FASQUEL Clément
 
 ---
+## Useful links
+
+- [Our Trello](https://trello.com/b/4eynBCyz)
+- ???
+
+---
 ## Idea: 
 Social network base on the Spotify API. Similar to soundcloud.
 
@@ -22,6 +28,11 @@ Social network base on the Spotify API. Similar to soundcloud.
 - ???
 
 ---
+
+## Prototype front
+![1st idea](img/prototype.png)
+
+
 
 
 
