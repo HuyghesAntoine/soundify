@@ -1,10 +1,22 @@
 import { Component } from 'react';
 import { A } from '@patched/hookrouter';
+import Cookies from 'js-cookie'
+
 
 class Sidebar extends Component {
     constructor(props) {
         super(props);
-        this.state = { username: 'John' };
+        this.state = { username: '' };
+        this.getName();
+    }
+
+    async getName(){
+        const token = Cookies.get('spotifyAuthToken')
+        console.log(token);
+        let res = await fetch ('https://api.spotify.com/v1/me', {method:'GET', headers:{Authorization:'Bearer BQCSoTKyzbwMWURZcDlAMI40lgbk4fsvkFvrL_CXKR7G-PGkv20UtxTLcIyWnbHvxd0cTUunV7xDrWXXK5Zz4FoMr4ZIwtW56fgD2RbagrjjqCMFfLvwU4TccyooLeDCJ51EJx7HHcG8kM_hfiarcr4zSAmtiPYKST-9zzfgfDJEXdQ'}})
+        res = await res.json();
+        console.log(res);
+        this.setState({username: res.display_name});
     }
 
     render() {

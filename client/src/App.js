@@ -5,6 +5,8 @@ import Error from './components/main/Error';
 import Sidebar from './components/sidebar/Sidebar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import { SpotifyAuth, Scopes } from 'react-spotify-auth'
+import 'react-spotify-auth/dist/index.css' // 
 
 function App() {
     const routeResult = useRoutes(routes);
