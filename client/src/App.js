@@ -1,15 +1,18 @@
 import React from 'react';
 import { useRoutes } from '@patched/hookrouter';
+import { SpotifyApiContext, UserTop } from 'react-spotify-api';
 import routes from './router';
 import Error from './components/main/Error';
 import Sidebar from './components/sidebar/Sidebar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { SpotifyAuth, Scopes } from 'react-spotify-auth'
-import 'react-spotify-auth/dist/index.css' // 
+import 'react-spotify-auth/dist/index.css';
+import Cookies from 'js-cookie';
 
 function App() {
     const routeResult = useRoutes(routes);
+    const token = Cookies.get('spotifyAuthToken');
+
     return (
         <div className="App bg-dark text-light">
             <div className="row m-0">
