@@ -16,25 +16,30 @@ class Post extends Component {
 
     render() {
         return (
-            <div class="position-relative border rounded mb-4">
-                <div class="m-2">
-                    <span class="text-warning fw-bold">
+            <div className="position-relative border rounded mb-4">
+                <div className="m-2">
+                    <span className="text-warning fw-bold">
                         {this.state.username}
                     </span>{' '}
-                    <span class="text-muted">· {this.state.date} min ago</span>
+                    <span className="text-muted">
+                        · {this.state.date} min ago
+                    </span>
                     <br />
                     {this.state.content}
                     <div
-                        class="position-absolute top-100 end-0 translate-middle-y d-fle"
+                        className="position-absolute top-100 end-0 translate-middle-y d-fle"
                         id="reactList"
                     >
-                        {this.state.reactions.map((reaction) => {
+                        {this.state.reactions.map((reaction, i) => {
                             return (
-                                <span class="d-inline badge bg-dark border position-relative p-1 m-2">
+                                <span
+                                    key={i}
+                                    className="d-inline badge bg-dark border position-relative p-1 m-2"
+                                >
                                     {reaction.emoji}{' '}
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
+                                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
                                         {reaction.count}
-                                        <span class="visually-hidden">
+                                        <span className="visually-hidden">
                                             number of reaction
                                         </span>
                                     </span>

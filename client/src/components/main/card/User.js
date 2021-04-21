@@ -19,8 +19,8 @@ class User extends Component {
 
     render() {
         return (
-            <div class="position-relative mb-4">
-                <div class="m-2">
+            <div className="position-relative mb-4">
+                <div className="m-2">
                     <img
                         className="avatar-friend rounded-circle border border-2 border-${this.state.doing} bg-light"
                         src={this.state.picture}
