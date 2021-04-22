@@ -46,7 +46,7 @@ Mainly for dev purpose, list of official repo and documentation.
 
 ### Client
 
--   react-spotify-api ([repo](https://github.com/idanlo/react-spotify-api#readme))
+-   react-spotify-api ([repo](https://github.com/idanlo/react-spotify-api#readme), [doc](https://idanlo.github.io/react-spotify-api/))
 -   react-spotify-auth ([repo](https://github.com/kevin51jiang/react-spotify-auth#readme))
 -   react-bootstrap-icons ([repo](https://github.com/ismamz/react-bootstrap-icons#readme))
 -   js-cookie ([repo](https://github.com/js-cookie/js-cookie#readme))
