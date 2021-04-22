@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { A } from '@patched/hookrouter';
 import Cookies from 'js-cookie';
+import { BoxArrowLeft } from 'react-bootstrap-icons';
 
 class Sidebar extends Component {
     constructor(props) {
@@ -23,30 +24,51 @@ class Sidebar extends Component {
 
     render() {
         return (
-            <div className="col-2 border-end border-2 border-warning align-middle">
-                <img
-                    className="avatar rounded-circle border border-2 border-warning bg-light"
-                    src={process.env.PUBLIC_URL + '/img/avataaars.svg'}
-                    alt="Avatar"
-                />
-                <span>#{this.state.username}</span> <br />
-                <span>🟢 Listening ...</span>
-                <div className="">
-                    <ul className="list-unstyled">
+            <div className="pt-3 d-flex flex-column justify-content-between col-2 border-end border-2 border-warning">
+                <section className="d-flex flex-column text-center">
+                    <img
+                        className="avatar mx-auto d-block rounded-circle border border-2 border-warning bg-light"
+                        src={process.env.PUBLIC_URL + '/img/avataaars.svg'}
+                        alt="Avatar"
+                    />
+                    <span>#{this.state.username}</span> <br />
+                    <span>🟢 Listening ...</span>
+                </section>
+
+                <div className="align-self-center">
+                    <ul className="list-unstyled text-center">
                         <li>
-                            <A href="/">Home</A>
+                            <A
+                                className="fs-5 text text-reset text-decoration-none"
+                                href="/"
+                            >
+                                Home
+                            </A>
                         </li>
                         <li>
-                            <A href="/friends">friends</A>
+                            <A
+                                className="fs-5 text text-reset text-decoration-none"
+                                href="/friends"
+                            >
+                                friends
+                            </A>
                         </li>
                         <li>
-                            <A href="/profile">Profile</A>
+                            <A
+                                className="fs-5 text text-reset text-decoration-none"
+                                href="/profile"
+                            >
+                                Profile
+                            </A>
                         </li>
                     </ul>
                 </div>
-                <li className="position-absolute bottom-0 start-0 pb-4 list-unstyled">
-                    <A href="/logout">Logout</A>
-                </li>
+                <A
+                    className="fs-5 pb-4 text text-reset text-decoration-none"
+                    href="/logout"
+                >
+                    <BoxArrowLeft /> Logout
+                </A>
             </div>
         );
     }
