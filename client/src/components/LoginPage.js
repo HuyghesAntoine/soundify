@@ -1,27 +1,27 @@
 import React from 'react';
-import { SpotifyApiContext } from 'react-spotify-api';
-import Cookies from 'js-cookie';
 import { SpotifyAuth, Scopes } from 'react-spotify-auth';
 import 'react-spotify-auth/dist/index.css';
 import { navigate } from '@patched/hookrouter';
 
-const App = () => {
-    const token = Cookies.get('spotifyAuthToken');
-    return (
-        <div className="app">
-            {token ? (
-                <SpotifyApiContext.Provider value={token}>
-                    <p>You are authorized with token: {token}</p>
-                    {navigate('/')}
-                </SpotifyApiContext.Provider>
-            ) : (
-                <SpotifyAuth
-                    redirectUri="http://localhost:3000/login"
-                    clientID={process.env.REACT_APP_SPOTIFY_CLIENT_ID}
-                    scopes={[Scopes.userReadPrivate, 'user-read-email']} // either style will work
-                />
-            )}
-        </div>
-    );
-};
-export default App;
+class LoginPage extends React.Component {
+    render() {
+        return (
+            <div className="position-relative vh-100 bg-dark">
+                <div className="position-absolute top-50 start-50 translate-middle">
+                    <h1 className="text-light text-center">SoundIfy</h1>
+                    <SpotifyAuth
+                        redirectUri="http://localhost:3000"
+                        clientID={process.env.REACT_APP_SPOTIFY_CLIENT_ID}
+                        scopes={[Scopes.userReadPrivate, Scopes.userReadEmail]} // either style will work
+                        onAccessToken={(token) => {
+                            console.log('onAccessToken');
+                            navigate('/friends', true);
+                        }}
+                    />
+                </div>
+            </div>
+        );
+    }
+}
+
+export default LoginPage;
