@@ -1,13 +1,14 @@
 import React from 'react';
 import { useRoutes } from '@patched/hookrouter';
-import { SpotifyApiContext, UserTop } from 'react-spotify-api';
+import { SpotifyApiContext } from 'react-spotify-api';
 import routes from './router';
-import Error from './components/main/Error';
-import Sidebar from './components/sidebar/Sidebar';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
 import Cookies from 'js-cookie';
 import LoginPage from './components/LoginPage';
+import Error from './components/main/Error';
+import Sidebar from './components/sidebar/Sidebar';
+import Releases from './components/main/Releases';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 const App = () => {
     const routeResult = useRoutes(routes);
@@ -23,8 +24,7 @@ const App = () => {
                                 {routeResult || <Error />}
                             </div>
                             <div className="col-2 border-start border-warning border-2">
-                                <span className="text-muted">New Releases</span>
-                                <p>You are authorized with token: {token}</p>
+                                <Releases />
                             </div>
                         </div>
                     </div>
