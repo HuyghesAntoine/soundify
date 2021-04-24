@@ -5,6 +5,14 @@ const apiController = require('./controller/apiController');
 
 
 /* API */
-router.get('/api/test', apiController.test);
+router.put('/api/hello', apiController.putUser); //méthode appelé lors de la connexion
+/*
+router.get('/api/user/:id', apiController.getUser); //get information of user id
+router.get('/api/timeline', apiController.getTimeline);
+router.put('/api/post/:content', apiController.putPost); 
+router.get('/api/post/:id', apiController.getPost);
+router.delete('/api/post/:id', apiController.deletePost);
+*/
+
 
 module.exports = router;

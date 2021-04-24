@@ -1,7 +1,6 @@
 const apiBusiness = require('../business/apiBusiness');
 
-exports.test = function (req, res) {
-    var tmp = apiBusiness.test();
-    console.log(tmp)
-    return res.json(tmp);
-};
+exports.putUser = async function (req, res){
+    res.send(await apiBusiness.createOrUpdateUser(req.query)); 
+    return res;
+}

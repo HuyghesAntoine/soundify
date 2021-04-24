@@ -5,6 +5,9 @@ var http = require('http').Server(app);
 var path = require('path');
 var port = process.env.PORT || 3000;
 var routes = require('./router');
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
 
 app.set('view engine', "html");
 
@@ -14,7 +17,7 @@ app.use(express.json());
 app.disable('x-powered-by');
 
 app.use('/', routes);
-/*
+
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
@@ -24,7 +27,7 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
     res.status(err.status || 500);
 });
-*/
+
 http.listen(port, () => {
     console.log('listening on *:3000');
 });
