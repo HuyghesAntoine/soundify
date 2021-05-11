@@ -6,11 +6,13 @@ const apiController = require('./controller/apiController');
 
 /* API */
 router.put('/api/hello', apiController.putUser); //méthode appelé lors de la connexion
-
-router.get('/api/user/:id', apiController.getUser); //get information of user id
+router.get('/api/user/:mail', apiController.getUser); //get information of user id
 /*
 router.get('/api/timeline', apiController.getTimeline);
+*/
 router.put('/api/post/:content', apiController.putPost); 
+router.delete('/api/post/delete/:id', apiController.deletePost)
+/*
 router.get('/api/post/:id', apiController.getPost);
 router.delete('/api/post/:id', apiController.deletePost);
 */

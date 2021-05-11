@@ -10,13 +10,17 @@ const userSchema = mongoose.Schema({
         required: true
     },
     oauth: {
-        type: String
+        type: String,
+        required: true
     },
     followers: {
-        type: [String]
+        type: [String],
+        required: true
     },
     status: {
-        type: String
+        type: String,
+        required: true,
+        default: "online"
     }
 });
 

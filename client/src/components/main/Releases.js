@@ -10,6 +10,20 @@ class Releases extends Component {
         return (
             <div>
                 <h1>Releases</h1>
+
+                <BrowseNew options={{ limit: 5 }}>
+                    {({ data }) =>
+                        data
+                            ? data.albums.items.map((album) => (
+                                <div>
+                                  <p key={album.id}>{album.name}</p>
+                                  <button>{album.uri}</button>
+                                </div>
+
+                              ))
+                            : null
+                    }
+                </BrowseNew>
             </div>
         );
     }
