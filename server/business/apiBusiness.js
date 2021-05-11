@@ -1,5 +1,5 @@
 const apiModel = require('../model/apiModel');
-const spotifyRepository = require('../httpRepository/spotifyRepository');
+const spotifyRepository = require('../httpRepository/SpotifyRepository');
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const _ = require('lodash');
 const { addFollower } = require('../controller/apiController');
