@@ -2,13 +2,14 @@ const apiModel = require('../model/apiModel');
 const spotifyRepository = require('../httpRepository/spotifyRepository');
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const _ = require('lodash');
+const { addFollower } = require('../controller/apiController');
 
 exports.test = function (req, res) {
     return apiModel.test();
 };
 
 exports.createOrUpdateUser = async function (oauth) {
-    var mail = 'theodouble20@gmail.com';
+    var mail = 'theodouble21@gmail.com';
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", 'https://api.spotify.com/v1/browse/new-releases?access_token=' + oauth.access_token, false ); // false for synchronous request
     xmlHttp.send( null );
@@ -57,4 +58,13 @@ exports.deletePost = async function(id){
 exports.getAllUsers = async function (){
     var users = await apiModel.searchAllUsers();
     return users;
+}
+
+exports.addFollower = async function(id){
+    const res = await apiModel.getFollower('609a50ecba695a14ac60f6c2', id);
+    if( _.isEqual(res, JSON.parse('[]')) ){    
+        const update = await apiModel.addFollower('609a50ecba695a14ac60f6c2', id);
+        return update;
+    }
+    return res;
 }

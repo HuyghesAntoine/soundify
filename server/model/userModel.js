@@ -9,6 +9,10 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    bio : {
+        type: String,
+        required: true
+    },
     oauth: {
         type: String,
         required: true

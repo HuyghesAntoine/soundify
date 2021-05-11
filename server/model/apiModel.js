@@ -20,6 +20,7 @@ exports.insertUser = async function (oauth, mail) {
     const user = new User({
         username: "Théo",
         email: mail,
+        bio: "ceci est une biographie",
         oauth: "undefined"
     });
     try{
@@ -79,3 +80,17 @@ exports.searchAllUsers = async function (mail) {
     const find = await User.find();
     return find;
 };
+
+exports.addFollower = async function (myid, id) {
+    const update = await User.updateOne(
+        { _id: myid},
+        { $push: {followers: id}}
+    );
+    return update;
+}
+
+exports.getFollower = async function (myid, id){
+    const find = await User.find(JSON.parse('{"_id": "' + myid + '","followers": "' + id + '"}'));
+    console.log(find);
+    return find;
+}
