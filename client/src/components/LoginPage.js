@@ -20,6 +20,9 @@ class LoginPage extends React.Component {
                             Scopes.userModifyPlaybackState,
                             Scopes.userLibraryRead,
                             Scopes.userLibraryModify,
+                            Scopes.playlistReadPrivate,
+                            Scopes.userFollowRead,
+                            Scopes.userFollowModify,
                         ]}
                         onAccessToken={(token) => {
                             console.log('onAccessToken');

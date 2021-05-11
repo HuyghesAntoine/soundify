@@ -17,7 +17,9 @@ class Releases extends Component {
                             ? data.albums.items.map((album) => (
                                 <div>
                                   <p key={album.id}>{album.name}</p>
+                                  <img src={album.images[0].url} width="100px"/>
                                   <button>{album.uri}</button>
+                                  <hr/>
                                 </div>
 
                               ))
