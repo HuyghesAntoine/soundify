@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import {UserPlaylists} from 'react-spotify-api';
+import {UserPlaylists, PlaylistImages} from 'react-spotify-api';
 
 class Playlist extends Component {
     constructor(props) {
@@ -10,11 +10,13 @@ class Playlist extends Component {
         return (
             <div>
                 <h1>Playlist</h1>
-                <UserPlaylists options={{ limit: 5 }}>
+                <UserPlaylists>
                     {({data}) =>
                         data ? (
                             data.items.map(data => (
-                                <h1 key={data.id}>{data.name}</h1>
+                                <div className="d-flex">
+                                    <img src={data.images[0].url} width="100px"/> <h1 key={data.id}>  {data.name}</h1>
+                                </div>
                             ))
                         ) : null
                     }
