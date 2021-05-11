@@ -3,7 +3,7 @@ var app = require('express')();
 var express = require('express');
 var http = require('http').Server(app);
 var path = require('path');
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3030;
 var routes = require('./router');
 const bodyParser = require('body-parser');
 
@@ -29,5 +29,5 @@ app.use(function (err, req, res, next) {
 });
 
 http.listen(port, () => {
-    console.log('listening on *:3000');
+    console.log('listening on *:' + port);
 });
