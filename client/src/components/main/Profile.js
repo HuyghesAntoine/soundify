@@ -15,7 +15,10 @@ class Profile extends Component {
                     {({data}) =>
                         data ? (
                             data.items.map(album => (
-                                <h1 key={album.album.id}>{album.album.name}</h1>
+                                <div className="d-flex">
+                                <img src={album.album.images[1].url} width="100px" />
+                                <h1 key={album.album.id}> &nbsp; {album.album.name} </h1>
+                                </div>
                             ))
                         ) : null
                     }
@@ -26,7 +29,10 @@ class Profile extends Component {
                     {({data}) =>
                         data ? (
                             data.artists.items.map(artist => (
-                                <h1 key={artist.id}>{artist.name}</h1>
+                                <div className="d-flex">
+                                    <img className="rounded-circle" src={artist.images[0].url} width="50px"/>
+                                    <h1 key={artist.id}> &nbsp; {artist.name}</h1>
+                                </div>
                             ))
                         ) : null
                     }
