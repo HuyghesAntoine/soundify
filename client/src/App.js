@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRoutes } from '@patched/hookrouter';
-import { SpotifyApiContext } from 'react-spotify-api';
+import { SpotifyApiContext, User } from 'react-spotify-api';
 import routes from './router';
 import Cookies from 'js-cookie';
 import LoginPage from './components/LoginPage';
@@ -9,10 +9,12 @@ import Sidebar from './components/sidebar/Sidebar';
 import Releases from './components/main/Releases';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import Player from './components/main/Player';
 
 const App = () => {
     const routeResult = useRoutes(routes);
     const token = Cookies.get('spotifyAuthToken');
+    console.log(token);
     return (
         <div className="app">
             {token ? (
@@ -22,6 +24,7 @@ const App = () => {
                             <Sidebar />
                             <div className="col-8">
                                 {routeResult || <Error />}
+                                <Player token={token} />
                             </div>
                             <div className="col-2 border-start border-warning border-2">
                                 <Releases />

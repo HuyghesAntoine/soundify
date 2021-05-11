@@ -9,10 +9,18 @@ class LoginPage extends React.Component {
             <div className="position-relative vh-100 bg-dark">
                 <div className="position-absolute top-50 start-50 translate-middle">
                     <h1 className="text-light text-center">SoundIfy</h1>
+                    {console.log(process.env.REACT_APP_SPOTIFY_CLIENT_ID)}
                     <SpotifyAuth
                         redirectUri="http://localhost:3000"
                         clientID={process.env.REACT_APP_SPOTIFY_CLIENT_ID}
-                        scopes={[Scopes.userReadPrivate, Scopes.userReadEmail]} // either style will work
+                        scopes={
+                            [Scopes.userReadPrivate,
+                            Scopes.userReadEmail,
+                            Scopes.userReadPlaybackState,
+                            Scopes.userModifyPlaybackState,
+                            Scopes.userLibraryRead,
+                            Scopes.userLibraryModify,
+                        ]}
                         onAccessToken={(token) => {
                             console.log('onAccessToken');
                             navigate('/friends', true);
