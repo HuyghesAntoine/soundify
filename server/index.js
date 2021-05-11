@@ -1,6 +1,7 @@
 const dotenv = require('dotenv').config();
 var app = require('express')();
 var express = require('express');
+var cors = require('cors')
 var http = require('http').Server(app);
 var path = require('path');
 var port = process.env.PORT || 3030;
@@ -13,6 +14,7 @@ app.set('view engine', "html");
 
 app.set('port', port);
 
+app.use(cors())
 app.use(express.json());
 app.disable('x-powered-by');
 
