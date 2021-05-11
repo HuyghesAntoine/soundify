@@ -19,3 +19,8 @@ exports.deletePost = async function (req, res){
     res.status(201).send(await apiBusiness.deletePost(req.params.id));
     return res;
 }
+
+exports.getAllUsers = async function (req, res){
+    res.status(201).send(await apiBusiness.getAllUsers());
+    return res;
+}
