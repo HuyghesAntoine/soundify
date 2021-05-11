@@ -1,8 +1,8 @@
-import React from 'react';
-import { SpotifyAuth, Scopes } from 'react-spotify-auth';
-import 'react-spotify-auth/dist/index.css';
-import { navigate } from '@patched/hookrouter';
-import axios from 'axios'
+import React from "react";
+import { SpotifyAuth, Scopes } from "react-spotify-auth";
+import "react-spotify-auth/dist/index.css";
+import { navigate } from "@patched/hookrouter";
+import axios from "axios";
 
 class LoginPage extends React.Component {
     render() {
@@ -14,8 +14,8 @@ class LoginPage extends React.Component {
                     <SpotifyAuth
                         redirectUri="http://localhost:3000"
                         clientID={process.env.REACT_APP_SPOTIFY_CLIENT_ID}
-                        scopes={
-                            [Scopes.userReadPrivate,
+                        scopes={[
+                            Scopes.userReadPrivate,
                             Scopes.userReadEmail,
                             Scopes.userReadPlaybackState,
                             Scopes.userModifyPlaybackState,
@@ -26,14 +26,17 @@ class LoginPage extends React.Component {
                             Scopes.userFollowModify,
                         ]}
                         onAccessToken={(token) => {
-                            console.log('onAccessToken');
-                            axios.put('http://localhost:3030/api/hello?access_token='+token)
-                            .then(response => { 
-                                console.log(response.data)
-                                this.setState({ internal : response.data }
+                            console.log("onAccessToken");
+                            axios
+                                .put(
+                                    "http://localhost:3030/api/hello?access_token=" +
+                                        token
                                 )
-                            });
-                            navigate('/friends', true);
+                                .then((response) => {
+                                    console.log(response.data);
+                                    this.setState({ internal: response.data });
+                                });
+                            navigate("/friends", true);
                         }}
                     />
                 </div>

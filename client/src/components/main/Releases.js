@@ -1,5 +1,5 @@
-import { Component } from 'react';
-import { BrowseNew } from 'react-spotify-api';
+import { Component } from "react";
+import { BrowseNew } from "react-spotify-api";
 
 class Releases extends Component {
     constructor(props) {
@@ -11,17 +11,27 @@ class Releases extends Component {
             <div>
                 <h1>Releases</h1>
 
-                <BrowseNew options={{ limit: 5 }}>
+                <BrowseNew options={{ limit: 3 }}>
                     {({ data }) =>
                         data
                             ? data.albums.items.map((album) => (
-                                <div>
-                                  <p key={album.id}>{album.name} - {album.artists[0].name}</p>
-                                  <img src={album.images[0].url} width="100px"/>
-                                  <button>{album.uri}</button>
-                                  <hr/>
-                                </div>
+                                  <div>
+                                      <p key={album.id}>
+                                          {album.name}{" "}
+                                          {album.artists[0] ? (
+                                              <span className="text-muted">
+                                                  {album.artists[0].name}
+                                              </span>
+                                          ) : null}
+                                      </p>
 
+                                      <img
+                                          src={album.images[0].url}
+                                          width="100px"
+                                      />
+                                      {/*<button>{album.uri}</button>*/}
+                                      <hr />
+                                  </div>
                               ))
                             : null
                     }

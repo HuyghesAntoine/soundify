@@ -1,5 +1,6 @@
-import { Component } from 'react';
-import { UserAlbums, UserArtists } from 'react-spotify-api'
+import { A } from "@patched/hookrouter";
+import { Component } from "react";
+import { UserAlbums, UserArtists } from "react-spotify-api";
 
 class Profile extends Component {
     constructor(props) {
@@ -10,31 +11,49 @@ class Profile extends Component {
         return (
             <div>
                 <h1>Profile</h1>
-                ALBUMS : 
+                ALBUMS :
                 <UserAlbums>
-                    {({data}) =>
-                        data ? (
-                            data.items.map(album => (
-                                <div className="d-flex">
-                                <img src={album.album.images[1].url} width="100px" />
-                                <h1 key={album.album.id}> &nbsp; {album.album.name} </h1>
-                                </div>
-                            ))
-                        ) : null
+                    {({ data }) =>
+                        data
+                            ? data.items.map((album) => (
+                                  <A
+                                      className="text text-reset text-decoration-none"
+                                      href={"/album/" + album.album.id}
+                                  >
+                                      <div className="d-flex">
+                                          <img
+                                              src={album.album.images[1].url}
+                                              width="100px"
+                                          />
+                                          <h1 key={album.album.id}>
+                                              {" "}
+                                              &nbsp; {album.album.name}{" "}
+                                          </h1>
+                                      </div>
+                                  </A>
+                              ))
+                            : null
                     }
                 </UserAlbums>
-                <hr/>
-                ARTISTS : 
+                <hr />
+                ARTISTS :
                 <UserArtists>
-                    {({data}) =>
-                        data ? (
-                            data.artists.items.map(artist => (
-                                <div className="d-flex">
-                                    <img className="rounded-circle" src={artist.images[0].url} width="50px"/>
-                                    <h1 key={artist.id}> &nbsp; {artist.name}</h1>
-                                </div>
-                            ))
-                        ) : null
+                    {({ data }) =>
+                        data
+                            ? data.artists.items.map((artist) => (
+                                  <div className="d-flex">
+                                      <img
+                                          className="rounded-circle"
+                                          src={artist.images[0].url}
+                                          width="50px"
+                                      />
+                                      <h1 key={artist.id}>
+                                          {" "}
+                                          &nbsp; {artist.name}
+                                      </h1>
+                                  </div>
+                              ))
+                            : null
                     }
                 </UserArtists>
             </div>
