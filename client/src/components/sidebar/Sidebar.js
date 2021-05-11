@@ -61,6 +61,14 @@ class Sidebar extends Component {
                                 Profile
                             </A>
                         </li>
+                        <li>
+                            <A
+                                className="fs-5 text text-reset text-decoration-none"
+                                href="/playlist"
+                            >
+                                Playlist
+                            </A>
+                        </li>
                     </ul>
                 </div>
                 <A
