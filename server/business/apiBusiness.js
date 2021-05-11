@@ -25,7 +25,7 @@ exports.createOrUpdateUser = async function (oauth) {
 exports.getUser = async function (mail){
     var user = await apiModel.searchUser(mail);
     if( _.isEqual(user, JSON.parse('[]')) )
-        return JSON.parse('{}')
+        return JSON.parse('[]')
     user = user[0];
     console.log(user);
     user.oauth = 'HIDE';
@@ -34,6 +34,11 @@ exports.getUser = async function (mail){
 
 exports.putPost = async function(content) {
     const res = await apiModel.insertPost('théo', content); //changer le théo en oauth.username
+    return res;
+}
+
+exports.getPost = async function(id) {
+    const res = await apiModel.searchPostWithId(id);
     return res;
 }
 

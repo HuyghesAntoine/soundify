@@ -11,11 +11,10 @@ router.get('/api/user/:mail', apiController.getUser); //get information of user 
 router.get('/api/timeline', apiController.getTimeline);
 */
 router.put('/api/post/:content', apiController.putPost); 
-router.delete('/api/post/delete/:id', apiController.deletePost)
-/*
-router.get('/api/post/:id', apiController.getPost);
 router.delete('/api/post/:id', apiController.deletePost);
-*/
+
+router.get('/api/post/get/:id', apiController.getPost);
+
 
 
 module.exports = router;
