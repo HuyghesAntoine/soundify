@@ -31,6 +31,8 @@ exports.insertUser = async function (oauth, mail) {
     }
 }
 
+
+
 exports.updateUser = async function (oauth, mail) {
     console.log('update user');
     const update = await User.updateOne(
@@ -72,3 +74,8 @@ exports.searchPostWithId = async function (id){
     const find = await Post.find(JSON.parse('{"_id": "' + id + '"}'));
     return find;
 }
+
+exports.searchAllUsers = async function (mail) {
+    const find = await User.find();
+    return find;
+};

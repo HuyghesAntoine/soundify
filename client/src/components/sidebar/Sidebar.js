@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { A } from '@patched/hookrouter';
 import { User } from 'react-spotify-api';
-import { BoxArrowLeft } from 'react-bootstrap-icons';
+import { PatchCheck, BoxArrowLeft } from 'react-bootstrap-icons';
 
 class Sidebar extends Component {
     constructor(props) {
@@ -19,15 +19,15 @@ class Sidebar extends Component {
                         alt="Avatar"
                     />
                     <span>
-                        #{' '}
+                        #
                         <User>
                             {({ data }) => {
                                 return data ? (
-                                    <span>{data.display_name}</span>
+                                    <span>{data.display_name} {data.product === "premium" ? <PatchCheck/> : null}</span>
                                 ) : null;
                             }}
                         </User>
-                    </span>{' '}
+                    </span>
                     <br />
                     <span>🟢 Listening ...</span>
                 </section>

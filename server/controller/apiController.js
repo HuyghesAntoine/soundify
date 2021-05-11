@@ -28,3 +28,8 @@ exports.deletePost = async function (req, res){
         res.status(200).send(post);
     return res;
 }
+
+exports.getAllUsers = async function (req, res){
+    res.status(201).send(await apiBusiness.getAllUsers());
+    return res;
+}

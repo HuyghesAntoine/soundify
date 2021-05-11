@@ -53,3 +53,8 @@ exports.deletePost = async function(id){
         return resSearch;
     }
 }
+
+exports.getAllUsers = async function (){
+    var users = await apiModel.searchAllUsers();
+    return users;
+}
