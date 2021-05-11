@@ -7,6 +7,7 @@ const apiController = require('./controller/apiController');
 /* API */
 router.put('/api/hello', apiController.putUser); //méthode appelé lors de la connexion
 router.get('/api/user/:mail', apiController.getUser); //get information of user id
+router.get('/api/users', apiController.getAllUsers);
 /*
 router.get('/api/timeline', apiController.getTimeline);
 */
