@@ -15,13 +15,13 @@ exports.searchUser = async function (mail) {
     return find;
 };
 
-exports.insertUser = async function (oauth, mail) {
+exports.insertUser = async function (oauth, token) {
     console.log('insert user ');
     const user = new User({
-        username: "Théo",
-        email: mail,
-        bio: "ceci est une biographie",
-        oauth: "undefined"
+        username: oauth.display_name,
+        email: oauth.email,
+        bio: " ",
+        oauth: token
     });
     try{
         const newUser = await user.save();
@@ -34,11 +34,11 @@ exports.insertUser = async function (oauth, mail) {
 
 
 
-exports.updateUser = async function (oauth, mail) {
+exports.updateUser = async function (oauth, token) {
     console.log('update user');
     const update = await User.updateOne(
-        { email: mail},
-        { $set: { oauth: 'tmp'} }
+        { email: oauth.email},
+        { $set: { oauth: token} }
     );
     return update;
 }

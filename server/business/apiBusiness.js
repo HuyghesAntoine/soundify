@@ -9,17 +9,18 @@ exports.test = function (req, res) {
 };
 
 exports.createOrUpdateUser = async function (oauth) {
-    var mail = 'theodouble21@gmail.com';
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", 'https://api.spotify.com/v1/browse/new-releases?access_token=' + oauth.access_token, false ); // false for synchronous request
+    xmlHttp.open( "GET", 'https://api.spotify.com/v1/me?access_token=' + oauth.access_token, false ); // false for synchronous request
     xmlHttp.send( null );
+    const res = JSON.parse(xmlHttp.responseText);
+    console.log(res);
     /*if(JSON.parse(xmlHttp.responseText).error.status == 401)
         return JSON.parse('{"error": "oauth incorrect"}');
     else{*/
-        if( _.isEqual(await apiModel.searchUser(mail), JSON.parse("[]")) ) //email probablement pas dans oauth
-            return await apiModel.insertUser(oauth, mail);
+        if( _.isEqual(await apiModel.searchUser(res.email), JSON.parse("[]")) ) //email probablement pas dans oauth
+            return await apiModel.insertUser(res, oauth.access_token);
         else
-            return await apiModel.updateUser(oauth, mail);
+            return await apiModel.updateUser(res, oauth.access_token);
     //}
 }
 
