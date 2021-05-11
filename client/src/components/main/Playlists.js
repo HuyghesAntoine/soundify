@@ -14,8 +14,14 @@ class Playlist extends Component {
                     {({data}) =>
                         data ? (
                             data.items.map(data => (
-                                <div className="d-flex">
-                                    <img src={data.images[0].url} width="100px"/> <h1 key={data.id}>  {data.name}</h1>
+                                <div className="d-flex pb-2">
+                                    <img src={data.images[0] ? data.images[0].url : null} width="80px"/>
+                                    <div className="flex-fill d-flex align-items-center justify-content-between ps-2 pe-2">
+                                        <div>
+                                        <p className="fs-2" key={data.id}>  {data.name}</p>
+                                        </div>
+                                        <div><p className="fs-4 text-muted"> ({data.tracks.total} songs)</p></div>
+                                    </div>
                                 </div>
                             ))
                         ) : null

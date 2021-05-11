@@ -18,7 +18,6 @@ class Player extends Component {
                     Click here!
                 </button>
                 <SpotifyPlayer
-                play
                   styles={{
                     activeColor: '#fff',
                     bgColor: '#212529',
