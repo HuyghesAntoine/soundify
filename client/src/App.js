@@ -1,6 +1,6 @@
 import React from "react";
 import { useRoutes } from "@patched/hookrouter";
-import { SpotifyApiContext, User } from "react-spotify-api";
+import { SpotifyApiContext } from "react-spotify-api";
 import routes from "./router";
 import Cookies from "js-cookie";
 import LoginPage from "./components/LoginPage";
@@ -15,6 +15,7 @@ const App = () => {
     const routeResult = useRoutes(routes);
     const token = Cookies.get("spotifyAuthToken");
     console.log(token);
+
     return (
         <div className="app vh-100 mb-5">
             {token ? (
@@ -26,7 +27,7 @@ const App = () => {
                                 {routeResult || <Error />}
                                 <Player token={token} />
                             </div>
-                            <div className="col-2 border-start border-warning border-2 overflow-auto">
+                            <div className="col-2 text-break border-start border-warning border-2 overflow-hidden">
                                 <Releases />
                             </div>
                         </div>

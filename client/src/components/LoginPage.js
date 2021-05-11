@@ -26,7 +26,6 @@ class LoginPage extends React.Component {
                             Scopes.userFollowModify,
                         ]}
                         onAccessToken={(token) => {
-                            console.log("onAccessToken");
                             axios
                                 .put(
                                     "http://localhost:3030/api/hello?access_token=" +

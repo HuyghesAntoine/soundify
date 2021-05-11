@@ -1,3 +1,4 @@
+import { A } from "@patched/hookrouter";
 import { Component } from "react";
 import { BrowseNew } from "react-spotify-api";
 
@@ -15,8 +16,11 @@ class Releases extends Component {
                     {({ data }) =>
                         data
                             ? data.albums.items.map((album) => (
-                                  <div>
-                                      <p key={album.id}>
+                                  <A
+                                      className="text text-reset text-decoration-none"
+                                      href={"/album/" + album.id}
+                                  >
+                                      <p key={album.id} className="break-word">
                                           {album.name}{" "}
                                           {album.artists[0] ? (
                                               <span className="text-muted">
@@ -31,7 +35,7 @@ class Releases extends Component {
                                       />
                                       {/*<button>{album.uri}</button>*/}
                                       <hr />
-                                  </div>
+                                  </A>
                               ))
                             : null
                     }
