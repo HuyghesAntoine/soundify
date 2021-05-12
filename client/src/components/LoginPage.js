@@ -26,15 +26,16 @@ class LoginPage extends React.Component {
                             Scopes.userFollowModify,
                         ]}
                         onAccessToken={(token) => {
-                            axios
-                                .put(
-                                    "http://localhost:3030/api/hello?access_token=" +
-                                        token
-                                )
-                                .then((response) => {
-                                    console.log(response.data);
-                                    this.setState({ internal: response.data });
-                                });
+                            axios({
+                                method: "put",
+                                url: "http://localhost:3030/api/hello",
+                                headers: {
+                                    Authorization: "Bearer " + token,
+                                },
+                            }).then((response) => {
+                                console.log(response.data);
+                                this.setState({ internal: response.data });
+                            });
                             navigate("/friends", true);
                         }}
                     />

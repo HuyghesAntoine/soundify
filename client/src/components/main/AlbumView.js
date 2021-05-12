@@ -1,4 +1,5 @@
 import { Component } from "react";
+import Moment from "react-moment";
 import { Album, AlbumTracks } from "react-spotify-api";
 import TrackLineView from "./card/TrackLineView";
 
@@ -23,24 +24,34 @@ class AlbumView extends Component {
                                         width="100px"
                                     ></img>
                                 ) : null}
-                                <p>{data.release_date}</p>
+                                <p>
+                                    <Moment format="y">
+                                        {data.release_date}
+                                    </Moment>
+                                </p>
+                                <AlbumTracks id={this.state.id}>
+                                    {({ data }) =>
+                                        data
+                                            ? data.items.map((track, i) => (
+                                                  <TrackLineView
+                                                      track={track}
+                                                      index={i + 1}
+                                                      isAlbum={true}
+                                                  />
+                                              ))
+                                            : null
+                                    }
+                                </AlbumTracks>
+
+                                <div className="pt-5 text-white-50 lh-1">
+                                    {data.copyrights.map((copyright) => (
+                                        <p>{copyright.text}</p>
+                                    ))}
+                                </div>
                             </div>
                         ) : null
                     }
                 </Album>
-                <AlbumTracks id={this.state.id}>
-                    {({ data }) =>
-                        data
-                            ? data.items.map((track, i) => (
-                                  <TrackLineView
-                                      track={track}
-                                      index={i + 1}
-                                      isAlbum={true}
-                                  />
-                              ))
-                            : null
-                    }
-                </AlbumTracks>
             </div>
         );
     }

@@ -33,10 +33,15 @@ class TrackLineView extends Component {
                 <div className="col-5" key={this.state.track.id}>
                     {this.state.track.name}
                 </div>
-                <div className="col text-white-50">
-                    {this.state.track.artists[0].name}
+                <div className="col text-white-50 text-truncate">
+                    {this.state.track.artists.map((artist, i) => (
+                        <span>
+                            {i ? ", " : null}
+                            {artist.name}
+                        </span>
+                    ))}
                 </div>
-                <div className="col text-white-50 text-end">
+                <div className="col-1 text-white-50 text-end">
                     <Moment format="m:ss">
                         {this.state.track.duration_ms}
                     </Moment>
