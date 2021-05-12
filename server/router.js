@@ -13,7 +13,7 @@ router.put('/api/addFollower/:id', apiController.addFollower);
 /*
 router.get('/api/timeline', apiController.getTimeline);
 */
-router.put('/api/post/:content', apiController.putPost); 
+router.put('/api/post', apiController.putPost); 
 router.delete('/api/post/:id', apiController.deletePost);
 
 router.get('/api/post/get/:id', apiController.getPost);

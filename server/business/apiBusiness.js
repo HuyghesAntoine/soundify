@@ -17,7 +17,7 @@ exports.createOrUpdateUser = async function (oauth) {
     /*if(JSON.parse(xmlHttp.responseText).error.status == 401)
         return JSON.parse('{"error": "oauth incorrect"}');
     else{*/
-        if( _.isEqual(await apiModel.searchUser(res.email), JSON.parse("[]")) ) //email probablement pas dans oauth
+        if( _.isEqual(await apiModel.getUser(res.email), JSON.parse("[]")) ) //email probablement pas dans oauth
             return await apiModel.insertUser(res, oauth.access_token);
         else
             return await apiModel.updateUser(res, oauth.access_token);
@@ -25,7 +25,7 @@ exports.createOrUpdateUser = async function (oauth) {
 }
 
 exports.getUser = async function (mail){
-    var user = await apiModel.searchUser(mail);
+    var user = await apiModel.getUser(mail);
     if( _.isEqual(user, JSON.parse('[]')) )
         return JSON.parse('[]')
     user = user[0];
@@ -34,8 +34,12 @@ exports.getUser = async function (mail){
     return user;
 }
 
-exports.putPost = async function(content) {
-    const res = await apiModel.insertPost('théo', content); //changer le théo en oauth.username
+exports.putPost = async function(content, query) {
+    const token = query.access_token;
+    const user = await apiModel.getUserWithToken(token);
+    if( _.isEqual(user, JSON.parse('[]')))
+        return user;
+    const res = await apiModel.insertPost(user[0]._id, content); //changer le théo en oauth.username
     return res;
 }
 
@@ -61,10 +65,14 @@ exports.getAllUsers = async function (){
     return users;
 }
 
-exports.addFollower = async function(id){
-    const res = await apiModel.getFollower('609a50ecba695a14ac60f6c2', id);
-    if( _.isEqual(res, JSON.parse('[]')) ){    
-        const update = await apiModel.addFollower('609a50ecba695a14ac60f6c2', id);
+exports.addFollower = async function(id, query){
+    const token = query.access_token;
+    console.log(token);
+    console.log(id);
+    const user = await apiModel.getUserWithId(id);
+    const res = await apiModel.getFollower(token, id);
+    if( _.isEqual(res, JSON.parse('[]')) && !_.isEqual(user, JSON.parse('[]')) ){    
+        const update = await apiModel.addFollower(token, id);
         return update;
     }
     return res;

@@ -53,3 +53,9 @@ Mainly for dev purpose, list of official repo and documentation.
 -   react-spotify-web-playback ([repo](https://github.com/gilbarbara/react-spotify-web-playback#readme))
 -   react-moment ([repo](https://github.com/headzoo/react-moment#readme))
 -   axios ([repo](https://github.com/axios/axios#readme))
+
+### backend (path)
+
+-  `localhost:3030/api/hello?access_token=...`: for create a new user or update a token an old one
+-  `localhost:3030/api/addFollowers/idToAdd?access_token=...`: add a follower
+- `localhost:3030/api/post?access_token=...`: add a post and waiting the "content" inside the body

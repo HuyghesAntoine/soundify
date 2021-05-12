@@ -16,7 +16,7 @@ exports.getUser = async function (req, res){
 }
 
 exports.putPost = async function (req, res){
-    res.status(201).send(await apiBusiness.putPost(req.params.content));
+    res.status(201).send(await apiBusiness.putPost(req.body.content, req.query));
     return res;
 }
 
@@ -44,7 +44,7 @@ exports.getPost = async function (req, res){
 }
 
 exports.addFollower = async function (req, res){
-    const update = await apiBusiness.addFollower(req.params.id);
+    const update = await apiBusiness.addFollower(req.params.id, req.query);
     if( _.isEqual(update, JSON.parse('[]')) )
         res.status(404).send(update);
     else

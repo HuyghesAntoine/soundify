@@ -9,9 +9,21 @@ mongoose.connect(process.env.DB_url,{ useNewUrlParser: true, useUnifiedTopology:
     console.log('db is connected !!!')
 });
 
+exports.getUserWithId = async function (id) {
+    try{
+        const find = await User.find(JSON.parse('{"_id": "' + id + '"}'));
+        return find;
+    }catch(err){}
+    return JSON.parse('[]');
+};
 
-exports.searchUser = async function (mail) {
+exports.getUser = async function (mail) {
     const find = await User.find(JSON.parse('{"email": "' + mail + '"}'));
+    return find;
+};
+
+exports.getUserWithToken = async function (token) {
+    const find = await User.find(JSON.parse('{"oauth": "' + token + '"}'));
     return find;
 };
 
@@ -81,16 +93,16 @@ exports.searchAllUsers = async function (mail) {
     return find;
 };
 
-exports.addFollower = async function (myid, id) {
+exports.addFollower = async function (token, id) {
     const update = await User.updateOne(
-        { _id: myid},
+        { oauth : token},
         { $push: {followers: id}}
     );
     return update;
 }
 
-exports.getFollower = async function (myid, id){
-    const find = await User.find(JSON.parse('{"_id": "' + myid + '","followers": "' + id + '"}'));
+exports.getFollower = async function (token, id){
+    const find = await User.find(JSON.parse('{"oauth": "' + token + '","followers": "' + id + '"}'));
     console.log(find);
     return find;
 }
