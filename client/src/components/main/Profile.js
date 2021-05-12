@@ -20,14 +20,19 @@ class Profile extends Component {
                                       className="text text-reset text-decoration-none"
                                       href={"/album/" + album.album.id}
                                   >
-                                      <div className="d-flex">
+                                      <div className="d-flex pb-2">
                                           <img
                                               src={album.album.images[1].url}
                                               width="100px"
                                           />
+                                          <span>
+                                          </span>
                                           <h1 key={album.album.id}>
                                               {" "}
                                               &nbsp; {album.album.name}{" "}
+                                              <span className="text-muted">
+                                                  - {album.album.artists[0].name}
+                                              </span>
                                           </h1>
                                       </div>
                                   </A>
@@ -41,7 +46,11 @@ class Profile extends Component {
                     {({ data }) =>
                         data
                             ? data.artists.items.map((artist) => (
-                                  <div className="d-flex">
+                                <A
+                                className="text text-reset text-decoration-none"
+                                href={"/artist/" + artist.id}
+                            >
+                                  <div className="d-flex pb-2">
                                       <img
                                           className="rounded-circle"
                                           src={artist.images[0].url}
@@ -52,6 +61,7 @@ class Profile extends Component {
                                           &nbsp; {artist.name}
                                       </h1>
                                   </div>
+                                  </A>
                               ))
                             : null
                     }
