@@ -50,3 +50,6 @@ Mainly for dev purpose, list of official repo and documentation.
 -   react-spotify-auth ([repo](https://github.com/kevin51jiang/react-spotify-auth#readme))
 -   react-bootstrap-icons ([repo](https://github.com/ismamz/react-bootstrap-icons#readme))
 -   js-cookie ([repo](https://github.com/js-cookie/js-cookie#readme))
+-   react-spotify-web-playback ([repo](https://github.com/gilbarbara/react-spotify-web-playback#readme))
+-   react-moment ([repo](https://github.com/headzoo/react-moment#readme))
+-   axios ([repo](https://github.com/axios/axios#readme))
