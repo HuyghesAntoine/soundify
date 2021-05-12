@@ -2,7 +2,7 @@ const apiBusiness = require('../business/apiBusiness');
 const _ = require('lodash');
 
 exports.putUser = async function (req, res){
-    res.status(201).send(await apiBusiness.createOrUpdateUser(req.query)); 
+    res.status(201).send(await apiBusiness.createOrUpdateUser(req.headers)); 
     return res;
 }
 
@@ -16,7 +16,7 @@ exports.getUser = async function (req, res){
 }
 
 exports.putPost = async function (req, res){
-    res.status(201).send(await apiBusiness.putPost(req.body.content, req.query));
+    res.status(201).send(await apiBusiness.putPost(req.body.content, req.headers));
     return res;
 }
 
@@ -44,7 +44,7 @@ exports.getPost = async function (req, res){
 }
 
 exports.addFollower = async function (req, res){
-    const update = await apiBusiness.addFollower(req.params.id, req.query);
+    const update = await apiBusiness.addFollower(req.params.id, req.headers);
     if( _.isEqual(update, JSON.parse('[]')) )
         res.status(404).send(update);
     else

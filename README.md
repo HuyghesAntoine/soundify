@@ -56,6 +56,6 @@ Mainly for dev purpose, list of official repo and documentation.
 
 ### backend (path)
 
--  `localhost:3030/api/hello?access_token=...`: for create a new user or update a token an old one
--  `localhost:3030/api/addFollowers/idToAdd?access_token=...`: add a follower
-- `localhost:3030/api/post?access_token=...`: add a post and waiting the "content" inside the body
+-  `localhost:3030/api/hello`: to create a new user or update a token of an existing one (access_token in the header)
+-  `localhost:3030/api/addFollowers/:id`: to add a new follower (access_token in the header)
+-  `localhost:3030/api/post`: to add a new post. The content need to be in the body (access_token in the header)
