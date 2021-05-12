@@ -1,9 +1,6 @@
 import { Component } from "react";
-import { Track } from 'react-spotify-api'
-
-
-
-
+import { ArtistTracks } from "react-spotify-api";
+import TrackLineView from "./card/TrackLineView";
 
 class ArtistView extends Component {
     constructor(props) {
@@ -14,15 +11,15 @@ class ArtistView extends Component {
         return (
             <div>
                 <h1>Artist</h1>
-                <Track id={this.state.id}>
-                    {({data}) => (
-                        data ? (
-                            data.map(track => (
-                                <h1 key={track.id}>{track.name}</h1>
-                            ))
-                        ) : null
-                    )}
-                </Track>
+                <ArtistTracks id={this.state.id}>
+                    {({ data }) =>
+                        data
+                            ? data.tracks.map((track, i) => (
+                                  <TrackLineView track={track} index={i + 1} />
+                              ))
+                            : null
+                    }
+                </ArtistTracks>
             </div>
         );
     }

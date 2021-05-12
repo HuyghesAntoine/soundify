@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Album, AlbumTracks } from "react-spotify-api";
+import TrackLineView from "./card/TrackLineView";
 
 class AlbumView extends Component {
     constructor(props) {
@@ -30,10 +31,12 @@ class AlbumView extends Component {
                 <AlbumTracks id={this.state.id}>
                     {({ data }) =>
                         data
-                            ? data.items.map((track) => (
-                                  <div>
-                                      <span key={track.id}>{track.name}</span>
-                                  </div>
+                            ? data.items.map((track, i) => (
+                                  <TrackLineView
+                                      track={track}
+                                      index={i + 1}
+                                      isAlbum={true}
+                                  />
                               ))
                             : null
                     }
