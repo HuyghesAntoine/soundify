@@ -118,3 +118,10 @@ exports.updateUsersBio = async function (id, content) {
     );
     return update;
 };
+
+exports.searchUser = async function (query, limit) {
+    const find = await User.find(
+        { username: { $regex: query, $options: 'i'} }
+    );
+    return find;
+}

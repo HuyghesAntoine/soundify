@@ -1,22 +1,23 @@
 var express = require('express');
 var router = express.Router();
 
-const apiController = require('./controller/apiController');
+const userController = require('./controller/userController');
+const postController = require('./controller/postController');
 
-/* API */
-router.put('/api/hello', apiController.putUser); //méthode appelé lors de la connexion
-router.get('/api/user/:mail', apiController.getUser); //get information of user id
-router.get('/api/me', apiController.getMe);
-router.get('/api/users', apiController.getAllUsers);
-router.put('/api/user/bio', apiController.putBio);
+// API - USER
+router.put('/api/hello', userController.putUser); //méthode appelé lors de la connexion
+router.get('/api/user/get/:mail', userController.getUser); //get information of user id
+router.get('/api/me', userController.getMe);
+router.get('/api/users', userController.getAllUsers);
+router.put('/api/user/bio', userController.putBio);
+router.put('/api/addFollower/:id', userController.addFollower);
+router.get('/api/user/search', userController.searchUser);
 
-router.put('/api/addFollower/:id', apiController.addFollower);
-/*
-router.get('/api/timeline', apiController.getTimeline);
-*/
-router.put('/api/post', apiController.putPost);
-router.delete('/api/post/:id', apiController.deletePost);
+// API - POST
+router.put('/api/post', postController.putPost);
+router.delete('/api/post/:id', postController.deletePost);
+router.get('/api/post/get/:id', postController.getPost);
+//router.get('/api/timeline', apiController.getTimeline);
 
-router.get('/api/post/get/:id', apiController.getPost);
 
 module.exports = router;
