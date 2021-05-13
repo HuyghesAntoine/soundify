@@ -1,6 +1,5 @@
 const apiModel = require('../model/apiModel');
 const spotifyRepository = require('../httpRepository/SpotifyRepository');
-const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 const _ = require('lodash');
 const { addFollower } = require('../controller/apiController');
 
@@ -8,23 +7,17 @@ exports.test = function (req, res) {
     return apiModel.test();
 };
 
-exports.createOrUpdateUser = async function (oauth) {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open(
-        'GET',
-        'https://api.spotify.com/v1/me?access_token=' + oauth,
-        false
-    ); // false for synchronous request
-    xmlHttp.send(null);
-    const res = JSON.parse(xmlHttp.responseText);
+exports.createOrUpdateUser = async function (token) {
+    const res = spotifyRepository.getUser(token);
     console.log(res);
     /*if(JSON.parse(xmlHttp.responseText).error.status == 401)
         return JSON.parse('{"error": "oauth incorrect"}');
     else{*/
     if (_.isEqual(await apiModel.getUser(res.email), JSON.parse('[]')))
         //email probablement pas dans oauth
-        return await apiModel.insertUser(res, oauth);
-    else return await apiModel.updateUser(res, oauth);
+        return await apiModel.insertUser(res, token);
+    else 
+        return await apiModel.updateUser(res, token);
     //}
 };
 
