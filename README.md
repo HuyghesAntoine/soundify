@@ -56,6 +56,20 @@ Mainly for dev purpose, list of official repo and documentation.
 
 ### backend (path)
 
--  `localhost:3030/api/hello`: to create a new user or update a token of an existing one (access_token in the header)
--  `localhost:3030/api/addFollowers/:id`: to add a new follower (access_token in the header)
--  `localhost:3030/api/post`: to add a new post. The content need to be in the body (access_token in the header)
+We assume that each route is preceded by `http://localhost:3030/api/`, and each request have a headers.authorization
+
+| Method   | route                  | detail                                                                                |
+| -------- | ---------------------- | ------------------------------------------------------------------------------------- | ---------------------------- |
+| `PUT`    | `hello`                | create a new user or update a token of an existing one                                |
+| `GET`    | `me`                   | get current user                                                                      |
+| `GET`    | `user/:id`             | get user using his id                                                                 |
+| `GET`    | `user/:id/follow`      | get users follow (=> User[] )                                                         |
+| `GET`    | `user/:id/follower`    | get users follower => User[] )                                                        |
+| `GET`    | `user/:id/timeline`    | get users timeline (=> Post[] )                                                       |
+| `PUT`    | `addFollowers/:id`     | add a new follower                                                                    | (access_token in the header) |
+| `PUT`    | `post`                 | add a new post.<br>`body : { content : String (required) } `                          |
+| `GET`    | `post/:id`             | get post from id                                                                      |
+| `DELETE` | `post/:id`             | delete post from post id                                                              |
+| `PUT`    | `post/:id/react/:mood` | create/update reaction from post id                                                   |
+| `GET`    | `search/post`          | search post `body { query : String (required), limit : Int(optional, default : 10) }` |
+| `GET`    | `user/user`            | search user `body { query : String (required) }`}                                     |
