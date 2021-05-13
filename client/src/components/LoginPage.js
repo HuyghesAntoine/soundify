@@ -9,8 +9,15 @@ class LoginPage extends React.Component {
         return (
             <div className="position-relative vh-100 bg-dark">
                 <div className="position-absolute top-50 start-50 translate-middle">
-                    <h1 className="text-light text-center">SoundIfy</h1>
+                    <div className="d-flex">
+                    <img src={process.env.PUBLIC_URL + 'soundIfyDroite.png'} width="300px"/>
+                    <h1 className="text-light text-center align-self-center" style={{fontSize: '100px',}}>Soundify</h1>
+                    <img src={process.env.PUBLIC_URL + 'soundIfyGauche.png'} width="300px"/>
+                    </div>
+                    <div className="d-flex justify-content-center">
                     <SpotifyAuth
+                        title="Continue with Spotify"
+                        className="mx-auto"
                         redirectUri="http://localhost:3000"
                         clientID={process.env.REACT_APP_SPOTIFY_CLIENT_ID}
                         scopes={[
@@ -38,6 +45,7 @@ class LoginPage extends React.Component {
                             navigate("/friends", true);
                         }}
                     />
+                    </div>
                 </div>
             </div>
         );
