@@ -1,5 +1,6 @@
-import { Component } from 'react';
-import Post from './card/Post';
+import { Component } from "react";
+import Post from "./card/Post";
+import PostForm from "./PostForm";
 
 class Home extends Component {
     constructor(props) {
@@ -10,6 +11,7 @@ class Home extends Component {
         return (
             <div>
                 <h1>My Feed</h1>
+                <PostForm />
                 <Post />
                 <Post />
                 <Post />

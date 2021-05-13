@@ -10,7 +10,6 @@ class LoginPage extends React.Component {
             <div className="position-relative vh-100 bg-dark">
                 <div className="position-absolute top-50 start-50 translate-middle">
                     <h1 className="text-light text-center">SoundIfy</h1>
-                    {console.log(process.env.REACT_APP_SPOTIFY_CLIENT_ID)}
                     <SpotifyAuth
                         redirectUri="http://localhost:3000"
                         clientID={process.env.REACT_APP_SPOTIFY_CLIENT_ID}
@@ -30,7 +29,7 @@ class LoginPage extends React.Component {
                                 method: "put",
                                 url: "http://localhost:3030/api/hello",
                                 headers: {
-                                    Authorization: "Bearer " + token,
+                                    Authorization: token,
                                 },
                             }).then((response) => {
                                 console.log(response.data);
