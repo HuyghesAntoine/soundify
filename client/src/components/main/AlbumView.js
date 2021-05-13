@@ -1,7 +1,7 @@
-import { Component } from "react";
-import Moment from "react-moment";
-import { Album, AlbumTracks } from "react-spotify-api";
-import TrackLineView from "./card/TrackLineView";
+import { Component } from 'react';
+import Moment from 'react-moment';
+import { Album, AlbumTracks } from 'react-spotify-api';
+import TrackLineView from './card/TrackLineView';
 
 class AlbumView extends Component {
     constructor(props) {
