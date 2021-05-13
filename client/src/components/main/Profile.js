@@ -10,7 +10,7 @@ class Profile extends Component {
     render() {
         return (
             <div>
-                <h1 className="d-flex flex-column text-center" >Profile</h1>
+                <h1 className="text-center" >Profile</h1>
                 <h3>Favorite albums : </h3>
                 <UserAlbums>
                     {({ data }) =>
@@ -24,6 +24,7 @@ class Profile extends Component {
                                           <img
                                               src={album.album.images[1].url}
                                               className="img-fluid"
+                                              width = "100px"
                                           />
                                           <span></span>
                                           <h1 key={album.album.id}>
