@@ -9,7 +9,7 @@ class Friends extends Component {
     render() {
         return (
             <div>
-                <h1>My Friends</h1>
+                <h1 className="d-flex flex-column text-center">My Friends</h1>
                 <User />
                 <User />
                 <User />

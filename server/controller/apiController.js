@@ -18,6 +18,13 @@ exports.getUser = async function (req, res) {
     return res;
 };
 
+exports.getMe = async function (req, res) {
+    const post = await apiBusiness.getMe(req.headers.authorization);
+    if (_.isEqual(post, JSON.parse('[]'))) res.status(404).send(post);
+    else res.status(200).send(post);
+    return res;
+};
+
 exports.putPost = async function (req, res) {
     res.status(201).send(
         await apiBusiness.putPost(req.body.content, req.headers)
@@ -46,6 +53,13 @@ exports.getPost = async function (req, res) {
 
 exports.addFollower = async function (req, res) {
     const update = await apiBusiness.addFollower(req.params.id, req.headers);
+    if (_.isEqual(update, JSON.parse('[]'))) res.status(404).send(update);
+    else res.status(200).send(update);
+    return res;
+};
+
+exports.putBio = async function (req, res) {
+    const update = await apiBusiness.putBio(req.body.content, req.headers);
     if (_.isEqual(update, JSON.parse('[]'))) res.status(404).send(update);
     else res.status(200).send(update);
     return res;

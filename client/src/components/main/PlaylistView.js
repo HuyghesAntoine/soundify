@@ -10,7 +10,6 @@ class PlaylistView extends Component {
     render() {
         return (
             <div>
-                <h1>Playlist</h1>
                 <Playlist id={this.state.id}>
                     {({ data }) => (data ? <h1>{data.name}</h1> : null)}
                 </Playlist>

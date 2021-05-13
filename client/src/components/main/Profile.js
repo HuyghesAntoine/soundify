@@ -1,6 +1,7 @@
 import { A } from '@patched/hookrouter';
 import { Component } from 'react';
 import { UserAlbums, UserArtists } from 'react-spotify-api';
+import BioForm from './BioForm';
 
 class Profile extends Component {
     constructor(props) {
@@ -10,8 +11,13 @@ class Profile extends Component {
     render() {
         return (
             <div>
-                <h1>Profile</h1>
-                ALBUMS :
+                <h1 className="text-center">Profile</h1>
+
+                <h3>Bio</h3>
+
+                <BioForm />
+
+                <h3>Favorite albums : </h3>
                 <UserAlbums>
                     {({ data }) =>
                         data
@@ -24,6 +30,7 @@ class Profile extends Component {
                                           <img
                                               src={album.album.images[1].url}
                                               className="img-fluid"
+                                              width="100px"
                                           />
                                           <span></span>
                                           <h1 key={album.album.id}>
@@ -41,7 +48,7 @@ class Profile extends Component {
                     }
                 </UserAlbums>
                 <hr />
-                ARTISTS :
+                <h3>Favorite artits : </h3>
                 <UserArtists>
                     {({ data }) =>
                         data

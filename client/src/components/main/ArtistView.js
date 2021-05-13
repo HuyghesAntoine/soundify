@@ -1,5 +1,6 @@
 import { Component } from "react";
-import { ArtistTracks } from "react-spotify-api";
+import { A } from "@patched/hookrouter";
+import { ArtistTracks, ArtistAlbums, Artist } from "react-spotify-api";
 import TrackLineView from "./card/TrackLineView";
 
 class ArtistView extends Component {
@@ -10,16 +11,35 @@ class ArtistView extends Component {
     render() {
         return (
             <div>
-                <h1>Artist</h1>
+                <h1>Top tracks :</h1> 
                 <ArtistTracks id={this.state.id}>
                     {({ data }) =>
                         data
                             ? data.tracks.map((track, i) => (
-                                  <TrackLineView track={track} index={i + 1} />
+                                    <TrackLineView track={track} index={i + 1} />
                               ))
                             : null
                     }
                 </ArtistTracks>
+                <hr/>
+                <div className="row justify-content-between">
+                    <h1> Recent albums : </h1>
+                <ArtistAlbums   id={this.state.id} options={{ limit: 8 }}>
+                    {({data}) => (
+                        data ? (
+                            data.items.map(album => (
+                                <A
+                                      className="text text-reset text-decoration-none col"
+                                      href={"/album/" + album.id}
+                                  >
+                                    <img src={album.images[0].url} width="100px"/>
+                                    <span> {album.name} </span>
+                                </A>
+                            ))
+                        ) : null
+                    )}
+                </ArtistAlbums>
+                </div>
             </div>
         );
     }
