@@ -59,17 +59,17 @@ Mainly for dev purpose, list of official repo and documentation.
 We assume that each route is preceded by `http://localhost:3030/api/`, and each request have a headers.authorization
 
 | Method   | route                  | detail                                                                                |
-| -------- | ---------------------- | ------------------------------------------------------------------------------------- | ---------------------------- |
+| -------- | ---------------------- | ------------------------------------------------------------------------------------- |
 | `PUT`    | `hello`                | create a new user or update a token of an existing one                                |
 | `GET`    | `me`                   | get current user                                                                      |
 | `GET`    | `user/:id`             | get user using his id                                                                 |
 | `GET`    | `user/:id/follow`      | get users follow (=> User[] )                                                         |
 | `GET`    | `user/:id/follower`    | get users follower => User[] )                                                        |
 | `GET`    | `user/:id/timeline`    | get users timeline (=> Post[] )                                                       |
-| `PUT`    | `addFollowers/:id`     | add a new follower                                                                    | (access_token in the header) |
+| `GET`    | `user/search`          | search user `body { query : String (required) }`}                                     |
+| `PUT`    | `addFollowers/:id`     | follow a user using his id                                                            |
 | `PUT`    | `post`                 | add a new post.<br>`body : { content : String (required) } `                          |
 | `GET`    | `post/:id`             | get post from id                                                                      |
 | `DELETE` | `post/:id`             | delete post from post id                                                              |
 | `PUT`    | `post/:id/react/:mood` | create/update reaction from post id                                                   |
-| `GET`    | `search/post`          | search post `body { query : String (required), limit : Int(optional, default : 10) }` |
-| `GET`    | `user/user`            | search user `body { query : String (required) }`}                                     |
+| `GET`    | `post/search`          | search post `body { query : String (required), limit : Int(optional, default : 10) }` |
