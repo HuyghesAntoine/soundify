@@ -37,6 +37,14 @@ exports.getUser = async function (mail) {
     return user;
 };
 
+exports.getMe = async function (token) {
+    var user = await apiModel.getUserWithToken(token);
+    if (_.isEqual(user, JSON.parse('[]'))) return JSON.parse('[]');
+    user = user[0];
+    user.oauth = 'HIDE';
+    return user;
+};
+
 exports.putPost = async function (content, query) {
     const token = query.authorization;
     const user = await apiModel.getUserWithToken(token);
@@ -80,5 +88,13 @@ exports.addFollower = async function (id, query) {
         const update = await apiModel.addFollower(token, id);
         return update;
     }
+    return res;
+};
+
+exports.putBio = async function (content, query) {
+    const token = query.authorization;
+    const user = await apiModel.getUserWithToken(token);
+    if (_.isEqual(user, JSON.parse('[]'))) return user;
+    const res = await apiModel.updateUsersBio(user[0]._id, content); //changer le théo en oauth.username
     return res;
 };
