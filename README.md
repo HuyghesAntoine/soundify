@@ -68,7 +68,7 @@ We assume that each route is preceded by `http://localhost:3030/api/`, and each 
 | `GET`    | `user/:id/timeline`    | get users timeline (=> Post[] )                                                       |
 | `GET`    | `user/search`          | search user `body { query : String (required) }`}                                     |
 | `PUT`    | `addFollowers/:id`     | follow a user using his id                                                            |
-| `PUT`    | `post`                 | add a new post.<br>`body : { content : String (required) } `                          |
+| `PUT`    | `post`                 | add a new post. `body : { content : String (required) } `                             |
 | `GET`    | `post/:id`             | get post from id                                                                      |
 | `DELETE` | `post/:id`             | delete post from post id                                                              |
 | `PUT`    | `post/:id/react/:mood` | create/update reaction from post id                                                   |
