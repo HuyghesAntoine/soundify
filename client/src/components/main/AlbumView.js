@@ -11,7 +11,7 @@ class AlbumView extends Component {
     render() {
         return (
             <div>
-                <h1>Album</h1>
+               
                 <Album id={this.state.id}>
                     {({ data }) =>
                         data ? (

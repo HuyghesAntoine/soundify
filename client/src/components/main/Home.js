@@ -9,7 +9,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <h1>My Feed</h1>
+                <h1 className="d-flex flex-column text-center">My Feed</h1>
                 <Post />
                 <Post />
                 <Post />

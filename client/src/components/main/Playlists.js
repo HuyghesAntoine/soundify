@@ -10,7 +10,7 @@ class Playlists extends Component {
     render() {
         return (
             <div>
-                <h1>Playlist</h1>
+                <h1 className="d-flex flex-column text-center">Playlist</h1>
                 <UserPlaylists>
                     {({ data }) =>
                         data

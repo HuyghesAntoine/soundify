@@ -10,7 +10,7 @@ class Releases extends Component {
     render() {
         return (
             <div>
-                <h1>Releases</h1>
+                <h1 className="d-flex flex-column text-center" >Releases</h1>
 
                 <BrowseNew options={{ limit: 3 }}>
                     {({ data }) =>

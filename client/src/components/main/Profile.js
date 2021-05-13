@@ -10,8 +10,8 @@ class Profile extends Component {
     render() {
         return (
             <div>
-                <h1>Profile</h1>
-                ALBUMS :
+                <h1 className="d-flex flex-column text-center" >Profile</h1>
+                <h3>Favorite albums : </h3>
                 <UserAlbums>
                     {({ data }) =>
                         data
@@ -41,7 +41,7 @@ class Profile extends Component {
                     }
                 </UserAlbums>
                 <hr />
-                ARTISTS :
+                <h3>Favorite artits : </h3>
                 <UserArtists>
                     {({ data }) =>
                         data
