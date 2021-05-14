@@ -27,7 +27,7 @@ class Profile extends Component {
                                       href={'/album/' + album.album.id}
                                   >
                                       <div className="d-flex align-items-center rounded mb-2 hover">
-                                          <div class="flex-shrink-0">
+                                          <div className="flex-shrink-0">
                                               <img
                                                   src={
                                                       album.album.images[1].url
@@ -35,6 +35,7 @@ class Profile extends Component {
                                                   className="rounded"
                                                   width="100px"
                                                   height="100px"
+                                                  alt={album.album.name}
                                               />
                                           </div>
                                           <div className="flex-grow-1 ms-3 fs-3">
@@ -64,8 +65,8 @@ class Profile extends Component {
                                       className="text text-reset text-decoration-none"
                                       href={'/artist/' + artist.id}
                                   >
-                                      <div class="d-flex rounded align-items-center mb-2 hover">
-                                          <div class="flex-shrink-0">
+                                      <div className="d-flex rounded align-items-center mb-2 hover">
+                                          <div className="flex-shrink-0">
                                               <img
                                                   className="rounded-circle"
                                                   src={artist.images[0].url}
@@ -74,7 +75,7 @@ class Profile extends Component {
                                                   alt="..."
                                               />
                                           </div>
-                                          <div class="flex-grow-1 ms-3 fs-3">
+                                          <div className="flex-grow-1 ms-3 fs-3">
                                               {artist.name}
                                           </div>
                                       </div>

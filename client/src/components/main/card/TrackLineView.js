@@ -1,3 +1,4 @@
+import { A } from '@patched/hookrouter';
 import { Component } from 'react';
 import Moment from 'react-moment';
 
@@ -15,15 +16,16 @@ class TrackLineView extends Component {
         return (
             <div className="row justify-content-between hover">
                 <div className="col">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-grow-1 text-white-50">
+                    <div className="d-flex align-items-center">
+                        <div className="flex-grow-1 text-white-50">
                             {this.state.index}
                         </div>
                         {!this.state.isAlbum ? (
-                            <div class="flex-shrink-0">
+                            <div className="flex-shrink-0">
                                 <img
                                     src={this.state.track.album.images[0].url}
                                     width="40px"
+                                    alt={this.state.track.album.name}
                                 ></img>
                             </div>
                         ) : null}
@@ -35,10 +37,16 @@ class TrackLineView extends Component {
                 </div>
                 <div className="col text-white-50 text-truncate">
                     {this.state.track.artists.map((artist, i) => (
-                        <span>
-                            {i ? ', ' : null}
-                            {artist.name}
-                        </span>
+                        <A
+                            className="text text-reset text-decoration-none"
+                            href={'/artist/' + artist.id}
+                            key={artist.id}
+                        >
+                            <span>
+                                {i ? ', ' : null}
+                                {artist.name}
+                            </span>
+                        </A>
                     ))}
                 </div>
                 <div className="col-1 text-white-50 text-end">

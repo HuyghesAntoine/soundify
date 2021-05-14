@@ -28,7 +28,6 @@ class Friends extends Component {
                     Authorization: this.state.token,
                 },
             }).then((response) => {
-                console.log(response.data);
                 this.setState({
                     res: response.data,
                 });

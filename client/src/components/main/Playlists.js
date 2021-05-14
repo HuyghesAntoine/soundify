@@ -21,13 +21,14 @@ class Playlists extends Component {
                                       href={'/playlist/' + data.id}
                                   >
                                       <div className="d-flex align-items-center rounded mb-2 hover">
-                                          <div class="flex-shrink-0">
+                                          <div className="flex-shrink-0">
                                               {data.images[0] ? (
                                                   <img
                                                       src={data.images[0].url}
                                                       className="rounded"
                                                       width="80px"
                                                       height="80px"
+                                                      alt=""
                                                   />
                                               ) : (
                                                   <Mug

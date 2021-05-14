@@ -13,7 +13,11 @@ class User extends Component {
             <div className="position-relative mb-4">
                 <div className="m-2">
                     <img
-                        className="avatar-friend rounded-circle border border-2 border-${this.state.doing} bg-light"
+                        className={
+                            'avatar-friend rounded-circle border border-2 border-' +
+                            this.state.doing.replace('online', 'success') +
+                            ' bg-light'
+                        }
                         src={this.state.picture ? this.state.picture : null}
                         alt="Avatar"
                     />
