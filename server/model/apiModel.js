@@ -147,7 +147,7 @@ exports.searchUser = async function (query, limit) {
 exports.getTimeline = async function (id) {
     var followers = await User.find(
         {
-            _id: id
+            oauth: id
         },
         {
             _id: 0,
@@ -156,7 +156,7 @@ exports.getTimeline = async function (id) {
     );
     followers = followers[0].followers;
     console.log(followers);
-    const res = await Post.find(
+    var res = await Post.find(
         {
             author: followers
         }
@@ -165,5 +165,9 @@ exports.getTimeline = async function (id) {
             date: -1
         }
     )
+    for(i in res){
+        res[i].author = (await apiModel.getUserWithId(res[i].author))[0].username;
+    };
+
     return res;
 }
