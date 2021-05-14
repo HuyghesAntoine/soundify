@@ -1,37 +1,32 @@
 import { Component } from 'react';
 import { Ghost } from 'react-kawaii';
+import Moment from 'react-moment';
 
 class Post extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: 'RandomDude' + parseInt(Math.random() * 10),
-            content: 'Some Content',
-            date: undefined,
-            reactions: [
-                { mood: 'ko', count: parseInt(Math.random() * 10) },
-                { mood: 'excited', count: parseInt(Math.random() * 10) },
-            ],
+            data: props.data,
         };
     }
 
     render() {
         return (
-            <div className="position-relative border rounded mb-5">
+            <div className="position-relative border-0 rounded mb-5 hover">
                 <div className="m-2">
                     <span className="text-warning fw-bold">
-                        {this.state.username}
+                        {this.state.data.author}
                     </span>{' '}
                     <span className="text-muted">
-                        · {this.state.date} min ago
+                        · <Moment fromNow>{this.state.data.date}</Moment>
                     </span>
                     <br />
-                    {this.state.content}
+                    {this.state.data.content}
                     <div
                         className="position-absolute top-100 end-0 translate-middle-y d-flex"
                         id="reactList"
                     >
-                        {this.state.reactions.map((reaction, i) => {
+                        {this.state.data.reactions.map((reaction, i) => {
                             return (
                                 <span
                                     key={i}
