@@ -145,29 +145,28 @@ exports.searchUser = async function (query, limit) {
 };
 
 exports.getTimeline = async function (id) {
-    var followers = await User.find(
+    var res = await User.find(
         {
-            oauth: id
+            oauth: id,
         },
         {
-            _id: 0,
-            followers: 1
+            _id: 1,
+            followers: 1,
         }
     );
-    followers = followers[0].followers;
+    var followers = res[0].followers;
+    followers.push(res[0]._id);
     console.log(followers);
-    var res = await Post.find(
-        {
-            author: followers
-        }
-    ).sort(
-        {
-            date: -1
-        }
-    )
-    for(i in res){
-        res[i].author = (await apiModel.getUserWithId(res[i].author))[0].username;
-    };
+    var res = await Post.find({
+        author: followers,
+    }).sort({
+        date: -1,
+    });
+    for (i in res) {
+        res[i].author = (
+            await apiModel.getUserWithId(res[i].author)
+        )[0].username;
+    }
 
     return res;
-}
+};
