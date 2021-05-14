@@ -1,5 +1,5 @@
-import { Component } from "react";
-import Moment from "react-moment";
+import { Component } from 'react';
+import Moment from 'react-moment';
 
 class TrackLineView extends Component {
     constructor(props) {
@@ -13,7 +13,7 @@ class TrackLineView extends Component {
 
     render() {
         return (
-            <div className="row justify-content-between">
+            <div className="row justify-content-between hover">
                 <div className="col">
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1 text-white-50">
@@ -36,7 +36,7 @@ class TrackLineView extends Component {
                 <div className="col text-white-50 text-truncate">
                     {this.state.track.artists.map((artist, i) => (
                         <span>
-                            {i ? ", " : null}
+                            {i ? ', ' : null}
                             {artist.name}
                         </span>
                     ))}

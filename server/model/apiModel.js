@@ -121,7 +121,10 @@ exports.updateUsersBio = async function (id, content) {
 
 exports.searchUser = async function (query, limit) {
     const find = await User.find(
-        { username: { $regex: query, $options: 'i'} }
+        {
+            username: { $regex: query, $options: 'i' },
+        },
+        { email: false, oauth: false }
     );
     return find;
-}
+};

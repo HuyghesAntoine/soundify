@@ -44,10 +44,14 @@ exports.putBio = async function (req, res) {
     return res;
 };
 
-exports.searchUser = async function (req, res){
-    if(req.query.limit == null)
-        res.status(201).send( await userBusiness.searchUser( req.query.query, 10 ) );
+exports.searchUser = async function (req, res) {
+    if (req.query.limit == null)
+        res.status(201).send(
+            await userBusiness.searchUser(req.query.query, 10)
+        );
     else
-        res.status(201).send( await userBusiness.searchUser( req.query.query, req.query.limit ) );
+        res.status(201).send(
+            await userBusiness.searchUser(req.query.query, req.query.limit)
+        );
     return res;
 };
