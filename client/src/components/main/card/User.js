@@ -1,18 +1,68 @@
+import axios from 'axios';
 import { Component } from 'react';
+import { PersonCheck, PersonPlus, PersonX } from 'react-bootstrap-icons';
 import { Planet } from 'react-kawaii';
+import Cookies from 'js-cookie';
 
 class User extends Component {
     constructor(props) {
         super(props);
+        this.token = Cookies.get('spotifyAuthToken');
+
         this.state = {
             user: props.user,
             self: props.self,
+            follow: props.follow,
+            hover: false,
         };
+
+        this.handleMouseEnter = this.handleMouseEnter.bind(this);
+        this.handleMouseLeave = this.handleMouseLeave.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleMouseEnter(event) {
+        this.setState({ hover: true });
+    }
+
+    handleMouseLeave(event) {
+        this.setState({ hover: false });
+    }
+
+    handleClick(event) {
+        console.log(
+            'http://localhost:3030/api/' +
+                (this.state.follow ? 'unfollow' : 'follow') +
+                '/' +
+                this.state.user._id
+        );
+        axios({
+            method: 'put',
+            url:
+                'http://localhost:3030/api/' +
+                (this.state.follow ? 'unfollow' : 'follow') +
+                '/' +
+                this.state.user._id,
+            headers: {
+                Authorization: this.token,
+            },
+            data: {
+                content: this.state.value,
+            },
+        }).then((response) => {
+            this.setState({
+                res: response.data,
+                follow: !this.state.follow,
+            });
+        });
     }
 
     render() {
         return (
-            <div className="d-flex align-items-center mb-4">
+            <div
+                className="d-flex align-items-center mb-4"
+                key={this.state.user._id}
+            >
                 <div className="flex-shrink-0">
                     <Planet
                         className={
@@ -37,7 +87,22 @@ class User extends Component {
                 </div>
 
                 {!this.state.self ? (
-                    <button className="btn btn-outline-light">Follow</button>
+                    <button
+                        className="btn btn-outline-light"
+                        onMouseEnter={this.handleMouseEnter}
+                        onMouseLeave={this.handleMouseLeave}
+                        onClick={this.handleClick}
+                    >
+                        {this.state.follow ? (
+                            !this.state.hover ? (
+                                <PersonCheck />
+                            ) : (
+                                <PersonX />
+                            )
+                        ) : (
+                            <PersonPlus />
+                        )}
+                    </button>
                 ) : null}
             </div>
         );

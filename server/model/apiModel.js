@@ -15,9 +15,7 @@ mongoose.connect(
 
 exports.getUserWithId = async function (id) {
     try {
-        const find = await User.find(
-            {"_id": id}
-        );
+        const find = await User.find({ _id: id });
         return find;
     } catch (err) {}
     return JSON.parse('[]');
@@ -25,19 +23,17 @@ exports.getUserWithId = async function (id) {
 
 exports.getUser = async function (mail) {
     const find = await User.find(
-        { "email": mail},
-        { 
-            "oauth" : 0,
-            "email" : 0
+        { email: mail },
+        {
+            oauth: 0,
+            email: 0,
         }
     );
     return find;
 };
 
 exports.getUserWithToken = async function (token) {
-    const find = await User.find(
-        {"oauth": token }
-    );
+    const find = await User.find({ oauth: token });
     return find;
 };
 
@@ -113,10 +109,16 @@ exports.addFollower = async function (token, id) {
     return update;
 };
 
-exports.getFollower = async function (token, id) {
-    const find = await User.find(
-        {"oauth": token , "followers": id}
+exports.removeFollower = async function (token, id) {
+    const update = await User.updateOne(
+        { oauth: token },
+        { $pull: { followers: id } }
     );
+    return update;
+};
+
+exports.getFollower = async function (token, id) {
+    const find = await User.find({ oauth: token, followers: id });
     console.log(find);
     return find;
 };
@@ -131,13 +133,13 @@ exports.updateUsersBio = async function (id, content) {
 
 exports.searchUser = async function (query, limit) {
     var find = await User.find(
-        { 
-            username: { $regex: query, $options: 'i'} 
+        {
+            username: { $regex: query, $options: 'i' },
         },
         {
-            oauth : 0,
-            email: 0
+            oauth: 0,
+            email: 0,
         }
-    ).limit( parseInt(limit) );
+    ).limit(parseInt(limit));
     return find;
 };

@@ -35,14 +35,14 @@ class Post extends Component {
                             return (
                                 <span
                                     key={i}
-                                    className="badge bg-dark border position-relative m-2"
+                                    className="badge position-relative m-2"
                                 >
                                     <Ghost
-                                        size={40}
+                                        size={45}
                                         mood={reaction.mood}
                                         color="#e6cb53"
                                     />
-                                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
+                                    <span className="position-absolute top-0 end-0 badge rounded-pill bg-secondary">
                                         {reaction.count}
                                         <span className="visually-hidden">
                                             number of reaction

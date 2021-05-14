@@ -11,8 +11,7 @@ exports.createOrUpdateUser = async function (token) {
     if (_.isEqual(await apiModel.getUser(res.email), JSON.parse('[]')))
         //email probablement pas dans oauth
         return await apiModel.insertUser(res, token);
-    else 
-        return await apiModel.updateUser(res, token);
+    else return await apiModel.updateUser(res, token);
     //}
 };
 
@@ -39,7 +38,7 @@ exports.getAllUsers = async function () {
 };
 
 exports.addFollower = async function (id, query) {
-    const token = query.access_token;
+    const token = query.authorization;
     console.log(token);
     console.log(id);
     const user = await apiModel.getUserWithId(id);
@@ -54,6 +53,18 @@ exports.addFollower = async function (id, query) {
     return res;
 };
 
+exports.removeFollower = async function (id, query) {
+    const token = query.authorization;
+    console.log(token);
+    console.log(id);
+    const user = await apiModel.getUserWithId(id);
+    if (!_.isEqual(user, JSON.parse('[]'))) {
+        const update = await apiModel.removeFollower(token, id);
+        return update;
+    }
+    return res;
+};
+
 exports.putBio = async function (content, query) {
     const token = query.authorization;
     const user = await apiModel.getUserWithToken(token);
@@ -62,6 +73,6 @@ exports.putBio = async function (content, query) {
     return res;
 };
 
-exports.searchUser = async function (query, limit){
+exports.searchUser = async function (query, limit) {
     return apiModel.searchUser(query, limit);
-}
+};

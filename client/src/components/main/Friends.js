@@ -75,7 +75,11 @@ class Friends extends Component {
                 </div>
                 {console.log(this.state.res)}
                 {this.state.res.map((user) => (
-                    <User user={user} self={user._id === this.state.self._id} />
+                    <User
+                        user={user}
+                        self={user._id === this.state.self._id}
+                        follow={this.state.self.followers.includes(user._id)}
+                    />
                 ))}
                 <hr />
             </div>

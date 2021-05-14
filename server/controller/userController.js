@@ -37,6 +37,16 @@ exports.addFollower = async function (req, res) {
     return res;
 };
 
+exports.removeFollower = async function (req, res) {
+    const update = await userBusiness.removeFollower(
+        req.params.id,
+        req.headers
+    );
+    if (_.isEqual(update, JSON.parse('[]'))) res.status(404).send(update);
+    else res.status(200).send(update);
+    return res;
+};
+
 exports.putBio = async function (req, res) {
     const update = await userBusiness.putBio(req.body.content, req.headers);
     if (_.isEqual(update, JSON.parse('[]'))) res.status(404).send(update);

@@ -35,48 +35,40 @@ class BioForm extends Component {
     }
     handleSubmit(event) {
         event.preventDefault();
-        if (this.state.value.length === 0) {
-            this.setState({ formStyle: 'danger' });
-        } else {
-            axios({
-                method: 'put',
-                url: 'http://localhost:3030/api/user/bio',
-                headers: {
-                    Authorization: this.state.token,
-                },
-                data: {
-                    content: this.state.value,
-                },
-            }).then((response) => {
-                console.log(response.data);
-                this.setState({
-                    res: response.data,
-                    inputDisplay: 'd-none',
-                });
+        axios({
+            method: 'put',
+            url: 'http://localhost:3030/api/user/bio',
+            headers: {
+                Authorization: this.state.token,
+            },
+            data: {
+                content: this.state.value,
+            },
+        }).then((response) => {
+            console.log(response.data);
+            this.setState({
+                res: response.data,
+                inputDisplay: 'd-none',
             });
-        }
+        });
     }
 
     render() {
         return (
-            <form
-                onSubmit={this.handleSubmit}
-                className="w-50 mx-auto gap-2 mt-2"
-            >
+            <form onSubmit={this.handleSubmit} className="mx-auto gap-2 mt-2">
                 <div>
                     <textarea
                         value={this.state.value}
                         onChange={this.handleChange}
-                        className="w-100 bg-dark border border-2 rounded text-light"
+                        placeholder="Nothing in your bio. Change that now!"
+                        className="w-100 bg-dark border-0 text-light"
                     />
                 </div>
                 <div className="d-grid">
                     <input
                         type="submit"
                         className={
-                            'btn btn-small btn- btn-outline-' +
-                            this.state.formStyle +
-                            ' ' +
+                            'btn btn-outline-warning btn-sm ' +
                             this.state.inputDisplay
                         }
                         value="Update my bio"
