@@ -26,7 +26,10 @@ exports.getUserWithId = async function (id) {
 exports.getUser = async function (mail) {
     const find = await User.find(
         { "email": mail},
-        { "oauth" : 0}
+        { 
+            "oauth" : 0,
+            "email" : 0
+        }
     );
     return find;
 };
@@ -130,6 +133,10 @@ exports.searchUser = async function (query, limit) {
     var find = await User.find(
         { 
             username: { $regex: query, $options: 'i'} 
+        },
+        {
+            oauth : 0,
+            email: 0
         }
     ).limit( parseInt(limit) );
     return find;
