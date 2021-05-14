@@ -8,9 +8,21 @@ class Friends extends Component {
     constructor(props) {
         super(props);
         const token = Cookies.get('spotifyAuthToken');
-        this.state = { token: token, value: '', res: [] };
+        this.state = { token: token, value: '', res: [], self: null };
 
         this.handleChange = this.handleChange.bind(this);
+
+        axios({
+            method: 'get',
+            url: 'http://localhost:3030/api/me',
+            headers: {
+                Authorization: this.state.token,
+            },
+        }).then((response) => {
+            this.setState({
+                self: response.data,
+            });
+        });
     }
 
     handleChange(event) {
@@ -63,7 +75,7 @@ class Friends extends Component {
                 </div>
                 {console.log(this.state.res)}
                 {this.state.res.map((user) => (
-                    <User user={user} />
+                    <User user={user} self={user._id === this.state.self._id} />
                 ))}
                 <hr />
             </div>

@@ -7,7 +7,8 @@ import {
     People,
     House,
     MusicNoteList,
-    Gear,
+    Person,
+    Disc,
 } from 'react-bootstrap-icons';
 
 class Sidebar extends Component {
@@ -51,8 +52,12 @@ class Sidebar extends Component {
                                 className="text text-reset text-decoration-none"
                                 href="/"
                             >
-                                <House className="d-block d-sm-none fs-3 mb-2" />{' '}
-                                <span className="d-none d-sm-block">Home</span>
+                                <div className="d-flex">
+                                    <House className="d-block d-sm-none d-xl-block fs-3 mb-2 me-2" />{' '}
+                                    <span className="d-none d-sm-block">
+                                        Home
+                                    </span>
+                                </div>
                             </A>
                         </li>
                         <li>
@@ -60,10 +65,12 @@ class Sidebar extends Component {
                                 className="text text-reset text-decoration-none"
                                 href="/friends"
                             >
-                                <People className="d-block d-sm-none fs-3 mb-2" />{' '}
-                                <span className="d-none d-sm-block">
-                                    Friends
-                                </span>
+                                <div className="d-flex">
+                                    <People className="d-block d-sm-none d-xl-block fs-3 mb-2 me-2" />{' '}
+                                    <span className="d-none d-sm-block">
+                                        Friends
+                                    </span>
+                                </div>
                             </A>
                         </li>
                         <li>
@@ -71,10 +78,12 @@ class Sidebar extends Component {
                                 className="text text-reset text-decoration-none"
                                 href="/profile"
                             >
-                                <Gear className="d-block d-sm-none fs-3 mb-2" />{' '}
-                                <span className="d-none d-sm-block">
-                                    Profile
-                                </span>
+                                <div className="d-flex">
+                                    <Person className="d-block d-sm-none d-xl-block fs-3 mb-2 me-2" />{' '}
+                                    <span className="d-none d-sm-block">
+                                        Profile
+                                    </span>
+                                </div>
                             </A>
                         </li>
                         <li>
@@ -82,10 +91,25 @@ class Sidebar extends Component {
                                 className="text text-reset text-decoration-none"
                                 href="/playlist"
                             >
-                                <MusicNoteList className="d-block d-sm-none fs-3 mb-2" />{' '}
-                                <span className="d-none d-sm-block">
-                                    Playlist
-                                </span>
+                                <div className="d-flex">
+                                    <MusicNoteList className="d-block d-sm-none d-xl-block fs-3 mb-2 me-2" />{' '}
+                                    <span className="d-none d-sm-block">
+                                        Playlist
+                                    </span>
+                                </div>
+                            </A>
+                        </li>
+                        <li>
+                            <A
+                                className="text text-reset text-decoration-none"
+                                href="/releases"
+                            >
+                                <div className="d-flex">
+                                    <Disc className="d-block d-sm-none fs-3 mb-2 me-2" />{' '}
+                                    <span className="visually-hidden">
+                                        Releases
+                                    </span>
+                                </div>
                             </A>
                         </li>
                     </ul>

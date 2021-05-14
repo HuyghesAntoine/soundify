@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRoutes } from '@patched/hookrouter';
+import { getWorkingPath, useRoutes } from '@patched/hookrouter';
 import { SpotifyApiContext } from 'react-spotify-api';
 import routes from './router';
 import Cookies from 'js-cookie';
@@ -22,11 +22,19 @@ const App = () => {
                     <div className="App bg-dark text-light">
                         <div className="row m-0">
                             <Sidebar />
-                            <div className="vh-100 overflow-auto col-8 overflow-auto">
+                            <div className="vh-100 overflow-auto col">
                                 {routeResult || <Error />}
                                 <Player token={token} />
                             </div>
-                            <div className="col-2 text-break border-start border-warning border-2 overflow-hidden">
+                            <div
+                                className={
+                                    'col-2 text-break border-start border-warning border-2 ' +
+                                    (getWorkingPath() === '/releases'
+                                        ? 'd-none'
+                                        : 'd-none d-sm-block')
+                                }
+                            >
+                                {console.log(getWorkingPath() === '/releases')}
                                 <Releases />
                             </div>
                         </div>

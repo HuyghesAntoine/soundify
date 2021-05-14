@@ -1,30 +1,44 @@
 import { Component } from 'react';
+import { Planet } from 'react-kawaii';
 
 class User extends Component {
     constructor(props) {
         super(props);
         this.state = {
             user: props.user,
+            self: props.self,
         };
     }
 
     render() {
         return (
-            <div className="position-relative mb-4">
-                <div className="m-2">
-                    <img
+            <div className="d-flex align-items-center mb-4">
+                <div className="flex-shrink-0">
+                    <Planet
                         className={
-                            'avatar-friend rounded-circle border border-2 border-' +
-                            this.state.doing.replace('online', 'success') +
-                            ' bg-light'
+                            'border border-3 rounded-circle border-' +
+                            this.state.user.status
+                                .replace('online', 'success')
+                                .replace('offline', 'danger')
                         }
-                        src={this.state.picture ? this.state.picture : null}
-                        alt="Avatar"
+                        size={40}
+                        mood="happy"
+                        color="#FCCB7E"
                     />
-                    <span className="ps-3 text-warning fw-bold">
-                        {this.state.user.username}
+                </div>
+
+                <div className="flex-grow-1 ms-3 fs-5 text-warning fw-bold">
+                    <span>
+                        {this.state.user.username}{' '}
+                        {this.state.self ? (
+                            <span className="text-muted">(you)</span>
+                        ) : null}
                     </span>
                 </div>
+
+                {!this.state.self ? (
+                    <button className="btn btn-outline-light">Follow</button>
+                ) : null}
             </div>
         );
     }
