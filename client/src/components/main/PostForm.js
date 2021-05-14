@@ -6,7 +6,7 @@ class PostForm extends Component {
     constructor(props) {
         super(props);
         const token = Cookies.get('spotifyAuthToken');
-        this.state = { value: '', token: token, formStyle: 'light' };
+        this.state = { value: '', token: token };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -33,7 +33,6 @@ class PostForm extends Component {
                 this.setState({
                     value: '',
                     res: response.data,
-                    formStyle: 'ligth',
                 });
             });
         }
@@ -56,10 +55,7 @@ class PostForm extends Component {
                 <div className="d-grid">
                     <input
                         type="submit"
-                        className={
-                            'btn btn-small btn- btn-outline-' +
-                            this.state.formStyle
-                        }
+                        className="btn btn-small btn-outline-light"
                         value="Submit"
                     />
                 </div>
