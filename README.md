@@ -66,10 +66,10 @@ We assume that each route is preceded by `http://localhost:3030/api/`, and each 
 | `GET`    | `user/:id/follow`      | get users follow (=> User[] )                                                         |
 | `GET`    | `user/:id/follower`    | get users follower => User[] )                                                        |
 | `GET`    | `user/:id/timeline`    | get users timeline (=> Post[] )                                                       |
-| `GET`    | `user/search`          | search user `body { query : String (required) }`}                                     |
+| `GET`    | `user/search`          | search user `params { query : String (required) }`}                                     |
 | `PUT`    | `addFollowers/:id`     | follow a user using his id                                                            |
 | `PUT`    | `post`                 | add a new post. `body : { content : String (required) } `                             |
 | `GET`    | `post/:id`             | get post from id                                                                      |
 | `DELETE` | `post/:id`             | delete post from post id                                                              |
 | `PUT`    | `post/:id/react/:mood` | create/update reaction from post id                                                   |
-| `GET`    | `post/search`          | search post `body { query : String (required), limit : Int(optional, default : 10) }` |
+| `GET`    | `post/search`          | search post `params { query : String (required), limit : Int(optional, default : 10) }` |

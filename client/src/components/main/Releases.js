@@ -1,6 +1,6 @@
-import { A } from "@patched/hookrouter";
-import { Component } from "react";
-import { BrowseNew } from "react-spotify-api";
+import { A } from '@patched/hookrouter';
+import { Component } from 'react';
+import { BrowseNew } from 'react-spotify-api';
 
 class Releases extends Component {
     constructor(props) {
@@ -10,7 +10,7 @@ class Releases extends Component {
     render() {
         return (
             <div>
-                <h1 className="d-flex flex-column text-center" >Releases</h1>
+                <h1 className="d-flex flex-column text-center">Releases</h1>
 
                 <BrowseNew options={{ limit: 3 }}>
                     {({ data }) =>
@@ -18,10 +18,11 @@ class Releases extends Component {
                             ? data.albums.items.map((album) => (
                                   <A
                                       className="text text-reset text-decoration-none"
-                                      href={"/album/" + album.id}
+                                      href={'/album/' + album.id}
+                                      key={album.id}
                                   >
                                       <p key={album.id} className="break-word">
-                                          {album.name}{" "}
+                                          {album.name}{' '}
                                           {album.artists[0] ? (
                                               <span className="text-muted">
                                                   {album.artists[0].name}
@@ -32,6 +33,7 @@ class Releases extends Component {
                                       <img
                                           src={album.images[0].url}
                                           width="100px"
+                                          alt={album.name}
                                       />
                                       {/*<button>{album.uri}</button>*/}
                                       <hr />

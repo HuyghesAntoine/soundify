@@ -11,7 +11,6 @@ class AlbumView extends Component {
     render() {
         return (
             <div>
-               
                 <Album id={this.state.id}>
                     {({ data }) =>
                         data ? (
@@ -20,8 +19,8 @@ class AlbumView extends Component {
                                 {data.images[0] ? (
                                     <img
                                         src={data.images[0].url}
-                                        alt="Album Image"
                                         width="100px"
+                                        alt={data.name}
                                     ></img>
                                 ) : null}
                                 <p>

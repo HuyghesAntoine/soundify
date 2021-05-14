@@ -1,15 +1,15 @@
-import { Component } from "react";
-import SpotifyPlayer from "react-spotify-web-playback";
+import { Component } from 'react';
+//import SpotifyPlayer from "react-spotify-web-playback";
 
 class Player extends Component {
     constructor(props) {
         super(props);
-        this.state = { uris: ["spotify:artist:6HQYnRM4OzToCYPpVBInuU"] };
+        this.state = { uris: ['spotify:artist:6HQYnRM4OzToCYPpVBInuU'] };
         this.handleClick = this.handleClick.bind(this);
     }
 
     handleClick() {
-        this.setState({ uris: ["spotify:artist:2BTZIqw0ntH9MvilQ3ewNY"] });
+        this.setState({ uris: ['spotify:artist:2BTZIqw0ntH9MvilQ3ewNY'] });
     }
     render() {
         return (

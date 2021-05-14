@@ -7,7 +7,12 @@ class BioForm extends Component {
         super(props);
         const token = Cookies.get('spotifyAuthToken');
 
-        this.state = { value: '', token: token, formStyle: 'light' };
+        this.state = {
+            value: '',
+            token: token,
+            formStyle: 'light',
+            inputDisplay: 'd-none',
+        };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -26,7 +31,7 @@ class BioForm extends Component {
     }
 
     handleChange(event) {
-        this.setState({ value: event.target.value });
+        this.setState({ value: event.target.value, inputDisplay: '' });
     }
     handleSubmit(event) {
         event.preventDefault();
@@ -46,6 +51,7 @@ class BioForm extends Component {
                 console.log(response.data);
                 this.setState({
                     res: response.data,
+                    inputDisplay: 'd-none',
                 });
             });
         }
@@ -69,7 +75,9 @@ class BioForm extends Component {
                         type="submit"
                         className={
                             'btn btn-small btn- btn-outline-' +
-                            this.state.formStyle
+                            this.state.formStyle +
+                            ' ' +
+                            this.state.inputDisplay
                         }
                         value="Update my bio"
                     />

@@ -1,6 +1,7 @@
-import { Component } from "react";
-import { A } from "@patched/hookrouter";
-import { UserPlaylists } from "react-spotify-api";
+import { Component } from 'react';
+import { A } from '@patched/hookrouter';
+import { UserPlaylists } from 'react-spotify-api';
+import { Mug } from 'react-kawaii';
 
 class Playlists extends Component {
     constructor(props) {
@@ -17,37 +18,40 @@ class Playlists extends Component {
                             ? data.items.map((data) => (
                                   <A
                                       className="text text-reset text-decoration-none"
-                                      href={"/playlist/" + data.id}
+                                      href={'/playlist/' + data.id}
                                   >
-                                      <div className="d-flex pb-2">
-                                          <img
-                                              src={
-                                                  data.images[0]
-                                                      ? data.images[0].url
-                                                      : null
-                                              }
-                                              width="80px"
-                                          />
-                                          <div className="flex-fill d-flex align-items-center justify-content-between ps-2 pe-2">
-                                              <div>
-                                                  <p
-                                                      className="fs-2"
-                                                      key={data.id}
-                                                  >
-                                                      {" "}
-                                                      {data.name}
-                                                  </p>
-                                              </div>
-                                              <div>
-                                                  <p className="fs-4 text-muted">
-                                                      {" "}
-                                                      (
-                                                      {data.tracks.total > 0
-                                                          ? `${data.tracks.total} songs`
-                                                          : "Playlist empty"}
-                                                      )
-                                                  </p>
-                                              </div>
+                                      <div className="d-flex align-items-center rounded mb-2 hover">
+                                          <div className="flex-shrink-0">
+                                              {data.images[0] ? (
+                                                  <img
+                                                      src={data.images[0].url}
+                                                      className="rounded"
+                                                      width="80px"
+                                                      height="80px"
+                                                      alt=""
+                                                  />
+                                              ) : (
+                                                  <Mug
+                                                      size={52}
+                                                      mood="sad"
+                                                      color="#A6E191"
+                                                  />
+                                              )}
+                                          </div>
+                                          <div className="flex-grow-1 ms-3 fs-3">
+                                              <p
+                                                  className="mb-0 fs-4"
+                                                  key={data.id}
+                                              >
+                                                  {data.name}
+                                              </p>
+                                              <p className="mb-0 fs-5 text-muted">
+                                                  (
+                                                  {data.tracks.total > 0
+                                                      ? `${data.tracks.total} songs`
+                                                      : 'Playlist empty'}
+                                                  )
+                                              </p>
                                           </div>
                                       </div>
                                   </A>
