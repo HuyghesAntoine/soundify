@@ -18,6 +18,6 @@ router.put('/api/unfollow/:id', userController.removeFollower);
 router.put('/api/post', postController.putPost);
 router.delete('/api/post/:id', postController.deletePost);
 router.get('/api/post/get/:id', postController.getPost);
-router.get('/api/:id/timeline', postController.getTimeline); //get timeline from :id
+router.get('/api/timeline', postController.getTimeline); //get timeline from :id
 
 module.exports = router;

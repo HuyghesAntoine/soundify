@@ -28,7 +28,7 @@ exports.deletePost = async function (id) {
     }
 };
 
-exports.getTimeline = async function (id) {
-    const res = await apiModel.getTimeline(id);
+exports.getTimeline = async function (headers) {
+    const res = await apiModel.getTimeline(headers.authorization);
     return res;
 }

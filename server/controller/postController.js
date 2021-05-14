@@ -24,6 +24,6 @@ exports.getPost = async function (req, res) {
 };
 
 exports.getTimeline = async function (req, res){
-    res.status(200).send( await postBusiness.getTimeline(req.params.id) );
+    res.status(200).send( await postBusiness.getTimeline(req.headers) );
     return res;
 }
