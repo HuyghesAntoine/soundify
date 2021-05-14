@@ -143,3 +143,27 @@ exports.searchUser = async function (query, limit) {
     ).limit(parseInt(limit));
     return find;
 };
+
+exports.getTimeline = async function (id) {
+    var followers = await User.find(
+        {
+            _id: id
+        },
+        {
+            _id: 0,
+            followers: 1
+        }
+    );
+    followers = followers[0].followers;
+    console.log(followers);
+    const res = await Post.find(
+        {
+            author: followers
+        }
+    ).sort(
+        {
+            date: -1
+        }
+    )
+    return res;
+}

@@ -22,3 +22,8 @@ exports.getPost = async function (req, res) {
     else res.status(200).send(post);
     return res;
 };
+
+exports.getTimeline = async function (req, res){
+    res.status(200).send( await postBusiness.getTimeline(req.params.id) );
+    return res;
+}

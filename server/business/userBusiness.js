@@ -39,10 +39,11 @@ exports.getAllUsers = async function () {
 
 exports.addFollower = async function (id, query) {
     const token = query.authorization;
-    console.log(token);
-    console.log(id);
+    console.log("token : " + token);
+    console.log("id : " + id);
     const user = await apiModel.getUserWithId(id);
     const res = await apiModel.getFollower(token, id);
+    console.log(res);
     if (
         _.isEqual(res, JSON.parse('[]')) &&
         !_.isEqual(user, JSON.parse('[]'))

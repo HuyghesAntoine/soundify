@@ -27,3 +27,8 @@ exports.deletePost = async function (id) {
         return resSearch;
     }
 };
+
+exports.getTimeline = async function (id) {
+    const res = await apiModel.getTimeline(id);
+    return res;
+}
