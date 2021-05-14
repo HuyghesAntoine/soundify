@@ -15,19 +15,26 @@ mongoose.connect(
 
 exports.getUserWithId = async function (id) {
     try {
-        const find = await User.find(JSON.parse('{"_id": "' + id + '"}'));
+        const find = await User.find(
+            {"_id": id}
+        );
         return find;
     } catch (err) {}
     return JSON.parse('[]');
 };
 
 exports.getUser = async function (mail) {
-    const find = await User.find(JSON.parse('{"email": "' + mail + '"}'));
+    const find = await User.find(
+        { "email": mail},
+        { "oauth" : 0}
+    );
     return find;
 };
 
 exports.getUserWithToken = async function (token) {
-    const find = await User.find(JSON.parse('{"oauth": "' + token + '"}'));
+    const find = await User.find(
+        {"oauth": token }
+    );
     return find;
 };
 
@@ -105,7 +112,7 @@ exports.addFollower = async function (token, id) {
 
 exports.getFollower = async function (token, id) {
     const find = await User.find(
-        JSON.parse('{"oauth": "' + token + '","followers": "' + id + '"}')
+        {"oauth": token , "followers": id}
     );
     console.log(find);
     return find;
@@ -120,8 +127,8 @@ exports.updateUsersBio = async function (id, content) {
 };
 
 exports.searchUser = async function (query, limit) {
-    const find = await User.find(
+    var find = await User.find(
         { username: { $regex: query, $options: 'i'} }
-    );
+    ).limit( parseInt(limit) );
     return find;
 }

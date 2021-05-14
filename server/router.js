@@ -6,12 +6,12 @@ const postController = require('./controller/postController');
 
 // API - USER
 router.put('/api/hello', userController.putUser); //méthode appelé lors de la connexion
-router.get('/api/user/get/:mail', userController.getUser); //get information of user id
+router.get('/api/user/search', userController.searchUser);
+router.get('/api/user/:mail', userController.getUser); //get information of user id
 router.get('/api/me', userController.getMe);
 router.get('/api/users', userController.getAllUsers);
 router.put('/api/user/bio', userController.putBio);
 router.put('/api/addFollower/:id', userController.addFollower);
-router.get('/api/user/search', userController.searchUser);
 
 // API - POST
 router.put('/api/post', postController.putPost);

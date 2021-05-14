@@ -21,7 +21,7 @@ exports.getUser = async function (mail) {
     if (_.isEqual(user, JSON.parse('[]'))) return JSON.parse('[]');
     user = user[0];
     console.log(user);
-    user.oauth = 'HIDE';
+    //user.oauth = 'HIDE';
     return user;
 };
 
