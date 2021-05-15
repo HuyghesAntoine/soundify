@@ -32,3 +32,8 @@ exports.putReact = async function (req, res){
     res.status(200).send( await postBusiness.putReact(req.headers, req.params.id, req.params.mood));
     return res;
 }
+
+exports.deleteReact = async function (req, res){
+    res.status(200).send( await postBusiness.removeReact(req.headers, req.params.id, req.params.mood));
+    return res;
+}

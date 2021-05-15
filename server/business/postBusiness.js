@@ -33,9 +33,25 @@ exports.getTimeline = async function (headers) {
     return res;
 };
 
-exports.putPost = async function (headers, id, mood){
-    const token = query.authorization;
+exports.putReact = async function (headers, id, mood){
+    const token = headers.authorization;
     const user = await apiModel.getUserWithToken(token);
-    const res = await apiModel.putReact(user[0]._id, id, mood);
-    return res;
+    const react = await apiModel.selectReact(user[0]._id, id, mood);
+
+    if( !_.isEqual(user, JSON.parse('[]')) && _.isEqual(react, JSON.parse('[]')) ){
+        const res = await apiModel.updateReact(user[0]._id, id, mood);
+        return res;
+    }else
+        return JSON.parse('{ "user":' + JSON.stringify(user)  + ', "reacts":'+ JSON.stringify(react) + '}');
+}
+
+exports.removeReact = async function (headers, id, mood){
+    const token = headers.authorization;
+    const user = await apiModel.getUserWithToken(token);
+
+    if( !_.isEqual(user, JSON.parse('[]')) ){
+        const res = await apiModel.removeReact(user[0]._id, id, mood);
+        return res;
+    }else
+        return user;
 }

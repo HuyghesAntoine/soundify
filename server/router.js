@@ -20,5 +20,6 @@ router.delete('/api/post/:id', postController.deletePost);
 router.get('/api/post/get/:id', postController.getPost);
 router.get('/api/timeline', postController.getTimeline); //get timeline from :id
 router.put('/api/post/:id/react/:mood', postController.putReact); //create /update reaction on post(:id)
+router.delete('/api/post/:id/react/:mood', postController.deleteReact); //create /update reaction on post(:id)
 
 module.exports = router;
