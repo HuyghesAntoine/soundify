@@ -27,3 +27,8 @@ exports.getTimeline = async function (req, res){
     res.status(200).send( await postBusiness.getTimeline(req.headers) );
     return res;
 }
+
+exports.putReact = async function (req, res){
+    res.status(200).send( await postBusiness.putReact(req.headers, req.params.id, req.params.mood));
+    return res;
+}

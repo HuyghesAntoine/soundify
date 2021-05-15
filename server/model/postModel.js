@@ -1,4 +1,5 @@
 const mongoose = require('mongoose'); 
+const User = require('./userModel');
 
 const postSchema = mongoose.Schema({
     author: {
@@ -14,7 +15,16 @@ const postSchema = mongoose.Schema({
         reqquired: true
     },
     reactions: {
-        type: [String],
+        type: [
+            {
+                mood: {
+                    type: String
+                },
+                user: {
+                    type: String
+                }
+            }
+        ],
         required: true
     }
 });

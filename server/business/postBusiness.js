@@ -31,4 +31,11 @@ exports.deletePost = async function (id) {
 exports.getTimeline = async function (headers) {
     const res = await apiModel.getTimeline(headers.authorization);
     return res;
+};
+
+exports.putPost = async function (headers, id, mood){
+    const token = query.authorization;
+    const user = await apiModel.getUserWithToken(token);
+    const res = await apiModel.putReact(user[0]._id, id, mood);
+    return res;
 }

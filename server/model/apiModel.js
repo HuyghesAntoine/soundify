@@ -55,7 +55,6 @@ exports.insertUser = async function (oauth, token) {
 };
 
 exports.updateUser = async function (oauth, token) {
-    console.log('update user');
     const update = await User.updateOne(
         { email: oauth.email },
         { $set: { oauth: token } }
@@ -170,4 +169,19 @@ exports.getTimeline = async function (id) {
     };
 
     return res;
+}
+
+exports.putReact = async function (id, id_post, mood){
+    const update = await Post.updateOne(
+        { _id: id_post },
+        { 
+            $push: { 
+                reactions: {
+                    mood: mood,
+                    id: id
+                } 
+            } 
+        }
+    );
+    return update;
 }
