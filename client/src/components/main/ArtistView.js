@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { A } from '@patched/hookrouter';
-import { ArtistTracks, ArtistAlbums } from 'react-spotify-api';
+import { Artist, ArtistTracks, ArtistAlbums } from 'react-spotify-api';
 import TrackLineView from './card/TrackLineView';
 
 class ArtistView extends Component {
@@ -11,6 +11,9 @@ class ArtistView extends Component {
     render() {
         return (
             <div>
+                <Artist id={this.state.id}>
+                    {({ data }) => (data ? <h1>{data.name}</h1> : null)}
+                </Artist>
                 <h1>Top tracks :</h1>
                 <ArtistTracks id={this.state.id}>
                     {({ data }) =>
