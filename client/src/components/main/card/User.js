@@ -88,7 +88,14 @@ class User extends Component {
 
                 {!this.state.self ? (
                     <button
-                        className="btn btn-outline-light"
+                        className={
+                            'btn btn-outline-light fs-4 p-0 ps-1 pe-1 ' +
+                            (this.state.follow
+                                ? !this.state.hover
+                                    ? 'border-success'
+                                    : 'border-danger'
+                                : null)
+                        }
                         onMouseEnter={this.handleMouseEnter}
                         onMouseLeave={this.handleMouseLeave}
                         onClick={this.handleClick}
