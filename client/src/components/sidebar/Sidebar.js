@@ -10,6 +10,7 @@ import {
     Person,
     Disc,
 } from 'react-bootstrap-icons';
+import { Ghost } from 'react-kawaii';
 
 class Sidebar extends Component {
     constructor(props) {
@@ -21,28 +22,39 @@ class Sidebar extends Component {
         return (
             <div className="vh-100 pt-3 d-flex flex-column justify-content-between col-2 border-end border-2 border-warning">
                 <section className="d-flex flex-column text-center">
-                    <img
-                        className="avatar mx-auto d-block rounded-circle border border-2 border-warning bg-light"
-                        src={process.env.PUBLIC_URL + '/img/avataaars.svg'}
-                        alt="Avatar"
-                    />
-                    <span>
-                        #
-                        <User>
-                            {({ data }) => {
-                                return data ? (
-                                    <span>
+                    <User>
+                        {({ data }) => {
+                            return data ? (
+                                <div>
+                                    {console.log(data)}
+                                    <div>
+                                        {!data.images[0] ? (
+                                            <img
+                                                className="avatar mx-auto img-fluid d-block rounded-circle border border-2 border-warning bg-light"
+                                                src={data.images[0].url}
+                                                width="100%"
+                                                alt="Avatar"
+                                            />
+                                        ) : (
+                                            <div
+                                                className="mx-auto"
+                                                style={{ maxWidth: '100px' }}
+                                            >
+                                                <Ghost size="100%" mood="ko" />
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <span className="d-block text-truncate">
                                         {data.display_name}{' '}
                                         {data.product === 'premium' ? (
                                             <PatchCheck />
                                         ) : null}
                                     </span>
-                                ) : null;
-                            }}
-                        </User>
-                    </span>
-                    <br />
-                    <span>🟢 Listening ...</span>
+                                </div>
+                            ) : null;
+                        }}
+                    </User>
                 </section>
 
                 <div className="align-self-center">
