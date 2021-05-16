@@ -3,8 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
-import { EmojiSmile } from 'react-bootstrap-icons';
-import Post from './card/Post';
+import { ArrowRight, EmojiSmile } from 'react-bootstrap-icons';
 
 class PostForm extends Component {
     constructor(props) {
@@ -60,30 +59,30 @@ class PostForm extends Component {
             <div>
                 <form
                     onSubmit={this.handleSubmit}
-                    className="w-50 mx-auto mt-2"
+                    className="w-75 mx-auto mt-3 mb-5 border border-2 rounded"
                 >
-                    <h3>Post</h3>
                     <div>
                         <textarea
                             value={this.state.value}
                             onChange={this.handleChange}
-                            className="w-100 bg-dark border border-2 rounded text-light"
+                            className="w-100 bg-dark border-0 text-light"
                         />
                     </div>
 
-                    <div className="row">
+                    <div className="d-flex justify-content-between">
                         <button
                             type="button"
-                            className="col-2 btn btn-sm btn-outline-light"
+                            className="col-2 btn btn-sm border-0 btn-outline-light"
                             onClick={this.handleEmojiDisplay}
                         >
                             <EmojiSmile />
                         </button>
-                        <input
+                        <button
                             type="submit"
-                            className="col-10 btn btn-small btn-outline-light"
-                            value="Submit"
-                        />
+                            className="col-2 btn btn-sm border-0 btn-outline-light"
+                        >
+                            <ArrowRight />
+                        </button>
                     </div>
                     {this.state.displayPicker ? (
                         <Picker

@@ -8,7 +8,9 @@ import Error from './components/main/Error';
 import Sidebar from './components/sidebar/Sidebar';
 import Releases from './components/main/Releases';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './fonts/No Added Sugar.woff';
 import './App.css';
+import './SoundifyBootstrap.css';
 import Player from './components/main/Player';
 
 const App = () => {
@@ -28,7 +30,7 @@ const App = () => {
                             </div>
                             <div
                                 className={
-                                    'col-2 text-break border-start border-warning border-2 ' +
+                                    'col-2 text-break border-start border-primary border-2 ' +
                                     (getWorkingPath() === '/releases'
                                         ? 'd-none'
                                         : 'd-none d-sm-block')

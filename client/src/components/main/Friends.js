@@ -19,8 +19,19 @@ class Friends extends Component {
                 Authorization: this.state.token,
             },
         }).then((response) => {
-            this.setState({
-                self: response.data,
+            this.setState({ self: response.data });
+            console.log(response.data);
+            axios({
+                method: 'get',
+                url:
+                    'http://localhost:3030/api/user/' +
+                    response.data._id +
+                    '/followers',
+                headers: {
+                    Authorization: this.state.token,
+                },
+            }).then((response) => {
+                console.log(response);
             });
         });
     }
@@ -51,7 +62,7 @@ class Friends extends Component {
         return (
             <div>
                 <div className="d-flex justify-content-between mt-3">
-                    <h1>My Friends</h1>
+                    <h1 className="sh">My Friends</h1>
 
                     <div>
                         <div className="input-group mb-3">
@@ -73,7 +84,6 @@ class Friends extends Component {
                         </div>
                     </div>
                 </div>
-                {console.log(this.state.res)}
                 {this.state.res.map((user) => (
                     <User
                         user={user}
@@ -82,6 +92,9 @@ class Friends extends Component {
                     />
                 ))}
                 <hr />
+                {this.state.self
+                    ? this.state.self.followers.map((user) => <p>{user}</p>)
+                    : null}
             </div>
         );
     }

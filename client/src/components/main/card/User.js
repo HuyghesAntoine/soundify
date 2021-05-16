@@ -77,7 +77,7 @@ class User extends Component {
                     />
                 </div>
 
-                <div className="flex-grow-1 ms-3 fs-5 text-warning fw-bold">
+                <div className="flex-grow-1 ms-3 fs-5 text-primary fw-bold">
                     <span>
                         {this.state.user.username}{' '}
                         {this.state.self ? (

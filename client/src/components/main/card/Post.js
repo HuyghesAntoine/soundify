@@ -21,7 +21,6 @@ class Post extends Component {
             const count = this.state.data.reactions.filter(
                 (react) => react.mood === mood
             ).length;
-            console.log(count);
             if (count !== 0) {
                 this.state.data.displayReactions.push({
                     mood: mood,
@@ -55,7 +54,6 @@ class Post extends Component {
                 Authorization: this.state.token,
             },
         }).then((response) => {
-            console.log(response.data);
             this.setState((prevState) => ({
                 data: {
                     ...prevState.data,
@@ -76,7 +74,7 @@ class Post extends Component {
                 onMouseLeave={this.handleMouseLeave}
             >
                 <div className="m-2">
-                    <span className="text-warning fw-bold">
+                    <span className="text-primary fw-bold">
                         {this.state.data.author}
                     </span>{' '}
                     <span className="text-muted">

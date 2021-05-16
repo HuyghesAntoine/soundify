@@ -20,7 +20,7 @@ class Sidebar extends Component {
 
     render() {
         return (
-            <div className="vh-100 pt-3 d-flex flex-column justify-content-between col-2 border-end border-2 border-warning">
+            <div className="vh-100 pt-3 d-flex flex-column justify-content-between col-2 border-end border-2 border-primary">
                 <section className="d-flex flex-column text-center">
                     <User>
                         {({ data }) => {
@@ -28,9 +28,9 @@ class Sidebar extends Component {
                                 <div>
                                     {console.log(data)}
                                     <div>
-                                        {!data.images[0] ? (
+                                        {data.images[0] ? (
                                             <img
-                                                className="avatar mx-auto img-fluid d-block rounded-circle border border-2 border-warning bg-light"
+                                                className="avatar mx-auto img-fluid d-block rounded-circle border border-2 border-primary bg-light"
                                                 src={data.images[0].url}
                                                 width="100%"
                                                 alt="Avatar"

@@ -2,6 +2,16 @@
     min-height: 100vh;
 }
 
+@font-face {
+    font-family: 'noaddedsugar';
+    src: local('noaddedsugar'),
+        url('./fonts/No Added Sugar.woff') format('woff');
+}
+
+html body {
+    font-family: 'noaddedsugar';
+}
+
 html,
 body,
 .App,
@@ -16,4 +26,8 @@ body,
 
 .hover:hover {
     background-color: hsla(0, 0%, 100%, 0.1);
+}
+
+.sh {
+    text-shadow: 3px 3px 0px #057614;
 }

@@ -68,7 +68,7 @@ class BioForm extends Component {
                     <input
                         type="submit"
                         className={
-                            'btn btn-outline-warning btn-sm ' +
+                            'btn btn-outline-primary btn-sm ' +
                             this.state.inputDisplay
                         }
                         value="Update my bio"

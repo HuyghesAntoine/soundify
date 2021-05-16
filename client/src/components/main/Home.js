@@ -27,7 +27,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <h1 className="text-center">My Feed</h1>
+                <h1 className="text-center sh">Feed</h1>
                 <PostForm />
                 {this.state.timeline.length !== 0 ? (
                     this.state.timeline.map((post) => <Post data={post} />)
