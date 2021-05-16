@@ -4,12 +4,13 @@ import Cookies from 'js-cookie';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
 import { EmojiSmile } from 'react-bootstrap-icons';
+import Post from './card/Post';
 
 class PostForm extends Component {
     constructor(props) {
         super(props);
         const token = Cookies.get('spotifyAuthToken');
-        this.state = { value: '', token: token };
+        this.state = { value: '', token: token, lastPost: [] };
 
         this.state.displayPicker = false;
         this.handleChange = this.handleChange.bind(this);
@@ -40,7 +41,7 @@ class PostForm extends Component {
                 this.setState({
                     value: '',
                     res: response.data,
-                    displayPicker: !this.state.displayPicker,
+                    displayPicker: false,
                 });
             });
         }
@@ -56,45 +57,50 @@ class PostForm extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit} className="w-50 mx-auto mt-2">
-                <h3>Post</h3>
-                <div>
-                    <textarea
-                        value={this.state.value}
-                        onChange={this.handleChange}
-                        className="w-100 bg-dark border border-2 rounded text-light"
-                    />
-                </div>
+            <div>
+                <form
+                    onSubmit={this.handleSubmit}
+                    className="w-50 mx-auto mt-2"
+                >
+                    <h3>Post</h3>
+                    <div>
+                        <textarea
+                            value={this.state.value}
+                            onChange={this.handleChange}
+                            className="w-100 bg-dark border border-2 rounded text-light"
+                        />
+                    </div>
 
-                <div className="row">
-                    <button
-                        type="button"
-                        className="col-2 btn btn-sm btn-outline-light"
-                        onClick={this.handleEmojiDisplay}
-                    >
-                        <EmojiSmile />
-                    </button>
-                    <input
-                        type="submit"
-                        className="col-10 btn btn-small btn-outline-light"
-                        value="Submit"
-                    />
-                </div>
-                {this.state.displayPicker ? (
-                    <Picker
-                        set="twitter"
-                        title="Pick your emoji…"
-                        emoji="point_up"
-                        theme="dark"
-                        color="#ffc107"
-                        perLine={9}
-                        emojiSize={20}
-                        showPreview={false}
-                        showSkinTones={false}
-                        onSelect={this.handleSelect}
-                    />
-                ) : null}
-            </form>
+                    <div className="row">
+                        <button
+                            type="button"
+                            className="col-2 btn btn-sm btn-outline-light"
+                            onClick={this.handleEmojiDisplay}
+                        >
+                            <EmojiSmile />
+                        </button>
+                        <input
+                            type="submit"
+                            className="col-10 btn btn-small btn-outline-light"
+                            value="Submit"
+                        />
+                    </div>
+                    {this.state.displayPicker ? (
+                        <Picker
+                            set="twitter"
+                            title="Pick your emoji…"
+                            emoji="point_up"
+                            theme="dark"
+                            color="#ffc107"
+                            perLine={9}
+                            emojiSize={20}
+                            showPreview={false}
+                            showSkinTones={false}
+                            onSelect={this.handleSelect}
+                        />
+                    ) : null}
+                </form>
+            </div>
         );
     }
 }

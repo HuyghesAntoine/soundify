@@ -3,6 +3,7 @@ import { Component } from 'react';
 import Post from './card/Post';
 import PostForm from './PostForm';
 import axios from 'axios';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 class Home extends Component {
     constructor(props) {
@@ -28,9 +29,21 @@ class Home extends Component {
             <div>
                 <h1 className="text-center">My Feed</h1>
                 <PostForm />
-                {this.state.timeline.map((post) => (
-                    <Post data={post} />
-                ))}
+                {this.state.timeline.length !== 0 ? (
+                    this.state.timeline.map((post) => <Post data={post} />)
+                ) : (
+                    <div>
+                        <SkeletonTheme
+                            color="#bbb"
+                            highlightColor="#aaa"
+                            duration={2}
+                        >
+                            <h1>
+                                <Skeleton className="pt-3 mb-5" count={10} />
+                            </h1>
+                        </SkeletonTheme>
+                    </div>
+                )}
             </div>
         );
     }
