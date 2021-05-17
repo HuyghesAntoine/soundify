@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@patched/hookrouter": "^1.3.1",
+    "@progresso/react-giphy-picker-https": "^1.3.4",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
@@ -27,7 +28,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "css" : "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 scss/custom.scss src/SoundifyBootstrap.css",
+    "css": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 scss/custom.scss src/SoundifyBootstrap.css",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
