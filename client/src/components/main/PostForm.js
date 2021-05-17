@@ -17,6 +17,7 @@ class PostForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
         this.handleEmojiDisplay = this.handleEmojiDisplay.bind(this);
+        this.handleGifDisplay = this.handleGifDisplay.bind(this);
     }
 
     log(gif) {
@@ -59,14 +60,14 @@ class PostForm extends Component {
         this.setState({ value: this.state.value + emoji.native });
     }
 
+    handleGifDisplay(){
+        this.setState({displayPickerGif: !this.state.displayPickerGif});
+    }
+
     render() {
         return (
             <div>
                 {' '}
-                <PickerGif
-                    apiKey={process.env.REACT_APP_GIPHY_CLIENT_ID}
-                    onSelected={this.log.bind(this)}
-                />
                 <form
                     onSubmit={this.handleSubmit}
                     className="w-75 mx-auto mt-3 mb-5 border border-2 rounded"
@@ -78,18 +79,25 @@ class PostForm extends Component {
                             className="w-100 bg-dark border-0 text-light"
                         />
                     </div>
-
+                    <hr 
+                        className="bg-primary"/>
                     <div className="d-flex justify-content-between">
                         <button
                             type="button"
-                            className="col-2 btn btn-sm border-0 btn-outline-light"
+                            className="col-2 btn btn-sm border-0 btn-outline-primary"
                             onClick={this.handleEmojiDisplay}
                         >
                             <EmojiSmile />
                         </button>
                         <button
+                            type="button"
+                            className="col-2 btn btn-sm border-0 btn-outline-primary"
+                            onClick={this.handleGifDisplay}>
+                                GIF
+                        </button>
+                        <button
                             type="submit"
-                            className="col-2 btn btn-sm border-0 btn-outline-light"
+                            className="col-2 btn btn-sm border-0 btn-outline-primary"
                         >
                             <ArrowRight />
                         </button>
@@ -108,6 +116,15 @@ class PostForm extends Component {
                             onSelect={this.handleSelect}
                         />
                     ) : null}
+                    {this.state.displayPickerGif ? (
+                        <PickerGif
+                                apiKey={process.env.REACT_APP_GIPHY_CLIENT_ID}
+                                onSelected={this.log.bind(this)}
+                                modal = {true}
+                                style={{"background-color" : "#29343d"}}
+                                width = "1000px"
+                            />
+                    ):null}
                 </form>
             </div>
         );
