@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Search } from 'react-bootstrap-icons';
+import { Scrollbars } from 'react-custom-scrollbars-2';
 import User from './card/User';
 import axios from 'axios';
 import Cookies from 'js-cookie';

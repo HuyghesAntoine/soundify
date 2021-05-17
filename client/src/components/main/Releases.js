@@ -12,7 +12,7 @@ class Releases extends Component {
             <div>
                 <h1 className="d-flex flex-column text-center">Releases</h1>
 
-                <BrowseNew options={{ limit: 3 }}>
+                <BrowseNew options={{ limit: 15 }}>
                     {({ data }) =>
                         data
                             ? data.albums.items.map((album) => (

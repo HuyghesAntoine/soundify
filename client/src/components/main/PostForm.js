@@ -48,6 +48,8 @@ class PostForm extends Component {
                     value: '',
                     res: response.data,
                     displayPicker: false,
+                    displayMusicSearch: false,
+                    displayPickerGif: false,
                 });
             });
         }
@@ -57,6 +59,7 @@ class PostForm extends Component {
         this.setState({
             displayPicker: !this.state.displayPicker,
             displayPickerGif: false,
+            displayMusicSearch: false,
         });
     }
 
@@ -67,6 +70,7 @@ class PostForm extends Component {
     handleGifDisplay() {
         this.setState({
             displayPicker: false,
+            displayMusicSearch: false,
             displayPickerGif: !this.state.displayPickerGif,
         });
     }
@@ -74,6 +78,7 @@ class PostForm extends Component {
     handleMusicSearchDisplay() {
         this.setState({
             displayPicker: false,
+            displayPickerGif: false,
             displayMusicSearch: !this.state.displayMusicSearch,
         });
     }
@@ -91,6 +96,7 @@ class PostForm extends Component {
                             value={this.state.value}
                             onChange={this.handleChange}
                             className="w-100 bg-dark border-0 text-light"
+                            style = {{resize : "none"}}
                         />
                     </div>
                     <div className="d-flex justify-content-between border-primary border-top">

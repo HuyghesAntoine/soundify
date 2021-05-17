@@ -45,12 +45,12 @@ class Sidebar extends Component {
                                         )}
                                     </div>
 
-                                    <span className="d-block text-truncate">
+                                    <h5 className="d-block text-truncate mt-3">
                                         {data.display_name}{' '}
                                         {data.product === 'premium' ? (
                                             <PatchCheck />
                                         ) : null}
-                                    </span>
+                                    </h5>
                                 </div>
                             ) : null;
                         }}
@@ -127,10 +127,10 @@ class Sidebar extends Component {
                     </ul>
                 </div>
                 <A
-                    className="fs-5 pb-4 text text-reset text-decoration-none"
+                    className="fs-5 pb-1 text text-reset text-decoration-none"
                     href="/logout"
                 >
-                    <BoxArrowLeft className="d-block d-sm-none fs-1 mb-2" />
+                    <BoxArrowLeft className="d-block d-sm-none fs-1 mb-1" />
                     <span className="d-none d-sm-block">
                         <BoxArrowLeft /> Logout
                     </span>

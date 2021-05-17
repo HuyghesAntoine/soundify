@@ -41,7 +41,7 @@ class ArtistView extends Component {
                                               width="100px"
                                               alt=""
                                           />
-                                          <span> {album.name} </span>
+                                          <p> {album.name} </p>
                                       </A>
                                   ))
                                 : null
