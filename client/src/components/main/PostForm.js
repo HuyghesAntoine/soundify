@@ -3,7 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
-import { ArrowRight, EmojiSmile } from 'react-bootstrap-icons';
+import { ArrowRight, EmojiSmile, MusicNoteBeamed, Stickies } from 'react-bootstrap-icons';
 import PickerGif from '@progresso/react-giphy-picker-https';
 
 class PostForm extends Component {
@@ -18,6 +18,7 @@ class PostForm extends Component {
         this.handleSelect = this.handleSelect.bind(this);
         this.handleEmojiDisplay = this.handleEmojiDisplay.bind(this);
         this.handleGifDisplay = this.handleGifDisplay.bind(this);
+        this.handleMusicSearchDisplay = this.handleMusicSearchDisplay.bind(this);
     }
 
     log(gif) {
@@ -70,6 +71,13 @@ class PostForm extends Component {
         });
     }
 
+    handleMusicSearchDisplay() {
+        this.setState({
+            displayPicker: false,
+            displayMusicSearch: !this.state.displayMusicSearch,
+        });
+    }
+
     render() {
         return (
             <div>
@@ -98,7 +106,15 @@ class PostForm extends Component {
                             className="col-2 btn btn-sm border-0 btn-outline-primary"
                             onClick={this.handleGifDisplay}
                         >
-                            GIF
+                            <Stickies />
+                        </button>
+                        <button
+                            type="button"
+                            className="col-2 btn btn-sm border-0 btn-outline-primary"
+                            onClick={this.handleMusicSearchDisplay}
+
+                        >
+                            <MusicNoteBeamed />
                         </button>
                         <button
                             type="submit"
@@ -129,6 +145,28 @@ class PostForm extends Component {
                             style={{ 'background-color': '#29343d' }}
                             width="1000px"
                         />
+                    ) : null}
+
+                    {this.state.displayMusicSearch ? (
+                       <div>
+                        <div className="input-group">
+                            <input
+                                type="text"
+                                className="form-control bg-dark text-light"
+                                placeholder="Search your music"
+                                aria-label="Search"
+                                aria-describedby="searchMusic"
+                                value={this.state.value}
+                                onChange={this.handleChange}
+                            />
+                            <button
+                                className="btn btn-outline-light"
+                                id="searchMusic"
+                            >
+                                Search
+                            </button>
+                        </div>
+                    </div>
                     ) : null}
                 </form>
             </div>
