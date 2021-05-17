@@ -118,7 +118,6 @@ exports.removeFollower = async function (token, id) {
 
 exports.getFollower = async function (token, id) {
     const find = await User.find({ oauth: token, followers: id });
-    console.log(find);
     return find;
 };
 

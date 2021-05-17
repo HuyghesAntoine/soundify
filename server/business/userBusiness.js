@@ -17,18 +17,28 @@ exports.createOrUpdateUser = async function (token) {
 
 exports.getUser = async function (mail) {
     var user = await apiModel.getUser(mail);
-    if (_.isEqual(user, JSON.parse('[]'))) return JSON.parse('[]');
+    if( _.isEqual(user, JSON.parse('[]')) )
+        return JSON.parse(
+        '{' +
+            '"code": 404,' +
+            '"erreur": "not found",' +
+            '"message": "email ' + mail + ' not found"' +
+        '}');
     user = user[0];
-    console.log(user);
-    //user.oauth = 'HIDE';
     return user;
 };
 
 exports.getMe = async function (token) {
     var user = await apiModel.getUserWithToken(token);
-    if (_.isEqual(user, JSON.parse('[]'))) return JSON.parse('[]');
+    if( _.isEqual(user, JSON.parse('[]')) )
+        return JSON.parse(
+        '{' +
+            '"code": 401,' +
+            '"erreur": "unauthorized",' +
+            '"message": "oauth introuvable"' +
+        '}');
     user = user[0];
-    user.oauth = 'HIDE';
+    //user.oauth = 'HIDE';
     return user;
 };
 
@@ -39,37 +49,70 @@ exports.getAllUsers = async function () {
 
 exports.addFollower = async function (id, query) {
     const token = query.authorization;
-    console.log("token : " + token);
-    console.log("id : " + id);
+    var me = await apiModel.getUserWithToken(token);
+    if( _.isEqual(me, JSON.parse('[]')) )
+        return JSON.parse(
+        '{' +
+            '"code": 401,' +
+            '"erreur": "unauthorized",' +
+            '"message": "oauth introuvable"' +
+        '}');
+
     const user = await apiModel.getUserWithId(id);
+    if( _.isEqual(user, JSON.parse('[]')) )
+        return JSON.parse(
+        '{' +
+            '"code": 400,' +
+            '"erreur": "error",' +
+            '"message": "l\'id fourni est introuvable"' +
+        '}');
+
     const res = await apiModel.getFollower(token, id);
-    console.log(res);
-    if (
-        _.isEqual(res, JSON.parse('[]')) &&
-        !_.isEqual(user, JSON.parse('[]'))
-    ) {
-        const update = await apiModel.addFollower(token, id);
-        return update;
-    }
-    return res;
+    if( !_.isEqual(res, JSON.parse('[]')) )
+        return JSON.parse(
+        '{' +
+            '"code": 400,' +
+            '"erreur": "error",' +
+            '"message": "vous followez déja cette personne"' +
+        '}');
+
+    const update = await apiModel.addFollower(token, id);
+    return update;  
 };
 
 exports.removeFollower = async function (id, query) {
     const token = query.authorization;
-    console.log(token);
-    console.log(id);
+    var me = await apiModel.getUserWithToken(token);
+    if( _.isEqual(me, JSON.parse('[]')) )
+        return JSON.parse(
+        '{' +
+            '"code": 401,' +
+            '"erreur": "unauthorized",' +
+            '"message": "oauth introuvable"' +
+        '}');
+
     const user = await apiModel.getUserWithId(id);
-    if (!_.isEqual(user, JSON.parse('[]'))) {
-        const update = await apiModel.removeFollower(token, id);
-        return update;
-    }
-    return res;
+    if( _.isEqual(user, JSON.parse('[]')) )
+        return JSON.parse(
+        '{' +
+            '"code": 400,' +
+            '"erreur": "error",' +
+            '"message": "l\'id fourni est introuvable"' +
+        '}');
+    const update = await apiModel.removeFollower(token, id);
+    return update;
 };
 
 exports.putBio = async function (content, query) {
     const token = query.authorization;
     const user = await apiModel.getUserWithToken(token);
-    if (_.isEqual(user, JSON.parse('[]'))) return user;
+    if( _.isEqual(user, JSON.parse('[]')) )
+        return JSON.parse(
+        '{' +
+            '"code": 401,' +
+            '"erreur": "unauthorized",' +
+            '"message": "oauth introuvable"' +
+        '}');
     const res = await apiModel.updateUsersBio(user[0]._id, content); //changer le théo en oauth.username
     return res;
 };

@@ -3,37 +3,61 @@ const _ = require('lodash');
 
 
 exports.putPost = async function (req, res) {
-    res.status(201).send(
-        await postBusiness.putPost(req.body.content, req.headers)
-    );
+    const put = await postBusiness.putPost(req.body.content, req.headers);
+    var error;
+    if(put.code)
+        error = put.code;
+    else error = 200;
+    res.status(error).send(put);
     return res;
 };
 
 exports.deletePost = async function (req, res) {
     const post = await postBusiness.deletePost(req.params.id);
-    if (_.isEqual(post, JSON.parse('[]'))) res.status(404).send(post);
-    else res.status(200).send(post);
+    var error;
+    if(post.code)
+        error = post.code;
+    else error = 200;
+    res.status(error).send(post);
     return res;
 };
 
 exports.getPost = async function (req, res) {
     const post = await postBusiness.getPost(req.params.id);
-    if (_.isEqual(post, JSON.parse('[]'))) res.status(404).send(post);
-    else res.status(200).send(post);
+    var error;
+    if(post.code)
+        error = post.code;
+    else error = 200;
+    res.status(error).send(post);
     return res;
 };
 
 exports.getTimeline = async function (req, res){
-    res.status(200).send( await postBusiness.getTimeline(req.headers) );
+    const get = await postBusiness.getTimeline(req.headers);
+    var error;
+    if(get.code)
+        error = get.code;
+    else error = 200;
+    res.status(error).send(get);
     return res;
 }
 
 exports.putReact = async function (req, res){
-    res.status(200).send( await postBusiness.putReact(req.headers, req.params.id, req.params.mood));
+    const post = await postBusiness.putReact(req.headers, req.params.id, req.params.mood);
+    var error;
+    if(post.code)
+        error = post.code;
+    else error = 200;
+    res.status(error).send(post);
     return res;
 }
 
 exports.deleteReact = async function (req, res){
-    res.status(200).send( await postBusiness.removeReact(req.headers, req.params.id, req.params.mood));
+    const post = await postBusiness.removeReact(req.headers, req.params.id, req.params.mood);
+    var error;
+    if(post.code)
+        error = post.code;
+    else error = 200;
+    res.status(error).send(post);
     return res;
 }
