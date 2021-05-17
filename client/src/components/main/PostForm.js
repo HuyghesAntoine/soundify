@@ -53,15 +53,21 @@ class PostForm extends Component {
     }
 
     handleEmojiDisplay() {
-        this.setState({ displayPicker: !this.state.displayPicker });
+        this.setState({
+            displayPicker: !this.state.displayPicker,
+            displayPickerGif: false,
+        });
     }
 
     handleSelect(emoji) {
         this.setState({ value: this.state.value + emoji.native });
     }
 
-    handleGifDisplay(){
-        this.setState({displayPickerGif: !this.state.displayPickerGif});
+    handleGifDisplay() {
+        this.setState({
+            displayPicker: false,
+            displayPickerGif: !this.state.displayPickerGif,
+        });
     }
 
     render() {
@@ -79,9 +85,7 @@ class PostForm extends Component {
                             className="w-100 bg-dark border-0 text-light"
                         />
                     </div>
-                    <hr 
-                        className="bg-primary"/>
-                    <div className="d-flex justify-content-between">
+                    <div className="d-flex justify-content-between border-primary border-top">
                         <button
                             type="button"
                             className="col-2 btn btn-sm border-0 btn-outline-primary"
@@ -92,8 +96,9 @@ class PostForm extends Component {
                         <button
                             type="button"
                             className="col-2 btn btn-sm border-0 btn-outline-primary"
-                            onClick={this.handleGifDisplay}>
-                                GIF
+                            onClick={this.handleGifDisplay}
+                        >
+                            GIF
                         </button>
                         <button
                             type="submit"
@@ -118,13 +123,13 @@ class PostForm extends Component {
                     ) : null}
                     {this.state.displayPickerGif ? (
                         <PickerGif
-                                apiKey={process.env.REACT_APP_GIPHY_CLIENT_ID}
-                                onSelected={this.log.bind(this)}
-                                modal = {true}
-                                style={{"background-color" : "#29343d"}}
-                                width = "1000px"
-                            />
-                    ):null}
+                            apiKey={process.env.REACT_APP_GIPHY_CLIENT_ID}
+                            onSelected={this.log.bind(this)}
+                            modal={true}
+                            style={{ 'background-color': '#29343d' }}
+                            width="1000px"
+                        />
+                    ) : null}
                 </form>
             </div>
         );

@@ -31,3 +31,10 @@ body,
 .sh {
     text-shadow: 3px 3px 0px #057614;
 }
+
+.spotifyLogoBtn {
+    padding: 0px;
+    height: 1.5rem;
+    fill: #fff;
+    padding-right: 0.5rem;
+}

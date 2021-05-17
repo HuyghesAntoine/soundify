@@ -44,6 +44,7 @@ class LoginPage extends React.Component {
                                 Scopes.userFollowRead,
                                 Scopes.userFollowModify,
                             ]}
+                            logoClassName={'spotifyLogoBtn'}
                             onAccessToken={(token) => {
                                 axios({
                                     method: 'put',
