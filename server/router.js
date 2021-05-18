@@ -11,7 +11,7 @@ router.get('/api/user/:mail', userController.getUser); //get information of user
 router.get('/api/me', userController.getMe);
 router.get('/api/users', userController.getAllUsers);
 router.put('/api/user/bio', userController.putBio);
-router.put('/api/follow/:id', userController.addFollower); 
+router.put('/api/follow/:id', userController.addFollower);
 router.put('/api/unfollow/:id', userController.removeFollower);
 
 // API - POST

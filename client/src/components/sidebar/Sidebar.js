@@ -30,9 +30,8 @@ class Sidebar extends Component {
                                     <div>
                                         {data.images[0] ? (
                                             <img
-                                                className="avatar mx-auto img-fluid d-block rounded-circle border border-2 border-primary bg-light"
+                                                className="avatar mx-auto img-fluid d-block rounded-circle border border-2 border-primary bg-light h-auto"
                                                 src={data.images[0].url}
-                                                width="100%"
                                                 alt="Avatar"
                                             />
                                         ) : (

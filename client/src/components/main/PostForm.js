@@ -10,6 +10,7 @@ import {
     Stickies,
 } from 'react-bootstrap-icons';
 import PickerGif from '@progresso/react-giphy-picker-https';
+import { Search } from 'react-spotify-api';
 
 class PostForm extends Component {
     constructor(props) {
@@ -20,6 +21,8 @@ class PostForm extends Component {
             token: token,
             lastPost: [],
             gifPreview: null,
+            searchValue: '',
+            trackPreview: null,
         };
 
         this.state.displayPicker = false;
@@ -41,8 +44,26 @@ class PostForm extends Component {
         this.setState({ gifPreview: null });
     }
 
+    removeTrack() {
+        this.setState({ trackPreview: null });
+    }
+
     handleChange(event) {
         this.setState({ value: event.target.value });
+    }
+
+    handleChangeSearch(event) {
+        this.setState({ searchValue: event.target.value });
+    }
+
+    handleSelectTrack(event) {
+        console.log(event);
+        this.setState({
+            trackPreview: {
+                id: event.target.id,
+                string: event.target.textContent,
+            },
+        });
     }
 
     handleSubmit(event) {
@@ -59,6 +80,7 @@ class PostForm extends Component {
                 data: {
                     content: this.state.value,
                     gif: this.state.gifPreview,
+                    track: this.state.trackPreview.id,
                 },
             }).then((response) => {
                 console.log(response.data);
@@ -69,6 +91,7 @@ class PostForm extends Component {
                     displayMusicSearch: false,
                     displayPickerGif: false,
                     gifPreview: null,
+                    trackPreview: null,
                 });
             });
         }
@@ -122,7 +145,7 @@ class PostForm extends Component {
                             <div className="w-100">
                                 <button
                                     type="button"
-                                    class="btn-close btn-close-white float-end"
+                                    className="btn-close btn-close-white float-end"
                                     aria-label="Close"
                                     onClick={this.removeGif.bind(this)}
                                 ></button>
@@ -130,6 +153,17 @@ class PostForm extends Component {
                                     className="w-50 mx-auto d-block"
                                     src={this.state.gifPreview}
                                 />
+                            </div>
+                        ) : null}
+                        {this.state.trackPreview ? (
+                            <div className="w-100">
+                                <button
+                                    type="button"
+                                    class="btn-close btn-close-white float-end"
+                                    aria-label="Close"
+                                    onClick={this.removeTrack.bind(this)}
+                                ></button>
+                                <p>{this.state.trackPreview.string}</p>
                             </div>
                         ) : null}
                     </div>
@@ -195,8 +229,9 @@ class PostForm extends Component {
                                     placeholder="Search your music"
                                     aria-label="Search"
                                     aria-describedby="searchMusic"
-                                    value={this.state.value}
-                                    onChange={this.handleChange}
+                                    onChange={this.handleChangeSearch.bind(
+                                        this
+                                    )}
                                 />
                                 <button
                                     className="btn btn-outline-light"
@@ -205,6 +240,31 @@ class PostForm extends Component {
                                     Search
                                 </button>
                             </div>
+                            <Search
+                                query={this.state.searchValue}
+                                track
+                                options={{ limit: 5 }}
+                            >
+                                {({ data }) =>
+                                    data ? (
+                                        <div>
+                                            {data.tracks.items.map((track) => (
+                                                <p
+                                                    className="hover ps-2"
+                                                    key={track.id}
+                                                    id={track.id}
+                                                    onClick={this.handleSelectTrack.bind(
+                                                        this
+                                                    )}
+                                                >
+                                                    {track.artists[0].name} -{' '}
+                                                    {track.name}
+                                                </p>
+                                            ))}
+                                        </div>
+                                    ) : null
+                                }
+                            </Search>
                         </div>
                     ) : null}
                 </form>

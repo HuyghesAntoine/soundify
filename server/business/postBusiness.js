@@ -13,7 +13,12 @@ exports.putPost = async function (data, query) {
                 '"message": "oauth introuvable"' +
                 '}'
         );
-    const res = await apiModel.insertPost(user[0]._id, data.content, data.gif);
+    const res = await apiModel.insertPost(
+        user[0]._id,
+        data.content,
+        data.gif,
+        data.track
+    );
     return res;
 };
 

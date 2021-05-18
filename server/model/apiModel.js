@@ -62,11 +62,12 @@ exports.updateUser = async function (oauth, token) {
     return update;
 };
 
-exports.insertPost = async function (username, cont, gif) {
+exports.insertPost = async function (username, cont, gif, track) {
     const post = new Post({
         author: username,
         content: cont,
         gif: gif,
+        track: track,
         date: Date.now(),
     });
     try {

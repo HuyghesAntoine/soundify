@@ -12,7 +12,10 @@ const postSchema = mongoose.Schema({
     },
     gif: {
         type: String,
-        required: true,
+        default: null,
+    },
+    track: {
+        type: String,
         default: null,
     },
     date: {

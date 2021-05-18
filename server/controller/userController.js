@@ -21,8 +21,7 @@ exports.getUser = async function (req, res) {
 exports.getMe = async function (req, res) {
     const post = await userBusiness.getMe(req.headers.authorization);
     var error;
-    if(post.code)
-        error = post.code;
+    if (post.code) error = post.code;
     else error = 200;
     res.status(error).send(post);
     return res;
@@ -36,8 +35,7 @@ exports.getAllUsers = async function (req, res) {
 exports.addFollower = async function (req, res) {
     const update = await userBusiness.addFollower(req.params.id, req.headers);
     var error;
-    if(update.code)
-        error = update.code;
+    if (update.code) error = update.code;
     else error = 200;
     res.status(error).send(update);
     return res;
@@ -49,8 +47,7 @@ exports.removeFollower = async function (req, res) {
         req.headers
     );
     var error;
-    if(update.code)
-        error = update.code;
+    if (update.code) error = update.code;
     else error = 200;
     res.status(error).send(update);
     return res;
@@ -59,8 +56,7 @@ exports.removeFollower = async function (req, res) {
 exports.putBio = async function (req, res) {
     const update = await userBusiness.putBio(req.body.content, req.headers);
     var error;
-    if(update.code)
-        error = update.code;
+    if (update.code) error = update.code;
     else error = 200;
     res.status(error).send(update);
     return res;

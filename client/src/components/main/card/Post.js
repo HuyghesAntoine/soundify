@@ -3,6 +3,9 @@ import { Ghost } from 'react-kawaii';
 import Moment from 'react-moment';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { Track } from 'react-spotify-api';
+import { MusicNote } from 'react-bootstrap-icons';
+import TrackLineView from './TrackLineView';
 
 class Post extends Component {
     constructor(props) {
@@ -73,23 +76,38 @@ class Post extends Component {
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
             >
-                <div className="m-2">
-                    <span className="text-primary fw-bold">
-                        {this.state.data.author}
-                    </span>{' '}
-                    <span className="text-muted">
-                        · <Moment fromNow>{this.state.data.date}</Moment>
-                    </span>
-                    <br />
-                    {this.state.data.content}
-                    {this.state.data.gif ? (
-                        <div className="row justify-content-center">
-                            <div className="col-sm-12 col-md-10 col-lg-8 col-xl-6">
-                                <img
-                                    className="w-50 mx-auto d-block"
-                                    src={this.state.data.gif}
-                                />
+                <div className="m-0">
+                    <div className="m-2">
+                        {' '}
+                        <span className="text-primary fw-bold">
+                            {this.state.data.author}
+                        </span>{' '}
+                        <span className="text-muted">
+                            · <Moment fromNow>{this.state.data.date}</Moment>
+                        </span>
+                        <br />
+                        {this.state.data.content}
+                        {this.state.data.gif ? (
+                            <div className="row justify-content-center">
+                                <div className="col-sm-12 col-md-10 col-lg-8 col-xl-6">
+                                    <img
+                                        className="w-50 mx-auto d-block"
+                                        src={this.state.data.gif}
+                                    />
+                                </div>
                             </div>
+                        ) : null}
+                    </div>
+
+                    {this.state.data.track ? (
+                        <div className="border-top p-2">
+                            <Track id={this.state.data.track}>
+                                {({ data }) =>
+                                    data ? (
+                                        <TrackLineView track={data} index={1} />
+                                    ) : null
+                                }
+                            </Track>
                         </div>
                     ) : null}
                     <div
