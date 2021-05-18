@@ -83,11 +83,13 @@ class Post extends Component {
                     <br />
                     {this.state.data.content}
                     {this.state.data.gif ? (
-                        <div className="w-100">
-                            <img
-                                className="w-50 mx-auto d-block"
-                                src={this.state.data.gif}
-                            />
+                        <div className="row justify-content-center">
+                            <div className="col-sm-12 col-md-10 col-lg-8 col-xl-6">
+                                <img
+                                    className="w-50 mx-auto d-block"
+                                    src={this.state.data.gif}
+                                />
+                            </div>
                         </div>
                     ) : null}
                     <div
