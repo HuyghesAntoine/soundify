@@ -3,7 +3,12 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
-import { ArrowRight, EmojiSmile, MusicNoteBeamed, Stickies } from 'react-bootstrap-icons';
+import {
+    ArrowRight,
+    EmojiSmile,
+    MusicNoteBeamed,
+    Stickies,
+} from 'react-bootstrap-icons';
 import PickerGif from '@progresso/react-giphy-picker-https';
 
 class PostForm extends Component {
@@ -18,7 +23,8 @@ class PostForm extends Component {
         this.handleSelect = this.handleSelect.bind(this);
         this.handleEmojiDisplay = this.handleEmojiDisplay.bind(this);
         this.handleGifDisplay = this.handleGifDisplay.bind(this);
-        this.handleMusicSearchDisplay = this.handleMusicSearchDisplay.bind(this);
+        this.handleMusicSearchDisplay =
+            this.handleMusicSearchDisplay.bind(this);
     }
 
     log(gif) {
@@ -34,7 +40,7 @@ class PostForm extends Component {
             this.setState({ formStyle: 'danger' });
         } else {
             axios({
-                method: 'put',
+                method: 'post',
                 url: 'http://localhost:3030/api/post',
                 headers: {
                     Authorization: this.state.token,
@@ -96,7 +102,7 @@ class PostForm extends Component {
                             value={this.state.value}
                             onChange={this.handleChange}
                             className="w-100 bg-dark border-0 text-light"
-                            style = {{resize : "none"}}
+                            style={{ resize: 'none' }}
                         />
                     </div>
                     <div className="d-flex justify-content-between border-primary border-top">
@@ -118,7 +124,6 @@ class PostForm extends Component {
                             type="button"
                             className="col-2 btn btn-sm border-0 btn-outline-primary"
                             onClick={this.handleMusicSearchDisplay}
-
                         >
                             <MusicNoteBeamed />
                         </button>
@@ -154,25 +159,25 @@ class PostForm extends Component {
                     ) : null}
 
                     {this.state.displayMusicSearch ? (
-                       <div>
-                        <div className="input-group">
-                            <input
-                                type="text"
-                                className="form-control bg-dark text-light"
-                                placeholder="Search your music"
-                                aria-label="Search"
-                                aria-describedby="searchMusic"
-                                value={this.state.value}
-                                onChange={this.handleChange}
-                            />
-                            <button
-                                className="btn btn-outline-light"
-                                id="searchMusic"
-                            >
-                                Search
-                            </button>
+                        <div>
+                            <div className="input-group">
+                                <input
+                                    type="text"
+                                    className="form-control bg-dark text-light"
+                                    placeholder="Search your music"
+                                    aria-label="Search"
+                                    aria-describedby="searchMusic"
+                                    value={this.state.value}
+                                    onChange={this.handleChange}
+                                />
+                                <button
+                                    className="btn btn-outline-light"
+                                    id="searchMusic"
+                                >
+                                    Search
+                                </button>
+                            </div>
                         </div>
-                    </div>
                     ) : null}
                 </form>
             </div>
