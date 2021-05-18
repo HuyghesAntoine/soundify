@@ -82,6 +82,14 @@ class Post extends Component {
                     </span>
                     <br />
                     {this.state.data.content}
+                    {this.state.data.gif ? (
+                        <div className="w-100">
+                            <img
+                                className="w-50 mx-auto d-block"
+                                src={this.state.data.gif}
+                            />
+                        </div>
+                    ) : null}
                     <div
                         className={
                             'position-absolute top-100 end-0 translate-middle-y d-flex ' +

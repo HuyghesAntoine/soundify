@@ -1,12 +1,10 @@
 const postBusiness = require('../business/postBusiness');
 const _ = require('lodash');
 
-
 exports.putPost = async function (req, res) {
-    const put = await postBusiness.putPost(req.body.content, req.headers);
+    const put = await postBusiness.putPost(req.body, req.headers);
     var error;
-    if(put.code)
-        error = put.code;
+    if (put.code) error = put.code;
     else error = 200;
     res.status(error).send(put);
     return res;
@@ -15,8 +13,7 @@ exports.putPost = async function (req, res) {
 exports.deletePost = async function (req, res) {
     const post = await postBusiness.deletePost(req.params.id);
     var error;
-    if(post.code)
-        error = post.code;
+    if (post.code) error = post.code;
     else error = 200;
     res.status(error).send(post);
     return res;
@@ -25,39 +22,43 @@ exports.deletePost = async function (req, res) {
 exports.getPost = async function (req, res) {
     const post = await postBusiness.getPost(req.params.id);
     var error;
-    if(post.code)
-        error = post.code;
+    if (post.code) error = post.code;
     else error = 200;
     res.status(error).send(post);
     return res;
 };
 
-exports.getTimeline = async function (req, res){
+exports.getTimeline = async function (req, res) {
     const get = await postBusiness.getTimeline(req.headers);
     var error;
-    if(get.code)
-        error = get.code;
+    if (get.code) error = get.code;
     else error = 200;
     res.status(error).send(get);
     return res;
-}
+};
 
-exports.putReact = async function (req, res){
-    const post = await postBusiness.putReact(req.headers, req.params.id, req.params.mood);
+exports.putReact = async function (req, res) {
+    const post = await postBusiness.putReact(
+        req.headers,
+        req.params.id,
+        req.params.mood
+    );
     var error;
-    if(post.code)
-        error = post.code;
+    if (post.code) error = post.code;
     else error = 200;
     res.status(error).send(post);
     return res;
-}
+};
 
-exports.deleteReact = async function (req, res){
-    const post = await postBusiness.removeReact(req.headers, req.params.id, req.params.mood);
+exports.deleteReact = async function (req, res) {
+    const post = await postBusiness.removeReact(
+        req.headers,
+        req.params.id,
+        req.params.mood
+    );
     var error;
-    if(post.code)
-        error = post.code;
+    if (post.code) error = post.code;
     else error = 200;
     res.status(error).send(post);
     return res;
-}
+};

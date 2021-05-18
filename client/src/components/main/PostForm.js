@@ -15,7 +15,12 @@ class PostForm extends Component {
     constructor(props) {
         super(props);
         const token = Cookies.get('spotifyAuthToken');
-        this.state = { value: '', token: token, lastPost: [] };
+        this.state = {
+            value: '',
+            token: token,
+            lastPost: [],
+            gifPreview: null,
+        };
 
         this.state.displayPicker = false;
         this.handleChange = this.handleChange.bind(this);
@@ -27,13 +32,19 @@ class PostForm extends Component {
             this.handleMusicSearchDisplay.bind(this);
     }
 
-    log(gif) {
+    handleSelectGif(gif) {
         console.log(gif);
+        this.setState({ gifPreview: gif.original.webp });
+    }
+
+    removeGif() {
+        this.setState({ gifPreview: null });
     }
 
     handleChange(event) {
         this.setState({ value: event.target.value });
     }
+
     handleSubmit(event) {
         event.preventDefault();
         if (this.state.value.length === 0) {
@@ -47,6 +58,7 @@ class PostForm extends Component {
                 },
                 data: {
                     content: this.state.value,
+                    gif: this.state.gifPreview,
                 },
             }).then((response) => {
                 console.log(response.data);
@@ -56,6 +68,7 @@ class PostForm extends Component {
                     displayPicker: false,
                     displayMusicSearch: false,
                     displayPickerGif: false,
+                    gifPreview: null,
                 });
             });
         }
@@ -104,6 +117,21 @@ class PostForm extends Component {
                             className="w-100 bg-dark border-0 text-light"
                             style={{ resize: 'none' }}
                         />
+
+                        {this.state.gifPreview ? (
+                            <div className="w-100">
+                                <button
+                                    type="button"
+                                    class="btn-close btn-close-white float-end"
+                                    aria-label="Close"
+                                    onClick={this.removeGif.bind(this)}
+                                ></button>
+                                <img
+                                    className="w-50 mx-auto d-block"
+                                    src={this.state.gifPreview}
+                                />
+                            </div>
+                        ) : null}
                     </div>
                     <div className="d-flex justify-content-between border-primary border-top">
                         <button
@@ -151,7 +179,7 @@ class PostForm extends Component {
                     {this.state.displayPickerGif ? (
                         <PickerGif
                             apiKey={process.env.REACT_APP_GIPHY_CLIENT_ID}
-                            onSelected={this.log.bind(this)}
+                            onSelected={this.handleSelectGif.bind(this)}
                             modal={true}
                             style={{ 'background-color': '#29343d' }}
                             width="1000px"

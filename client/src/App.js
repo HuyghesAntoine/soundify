@@ -14,7 +14,6 @@ import './SoundifyBootstrap.css';
 import Player from './components/main/Player';
 import ScrollbarsCustom from './components/main/ScrollbarsCustom';
 
-
 const App = () => {
     const routeResult = useRoutes(routes);
     const token = Cookies.get('spotifyAuthToken');
@@ -27,28 +26,28 @@ const App = () => {
                         <div className="row m-0">
                             <Sidebar />
 
-                            
-                                <div className="vh-100 overflow-hidden col p-1 m-0">
-                                    <ScrollbarsCustom>
-                                        <div className="p-4 ">
-                                            {routeResult || <Error />}
-                                            <Player token={token} />
-                                        </div>
-                                    </ScrollbarsCustom>
-                                </div>
-                            
+                            <div className="vh-100 overflow-hidden col p-1">
+                                <ScrollbarsCustom>
+                                    <div className="p-4">
+                                        {routeResult || <Error />}
+                                        <Player token={token} />
+                                    </div>
+                                </ScrollbarsCustom>
+                            </div>
 
                             <div
                                 className={
-                                    'col-2 text-break border-start border-primary border-2 m-0 p-0' +
+                                    'col-2 text-break border-start border-primary border-2 p-0 ' +
                                     (getWorkingPath() === '/releases'
                                         ? 'd-none'
                                         : 'd-none d-sm-block')
                                 }
                             >
-                                 <ScrollbarsCustom>
+                                <ScrollbarsCustom>
                                     <div className="p-4 ">
-                                        {console.log(getWorkingPath() === '/releases')}
+                                        {console.log(
+                                            getWorkingPath() === '/releases'
+                                        )}
                                         <Releases />
                                     </div>
                                 </ScrollbarsCustom>
