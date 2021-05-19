@@ -4,7 +4,7 @@ import Moment from 'react-moment';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { Track } from 'react-spotify-api';
-import { MusicNote } from 'react-bootstrap-icons';
+import { EmojiSmile } from 'react-bootstrap-icons';
 import TrackLineView from './TrackLineView';
 
 class Post extends Component {
@@ -15,22 +15,10 @@ class Post extends Component {
         this.state = {
             data: props.data,
             token: token,
+            hover: false,
+            moodPanel: false,
         };
-
         this.activeMoods = ['lovestruck', 'sad', 'shocked'];
-
-        this.state.data.displayReactions = [];
-        this.activeMoods.forEach((mood) => {
-            const count = this.state.data.reactions.filter(
-                (react) => react.mood === mood
-            ).length;
-            if (count !== 0) {
-                this.state.data.displayReactions.push({
-                    mood: mood,
-                    count: count,
-                });
-            }
-        });
 
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
@@ -42,12 +30,25 @@ class Post extends Component {
     }
 
     handleMouseLeave() {
-        this.setState({ hover: false });
+        this.setState({
+            hover: false,
+            moodPanel: false,
+        });
+    }
+
+    handleDisplayReactPaneClick() {
+        this.setState({ moodPanel: true });
     }
 
     handleClick(reaction) {
+        const method =
+            this.state.data.reactions.filter(
+                (react) => react.mood === reaction && react.user === true
+            ).length === 0
+                ? 'put'
+                : 'delete';
         axios({
-            method: 'put',
+            method: method,
             url:
                 'http://localhost:3030/api/post/' +
                 this.state.data._id +
@@ -57,14 +58,29 @@ class Post extends Component {
                 Authorization: this.state.token,
             },
         }).then((response) => {
+            const reactions = this.state.data.reactions;
+            if (method === 'put') {
+                reactions.forEach((react) => {
+                    if (react.mood == reaction) {
+                        react.user = true;
+                        react.count = react.count + 1;
+                    }
+                });
+            } else {
+                reactions.forEach((react) => {
+                    if (react.mood == reaction) {
+                        react.user = false;
+                        react.count = react.count - 1;
+                    }
+                });
+            }
+
             this.setState((prevState) => ({
                 data: {
                     ...prevState.data,
-                    reactions: [
-                        ...this.state.data.reactions,
-                        { mood: reaction },
-                    ],
+                    reactions: reactions,
                 },
+                moodPanel: false,
             }));
         });
     }
@@ -112,56 +128,77 @@ class Post extends Component {
                     ) : null}
                     <div
                         className={
-                            'position-absolute top-100 end-0 translate-middle-y d-flex ' +
-                            (this.state.hover ? 'd-none' : null)
+                            'position-absolute top-100 start-0 translate-middle-y d-flex '
                         }
                         id="reactList"
                     >
-                        {this.state.data.displayReactions.map((reaction, i) => {
-                            return (
-                                <span
-                                    key={i}
-                                    className="badge position-relative m-2"
-                                >
-                                    <Ghost
-                                        size={45}
-                                        mood={reaction.mood}
-                                        color="#e6cb53"
-                                    />
-                                    <span className="position-absolute top-0 end-0 badge rounded-pill bg-secondary">
-                                        {reaction.count}
-                                        <span className="visually-hidden">
-                                            number of reaction
+                        {this.state.data.reactions.map((reaction, i) => {
+                            if (reaction.count !== 0)
+                                return (
+                                    <span
+                                        key={i}
+                                        className="badge position-relative m-2"
+                                    >
+                                        <Ghost
+                                            size={45}
+                                            mood={reaction.mood}
+                                            color="#e6cb53"
+                                        />
+                                        <span
+                                            className={
+                                                'position-absolute top-0 end-0 badge rounded-pill bg-secondary ' +
+                                                (reaction.user
+                                                    ? 'text-warning'
+                                                    : '')
+                                            }
+                                        >
+                                            {reaction.count}
+                                            <span className="visually-hidden">
+                                                number of reaction
+                                            </span>
                                         </span>
                                     </span>
-                                </span>
-                            );
+                                );
                         })}
                     </div>
+
                     <div
                         className={
-                            'position-absolute top-100 end-0 translate-middle-y d-flex ' +
-                            (!this.state.hover ? 'd-none' : null)
+                            'position-absolute top-100 end-0 translate-middle-y d-flex '
                         }
-                        id="reactActiveList"
                     >
-                        {this.activeMoods.map((reaction, i) => {
-                            return (
-                                <button
-                                    key={i}
-                                    className="badge position-relative m-2"
-                                    onClick={() => {
-                                        this.handleClick(reaction);
-                                    }}
-                                >
-                                    <Ghost
-                                        size={45}
-                                        mood={reaction}
-                                        color="#e6cb53"
-                                    />
-                                </button>
-                            );
-                        })}
+                        <span
+                            className={
+                                'badge rounded-pill bg-secondary position-relative m-2 ' +
+                                (!this.state.hover ? 'd-none' : null)
+                            }
+                            onClick={this.handleDisplayReactPaneClick.bind(
+                                this
+                            )}
+                        >
+                            <EmojiSmile />
+                        </span>
+                        <div
+                            className={!this.state.moodPanel ? 'd-none' : null}
+                        >
+                            {this.activeMoods.map((reaction, i) => {
+                                return (
+                                    <button
+                                        key={i}
+                                        className="badge hover m-2"
+                                        onClick={() => {
+                                            this.handleClick(reaction);
+                                        }}
+                                    >
+                                        <Ghost
+                                            size={20}
+                                            mood={reaction}
+                                            color="#e6cb53"
+                                        />
+                                    </button>
+                                );
+                            })}
+                        </div>
                     </div>
                 </div>
             </div>

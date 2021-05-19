@@ -59,6 +59,30 @@ exports.getTimeline = async function (headers) {
                 '}'
         );
     const res = await apiModel.getTimeline(headers.authorization);
+
+    const activeMoods = ['lovestruck', 'sad', 'shocked'];
+    for (let i = 0; i < res.length; i++) {
+        let reactions = [];
+        activeMoods.forEach((mood) => {
+            const count = res[i].reactions.filter(
+                (react) => react.mood == mood
+            ).length;
+            userValue =
+                res[i].reactions.filter(
+                    (react) => react.mood == mood && react.user == user[0]._id
+                ).length === 1
+                    ? true
+                    : false;
+            reactions.push({
+                mood: mood,
+                count: count,
+                user: userValue,
+            });
+        });
+        for (let j = 0; j < res[i].reactions.length; j++)
+            res[i].reactions.pop();
+        Object.assign(res[i].reactions, reactions);
+    }
     return res;
 };
 
