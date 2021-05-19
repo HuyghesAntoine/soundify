@@ -60,14 +60,7 @@ exports.getTimeline = async function (headers) {
         );
     const res = await apiModel.getTimeline(headers.authorization);
 
-    const activeMoods = [
-        'blissful',
-        'lovestruck',
-        'happy',
-        'excited',
-        'sad',
-        'shocked',
-    ];
+    const activeMoods = ['lovestruck', 'happy', 'shocked', 'sad', 'ko'];
     for (let i = 0; i < res.length; i++) {
         let reactions = [];
         activeMoods.forEach((mood) => {

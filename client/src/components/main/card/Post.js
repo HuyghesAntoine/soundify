@@ -18,14 +18,15 @@ class Post extends Component {
             hover: false,
             moodPanel: false,
         };
-        this.activeMoods = [
-            'blissful',
-            'lovestruck',
-            'happy',
-            'excited',
-            'sad',
-            'shocked',
-        ];
+        this.activeMoods = ['lovestruck', 'happy', 'shocked', 'sad', 'ko'];
+
+        this.color = {
+            lovestruck: '#f39189',
+            happy: '#efbbcf',
+            sad: '#f2dcbb',
+            shocked: '#fff5ea',
+            ko: '#e0e4e8',
+        };
 
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
@@ -156,7 +157,9 @@ class Post extends Component {
                                             <Ghost
                                                 size={45}
                                                 mood={reaction.mood}
-                                                color="#e6cb53"
+                                                color={
+                                                    this.color[reaction.mood]
+                                                }
                                             />
                                             <span
                                                 className={
@@ -207,7 +210,7 @@ class Post extends Component {
                                         <Ghost
                                             size={35}
                                             mood={reaction}
-                                            color="#e6cb53"
+                                            color={this.color[reaction]}
                                         />
                                     </span>
                                 );
