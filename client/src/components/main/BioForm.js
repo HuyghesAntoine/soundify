@@ -60,8 +60,9 @@ class BioForm extends Component {
                     <textarea
                         value={this.state.value}
                         onChange={this.handleChange}
-                        placeholder="Nothing in your bio. Change that now!"
-                        className="w-100 bg-dark border-0 text-light"
+                        placeholder=" Nothing in your bio. Change that now!"
+                        className="w-100 bg-dark text-light border border-1 rounded"
+                        style={{ resize: 'none', textIndent:"1%" }}
                     />
                 </div>
                 <div className="d-grid">

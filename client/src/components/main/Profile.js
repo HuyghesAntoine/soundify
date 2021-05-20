@@ -13,7 +13,7 @@ class Profile extends Component {
             <div>
                 <h1 className="text-center sh">Profile</h1>
 
-                <h3>Bio</h3>
+                <h3>Bio :</h3>
 
                 <BioForm />
 

@@ -80,7 +80,7 @@ class PostForm extends Component {
                 data: {
                     content: this.state.value,
                     gif: this.state.gifPreview,
-                    track: this.state.trackPreview.id,
+                    track: this.state.trackPreview ? this.state.trackPreview.id : null,
                 },
             }).then((response) => {
                 console.log(response.data);
