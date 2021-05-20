@@ -1,15 +1,7 @@
 const apiModel = require('../model/apiModel');
 const spotifyRepository = require('../httpRepository/SpotifyRepository');
 const _ = require('lodash');
-
-const errorReturn = (code, error, message) => {
-    var returnedError = {
-        code: code,
-        error: error,
-        message: message,
-    };
-    return returnedError;
-};
+const error = require('./errorBusiness');
 
 exports.createOrUpdateUser = async function (token) {
     const res = spotifyRepository.getUser(token);
@@ -27,14 +19,10 @@ exports.createOrUpdateUser = async function (token) {
 exports.getUser = async function (mail) {
     var user = await apiModel.getUser(mail);
     if (_.isEqual(user, JSON.parse('[]')))
-        return JSON.parse(
-            errorReturn(
+        return error.errorReturn(
                 404,
                 'not found',
-                `email
-         ${mail}
-        not found`
-            )
+                `email ${mail} not found`
         );
     user = user[0];
     return user;
@@ -43,16 +31,12 @@ exports.getUser = async function (mail) {
 exports.getMe = async function (token) {
     var user = await apiModel.getUserWithToken(token);
     if (_.isEqual(user, JSON.parse('[]')))
-        return JSON.parse(
-            '{' +
-                '"code": 401,' +
-                '"erreur": "unauthorized",' +
-                '"message": "oauth introuvable"' +
-                '}'
+        return error.errorReturn(
+            401,
+            "unauthorized",
+            "oauth introuvable"
         );
-    user = user[0];
-    //user.oauth = 'HIDE';
-    return user;
+    return user[0];
 };
 
 exports.getAllUsers = async function () {
@@ -64,32 +48,26 @@ exports.addFollower = async function (id, query) {
     const token = query.authorization;
     var me = await apiModel.getUserWithToken(token);
     if (_.isEqual(me, JSON.parse('[]')))
-        return JSON.parse(
-            '{' +
-                '"code": 401,' +
-                '"erreur": "unauthorized",' +
-                '"message": "oauth introuvable"' +
-                '}'
+        return error.returnedError(
+            401,
+            "unauthorized",
+            "oauth introuvable"
         );
 
     const user = await apiModel.getUserWithId(id);
     if (_.isEqual(user, JSON.parse('[]')))
-        return JSON.parse(
-            '{' +
-                '"code": 400,' +
-                '"erreur": "error",' +
-                '"message": "l\'id fourni est introuvable"' +
-                '}'
+        return error.returnedError(
+            400,
+            "error",
+            "l\'id fourni est introuvable"
         );
 
     const res = await apiModel.getFollower(token, id);
     if (!_.isEqual(res, JSON.parse('[]')))
-        return JSON.parse(
-            '{' +
-                '"code": 400,' +
-                '"erreur": "error",' +
-                '"message": "vous followez déja cette personne"' +
-                '}'
+        return error.returnedError(
+            400,
+            "error",
+            "vous followez déja cette personne"
         );
 
     const update = await apiModel.addFollower(token, id);
@@ -100,22 +78,18 @@ exports.removeFollower = async function (id, query) {
     const token = query.authorization;
     var me = await apiModel.getUserWithToken(token);
     if (_.isEqual(me, JSON.parse('[]')))
-        return JSON.parse(
-            '{' +
-                '"code": 401,' +
-                '"erreur": "unauthorized",' +
-                '"message": "oauth introuvable"' +
-                '}'
+        return error.returnedError(
+            401,
+            "unauthorized",
+            "oauth introuvable"
         );
 
     const user = await apiModel.getUserWithId(id);
     if (_.isEqual(user, JSON.parse('[]')))
-        return JSON.parse(
-            '{' +
-                '"code": 400,' +
-                '"erreur": "error",' +
-                '"message": "l\'id fourni est introuvable"' +
-                '}'
+        return error.returnedError(
+            400,
+            "error",
+            "l\'id fourni est introuvable"
         );
     const update = await apiModel.removeFollower(token, id);
     return update;
@@ -125,12 +99,10 @@ exports.putBio = async function (content, query) {
     const token = query.authorization;
     const user = await apiModel.getUserWithToken(token);
     if (_.isEqual(user, JSON.parse('[]')))
-        return JSON.parse(
-            '{' +
-                '"code": 401,' +
-                '"erreur": "unauthorized",' +
-                '"message": "oauth introuvable"' +
-                '}'
+        return error.returnedError(
+            401,
+            "unauthorized",
+            "oauth introuvable"
         );
     const res = await apiModel.updateUsersBio(user[0]._id, content); //changer le théo en oauth.username
     return res;

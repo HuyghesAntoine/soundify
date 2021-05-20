@@ -13,15 +13,17 @@ exports.putUser = async function (req, res) {
 
 exports.getUser = async function (req, res) {
     const post = await userBusiness.getUser(req.params.mail);
-    if (_.isEqual(post, JSON.parse('[]'))) res.status(404).send(post);
-    else res.status(200).send(post);
+    var error;
+    if(post.error) error = post.error.code;
+    else error = 200;
+    res.status(error).send(post);
     return res;
 };
 
 exports.getMe = async function (req, res) {
     const post = await userBusiness.getMe(req.headers.authorization);
     var error;
-    if (post.code) error = post.code;
+    if (post.code) error = post.error.code;
     else error = 200;
     res.status(error).send(post);
     return res;
@@ -35,7 +37,7 @@ exports.getAllUsers = async function (req, res) {
 exports.addFollower = async function (req, res) {
     const update = await userBusiness.addFollower(req.params.id, req.headers);
     var error;
-    if (update.code) error = update.code;
+    if (update.code) error = update.error.code;
     else error = 200;
     res.status(error).send(update);
     return res;
@@ -47,7 +49,7 @@ exports.removeFollower = async function (req, res) {
         req.headers
     );
     var error;
-    if (update.code) error = update.code;
+    if (update.code) error = update.error.code;
     else error = 200;
     res.status(error).send(update);
     return res;
@@ -56,7 +58,7 @@ exports.removeFollower = async function (req, res) {
 exports.putBio = async function (req, res) {
     const update = await userBusiness.putBio(req.body.content, req.headers);
     var error;
-    if (update.code) error = update.code;
+    if (update.code) error = update.error.code;
     else error = 200;
     res.status(error).send(update);
     return res;
