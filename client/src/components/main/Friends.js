@@ -89,12 +89,12 @@ class Friends extends Component {
                     <User
                         user={user}
                         self={user._id === this.state.self._id}
-                        follow={this.state.self.followers.includes(user._id)}
+                        follow={this.state.self.follow.includes(user._id)}
                     />
                 ))}
                 <hr />
                 {this.state.self
-                    ? this.state.self.followers.map((user) => <p>{user}</p>)
+                    ? this.state.self.follow.map((user) => <p>{user}</p>)
                     : null}
             </div>
         );
