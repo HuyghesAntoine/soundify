@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { Search } from 'react-bootstrap-icons';
-import { Scrollbars } from 'react-custom-scrollbars-2';
 import User from './card/User';
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -9,7 +8,13 @@ class Friends extends Component {
     constructor(props) {
         super(props);
         const token = Cookies.get('spotifyAuthToken');
-        this.state = { token: token, value: '', res: [], self: null };
+        this.state = {
+            token: token,
+            value: '',
+            res: [],
+            self: null,
+            follow: [],
+        };
 
         this.handleChange = this.handleChange.bind(this);
 
@@ -21,18 +26,18 @@ class Friends extends Component {
             },
         }).then((response) => {
             this.setState({ self: response.data });
-            console.log(response.data);
             axios({
                 method: 'get',
                 url:
                     'http://localhost:3030/api/user/' +
                     response.data._id +
-                    '/followers',
+                    '/follow',
                 headers: {
                     Authorization: this.state.token,
                 },
             }).then((response) => {
-                console.log(response);
+                console.log(response.data);
+                this.setState({ follow: response.data });
             });
         });
     }
@@ -93,9 +98,9 @@ class Friends extends Component {
                     />
                 ))}
                 <hr />
-                {this.state.self
-                    ? this.state.self.follow.map((user) => <p>{user}</p>)
-                    : null}
+                {this.state.follow.map((user) => (
+                    <User user={user} self={false} follow={true} />
+                ))}
             </div>
         );
     }

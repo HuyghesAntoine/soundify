@@ -67,9 +67,11 @@ class User extends Component {
                     <Planet
                         className={
                             'border border-3 rounded-circle border-' +
-                            this.state.user.status
-                                .replace('online', 'success')
-                                .replace('offline', 'danger')
+                            (this.state.user.status
+                                ? this.state.user.status
+                                      .replace('online', 'success')
+                                      .replace('offline', 'danger')
+                                : 'success')
                         }
                         size={40}
                         mood="happy"

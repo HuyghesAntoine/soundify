@@ -217,25 +217,25 @@ exports.removeReact = async function (id, id_post, mood) {
 exports.getFollow = async function (id) {
     var get = await User.find(
         {
-            _id: id
+            _id: id,
         },
         {
             follow: 1,
-            _id: 0
+            _id: 1,
         }
     );
     return get;
-}
+};
 
 exports.getFollowed = async function (id) {
     var get = await User.find(
         {
-            follow: id
+            follow: id,
         },
         {
             username: 1,
-            _id: 0
+            _id: 1,
         }
     );
     return get;
-}
+};
