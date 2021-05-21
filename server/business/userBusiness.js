@@ -48,7 +48,7 @@ exports.addFollower = async function (id, query) {
     const token = query.authorization;
     var me = await apiModel.getUserWithToken(token);
     if (_.isEqual(me, JSON.parse('[]')))
-        return error.returnedError(
+        return error.errorReturn(
             401,
             "unauthorized",
             "oauth introuvable"
@@ -56,7 +56,7 @@ exports.addFollower = async function (id, query) {
 
     const user = await apiModel.getUserWithId(id);
     if (_.isEqual(user, JSON.parse('[]')))
-        return error.returnedError(
+        return error.errorReturn(
             400,
             "error",
             "l\'id fourni est introuvable"
@@ -64,7 +64,7 @@ exports.addFollower = async function (id, query) {
 
     const res = await apiModel.getFollower(token, id);
     if (!_.isEqual(res, JSON.parse('[]')))
-        return error.returnedError(
+        return error.errorReturn(
             400,
             "error",
             "vous followez déja cette personne"
@@ -78,7 +78,7 @@ exports.removeFollower = async function (id, query) {
     const token = query.authorization;
     var me = await apiModel.getUserWithToken(token);
     if (_.isEqual(me, JSON.parse('[]')))
-        return error.returnedError(
+        return error.errorReturn(
             401,
             "unauthorized",
             "oauth introuvable"
@@ -86,7 +86,7 @@ exports.removeFollower = async function (id, query) {
 
     const user = await apiModel.getUserWithId(id);
     if (_.isEqual(user, JSON.parse('[]')))
-        return error.returnedError(
+        return error.errorReturn(
             400,
             "error",
             "l\'id fourni est introuvable"
@@ -99,7 +99,7 @@ exports.putBio = async function (content, query) {
     const token = query.authorization;
     const user = await apiModel.getUserWithToken(token);
     if (_.isEqual(user, JSON.parse('[]')))
-        return error.returnedError(
+        return error.errorReturn(
             401,
             "unauthorized",
             "oauth introuvable"
@@ -110,4 +110,37 @@ exports.putBio = async function (content, query) {
 
 exports.searchUser = async function (query, limit) {
     return apiModel.searchUser(query, limit);
+};
+
+exports.getFollow = async function (query, id) {
+    const token = query.authorization;
+    const user = await apiModel.getUserWithToken(token);
+    if (_.isEqual(user, JSON.parse('[]')))
+        return error.errorReturn(
+            401,
+            "unauthorized",
+            "oauth introuvable"
+        );
+    const res = await apiModel.getFollow(id);
+    for(let i=0; i<res[0].follow.length; i++)
+        res[0].follow[i] = (await apiModel.getUserWithId(res[0].follow[i]))[0].username;
+    return res[0];
+};
+
+exports.getFollower = async function (query, id) {
+    const token = query.authorization;
+    const user = await apiModel.getUserWithToken(token);
+    if (_.isEqual(user, JSON.parse('[]')))
+        return error.errorReturn(
+            401,
+            "unauthorized",
+            "oauth introuvable"
+        );
+    const res = await apiModel.getFollowed(id);
+    var array = [];
+    for(let i=0; i<res.length; i++)
+        array.push( res[i].username );
+    return {
+        followers: array
+    };
 };

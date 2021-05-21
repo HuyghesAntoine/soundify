@@ -13,6 +13,8 @@ router.get('/api/users', userController.getAllUsers);
 router.put('/api/user/bio', userController.putBio);
 router.put('/api/follow/:id', userController.addFollower);
 router.put('/api/unfollow/:id', userController.removeFollower);
+router.get('/api/user/:id/follow', userController.getFollow);
+router.get('/api/user/:id/follower', userController.getFollower)
 
 // API - POST
 router.post('/api/post', postController.putPost); //changer en post

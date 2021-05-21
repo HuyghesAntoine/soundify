@@ -105,7 +105,7 @@ exports.searchAllUsers = async function (mail) {
 exports.addFollower = async function (token, id) {
     const update = await User.updateOne(
         { oauth: token },
-        { $push: { followers: id } }
+        { $push: { follow: id } }
     );
     return update;
 };
@@ -113,13 +113,13 @@ exports.addFollower = async function (token, id) {
 exports.removeFollower = async function (token, id) {
     const update = await User.updateOne(
         { oauth: token },
-        { $pull: { followers: id } }
+        { $pull: { follow: id } }
     );
     return update;
 };
 
 exports.getFollower = async function (token, id) {
-    const find = await User.find({ oauth: token, followers: id });
+    const find = await User.find({ oauth: token, follow: id });
     return find;
 };
 
@@ -151,10 +151,10 @@ exports.getTimeline = async function (id) {
         },
         {
             _id: 1,
-            followers: 1,
+            follow: 1,
         }
     );
-    var followers = res[0].followers;
+    var followers = res[0].follow;
     followers.push(res[0]._id);
     console.log(followers);
     var res = await Post.find({
@@ -213,3 +213,29 @@ exports.removeReact = async function (id, id_post, mood) {
     );
     return remove;
 };
+
+exports.getFollow = async function (id) {
+    var get = await User.find(
+        {
+            _id: id
+        },
+        {
+            follow: 1,
+            _id: 0
+        }
+    );
+    return get;
+}
+
+exports.getFollowed = async function (id) {
+    var get = await User.find(
+        {
+            follow: id
+        },
+        {
+            username: 1,
+            _id: 0
+        }
+    );
+    return get;
+}

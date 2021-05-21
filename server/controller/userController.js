@@ -75,3 +75,13 @@ exports.searchUser = async function (req, res) {
         );
     return res;
 };
+
+exports.getFollow = async function (req, res){
+    res.send(await userBusiness.getFollow(req.headers, req.params.id)) ;
+    return res;
+}
+
+exports.getFollower = async function (req, res){
+    res.send(await userBusiness.getFollower(req.headers, req.params.id)) ;
+    return res;
+}
