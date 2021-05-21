@@ -28,7 +28,7 @@ class Home extends Component {
     }
     render() {
         return (
-            <div>
+            <div className>
                 <h1 className="text-center sh">Feed</h1>
                 <PostForm />
                 {this.state.timeline.length !== 0 ? (

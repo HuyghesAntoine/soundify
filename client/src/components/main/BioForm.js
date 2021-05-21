@@ -61,7 +61,7 @@ class BioForm extends Component {
                         value={this.state.value}
                         onChange={this.handleChange}
                         placeholder=" Nothing in your bio. Change that now!"
-                        className="w-100 bg-dark text-light border border-1 rounded"
+                        className="w-100 bg-secondary text-light border border-1 rounded"
                         style={{ resize: 'none', textIndent:"1%" }}
                     />
                 </div>

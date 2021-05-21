@@ -20,7 +20,7 @@ class Sidebar extends Component {
 
     render() {
         return (
-            <div className="vh-100 pt-3 d-flex flex-column justify-content-between col-2 border-end border-2 border-primary">
+            <div className="vh-100 pt-3 d-flex flex-column justify-content-between col-2 border-end border-3 border-primary bg-dark">
                 <section className="d-flex flex-column text-center">
                     <User>
                         {({ data }) => {
@@ -63,7 +63,7 @@ class Sidebar extends Component {
                                 className="text text-reset text-decoration-none"
                                 href="/"
                             >
-                                <div className="d-flex">
+                                <div className="d-flex rounded-pill hover px-2">
                                     <House className="d-block d-sm-none d-xl-block fs-3 mb-2 me-2" />{' '}
                                     <span className="d-none d-sm-block">
                                         Home
@@ -76,7 +76,7 @@ class Sidebar extends Component {
                                 className="text text-reset text-decoration-none"
                                 href="/friends"
                             >
-                                <div className="d-flex">
+                                <div className="d-flex rounded-pill hover px-2">
                                     <People className="d-block d-sm-none d-xl-block fs-3 mb-2 me-2" />{' '}
                                     <span className="d-none d-sm-block">
                                         Friends
@@ -89,7 +89,7 @@ class Sidebar extends Component {
                                 className="text text-reset text-decoration-none"
                                 href="/profile"
                             >
-                                <div className="d-flex">
+                                <div className="d-flex rounded-pill hover px-2">
                                     <Person className="d-block d-sm-none d-xl-block fs-3 mb-2 me-2" />{' '}
                                     <span className="d-none d-sm-block">
                                         Profile
@@ -102,7 +102,7 @@ class Sidebar extends Component {
                                 className="text text-reset text-decoration-none"
                                 href="/playlist"
                             >
-                                <div className="d-flex">
+                                <div className="d-flex rounded-pill hover px-2">
                                     <MusicNoteList className="d-block d-sm-none d-xl-block fs-3 mb-2 me-2" />{' '}
                                     <span className="d-none d-sm-block">
                                         Playlist
@@ -115,7 +115,7 @@ class Sidebar extends Component {
                                 className="text text-reset text-decoration-none"
                                 href="/releases"
                             >
-                                <div className="d-flex">
+                                <div className="d-flex rounded-pill hover px-2">
                                     <Disc className="d-block d-sm-none fs-3 mb-2 me-2" />{' '}
                                     <span className="visually-hidden">
                                         Releases

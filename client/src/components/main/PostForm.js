@@ -131,14 +131,14 @@ class PostForm extends Component {
                 {' '}
                 <form
                     onSubmit={this.handleSubmit}
-                    className="w-75 mx-auto mt-3 mb-5 border border-2 rounded"
+                    className="w-75 mx-auto mt-3 mb-5 border border-2 rounded bg-dark"
                 >
                     <div>
                         <textarea
                             value={this.state.value}
                             onChange={this.handleChange}
                             className="w-100 bg-dark border-0 text-light"
-                            style={{ resize: 'none' }}
+                            style={{ resize: 'none', textIndent:"1%" }}
                         />
 
                         {this.state.gifPreview ? (

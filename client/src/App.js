@@ -22,7 +22,7 @@ const App = () => {
         <div className="app vh-100 mb-5">
             {token ? (
                 <SpotifyApiContext.Provider value={token}>
-                    <div className="App bg-dark text-light">
+                    <div className="App bg-secondary text-light">
                         <div className="row m-0">
                             <Sidebar />
 
@@ -37,14 +37,14 @@ const App = () => {
 
                             <div
                                 className={
-                                    'col-2 text-break border-start border-primary border-2 p-0 ' +
+                                    'col-2 text-break border-start border-primary border-3 p-0 ' +
                                     (getWorkingPath() === '/releases'
                                         ? 'd-none'
                                         : 'd-none d-sm-block')
                                 }
                             >
                                 <ScrollbarsCustom>
-                                    <div className="p-4 ">
+                                    <div className="p-4 bg-dark">
                                         {console.log(
                                             getWorkingPath() === '/releases'
                                         )}
