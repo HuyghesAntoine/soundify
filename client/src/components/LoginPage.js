@@ -7,7 +7,7 @@ import axios from 'axios';
 class LoginPage extends React.Component {
     render() {
         return (
-            <div className="position-relative vh-100 bg-dark">
+            <div className="position-relative vh-100 bg-secondary">
                 <div className="position-absolute top-50 start-50 translate-middle">
                     <div className="d-flex">
                         <img
