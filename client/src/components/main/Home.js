@@ -15,7 +15,7 @@ class Home extends Component {
 
         axios({
             method: 'get',
-            url: 'http://localhost:3030/api/timeline',
+            url: REACT_APP_URL+'/api/timeline',
             headers: {
                 Authorization: token,
             },
