@@ -1,6 +1,7 @@
 import { A } from '@patched/hookrouter';
 import { Component } from 'react';
 import Moment from 'react-moment';
+import {ChatSquareText} from 'react-bootstrap-icons';
 
 class TrackLineView extends Component {
     constructor(props) {
@@ -19,6 +20,9 @@ class TrackLineView extends Component {
                     <div className="d-flex align-items-center">
                         <div className="flex-grow-1 text-white-50">
                             {this.state.index}
+                        </div>
+                        <div className="flex-grow-1 text-white-50">
+                            <ChatSquareText/>
                         </div>
                         {!this.state.isAlbum ? (
                             <div className="flex-shrink-0">
