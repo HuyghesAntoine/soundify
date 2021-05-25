@@ -96,7 +96,7 @@ class Post extends Component {
     render() {
         return (
             <div
-                className="position-relative border border-1 rounded mb-5 hover bg-dark"
+                className="position-relative border border-1 rounded mb-5 hover bg-dark shadow-lg"
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
             >
