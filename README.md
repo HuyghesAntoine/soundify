@@ -16,7 +16,7 @@
 ## Useful links
 
 -   [Trello](https://trello.com/b/4eynBCyz)
--   [Soundify.fr](soundify.fr)
+-   [Soundify.fr](https://sound-ify.netlify.app/)
 
 ---
 
