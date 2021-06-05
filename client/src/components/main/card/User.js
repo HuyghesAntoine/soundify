@@ -31,7 +31,7 @@ class User extends Component {
 
     handleClick(event) {
         console.log(
-            process.env.REACT_API_URL+'/api/' +
+            process.env.REACT_APP_API_URL+'/api/' +
                 (this.state.follow ? 'unfollow' : 'follow') +
                 '/' +
                 this.state.user._id
@@ -39,7 +39,7 @@ class User extends Component {
         axios({
             method: 'put',
             url:
-            process.env.REACT_API_URL+'/api/' +
+            process.env.REACT_APP_API_URL+'/api/' +
                 (this.state.follow ? 'unfollow' : 'follow') +
                 '/' +
                 this.state.user._id,

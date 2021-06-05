@@ -73,7 +73,7 @@ class PostForm extends Component {
         } else {
             axios({
                 method: 'post',
-                url: process.env.REACT_API_URL+'/api/post',
+                url: process.env.REACT_APP_API_URL+'/api/post',
                 headers: {
                     Authorization: this.state.token,
                 },

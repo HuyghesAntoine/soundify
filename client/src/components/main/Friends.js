@@ -20,7 +20,7 @@ class Friends extends Component {
 
         axios({
             method: 'get',
-            url: process.env.REACT_API_URL+'/api/me',
+            url: process.env.REACT_APP_API_URL+'/api/me',
             headers: {
                 Authorization: this.state.token,
             },
@@ -29,7 +29,7 @@ class Friends extends Component {
             axios({
                 method: 'get',
                 url:
-                process.env.REACT_API_URL+'/api/user/' +
+                process.env.REACT_APP_API_URL+'/api/user/' +
                     response.data._id +
                     '/follow',
                 headers: {
@@ -51,7 +51,7 @@ class Friends extends Component {
             axios({
                 method: 'get',
                 url:
-                process.env.REACT_API_URL+'/api/user/search?query=' +
+                process.env.REACT_APP_API_URL+'/api/user/search?query=' +
                     event.target.value,
                 headers: {
                     Authorization: this.state.token,

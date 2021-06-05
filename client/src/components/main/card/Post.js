@@ -58,7 +58,7 @@ class Post extends Component {
         axios({
             method: method,
             url:
-            process.env.REACT_API_URL+'/api/post/' +
+            process.env.REACT_APP_API_URL+'/api/post/' +
                 this.state.data._id +
                 '/react/' +
                 reaction,

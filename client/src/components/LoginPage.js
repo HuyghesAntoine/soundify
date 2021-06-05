@@ -48,7 +48,7 @@ class LoginPage extends React.Component {
                             onAccessToken={(token) => {
                                 axios({
                                     method: 'put',
-                                    url: process.env.REACT_API_URL+'/api/hello',
+                                    url: process.env.REACT_APP_API_URL+'/api/hello',
                                     headers: {
                                         Authorization: token,
                                     },
