@@ -18,7 +18,7 @@ class BioForm extends Component {
 
         axios({
             method: 'get',
-            url: 'http://localhost:3030/api/me',
+            url: process.env.REACT_API_URL+'/api/me',
             headers: {
                 Authorization: this.state.token,
             },
@@ -37,7 +37,7 @@ class BioForm extends Component {
         event.preventDefault();
         axios({
             method: 'put',
-            url: 'http://localhost:3030/api/user/bio',
+            url: process.env.REACT_API_URL+'/api/user/bio',
             headers: {
                 Authorization: this.state.token,
             },

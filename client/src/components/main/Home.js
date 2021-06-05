@@ -15,7 +15,7 @@ class Home extends Component {
 
         axios({
             method: 'get',
-            url: process.env.REACT_APP_URL+'/api/timeline',
+            url: process.env.REACT_API_URL+'/api/timeline',
             headers: {
                 Authorization: token,
             },

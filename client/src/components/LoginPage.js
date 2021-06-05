@@ -31,7 +31,7 @@ class LoginPage extends React.Component {
                         <SpotifyAuth
                             title="Continue with Spotify"
                             className="mx-auto"
-                            redirectUri="http://localhost:3000"
+                            redirectUri={process.env.REACT_APP_URL}
                             clientID={process.env.REACT_APP_SPOTIFY_CLIENT_ID}
                             scopes={[
                                 Scopes.userReadPrivate,
@@ -48,7 +48,7 @@ class LoginPage extends React.Component {
                             onAccessToken={(token) => {
                                 axios({
                                     method: 'put',
-                                    url: 'http://localhost:3030/api/hello',
+                                    url: process.env.REACT_API_URL+'/api/hello',
                                     headers: {
                                         Authorization: token,
                                     },
