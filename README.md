@@ -15,8 +15,8 @@
 
 ## Useful links
 
--   [Our Trello](https://trello.com/b/4eynBCyz)
--   ???
+-   [Trello](https://trello.com/b/4eynBCyz)
+-   [Soundify.fr](soundify.fr)
 
 ---
 
@@ -44,6 +44,17 @@ This is the first idea that we got for our social network.
 
 ![1st idea](img/prototype.png)
 
+---
+### Features
+
+* Login with your spotify account
+* Add new friends 
+* Add a word about you in your soundify profile
+* Get your favorite artists/playlists/albums in 1 click
+* Share your favorite sound of the moment with your friends
+* Add emojis, gifs, and songs to your posts
+* Find the most recent releases at any moment
+---
 ## References
 
 Mainly for dev purpose, list of official repo and documentation.
