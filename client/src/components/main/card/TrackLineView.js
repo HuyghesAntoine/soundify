@@ -19,26 +19,46 @@ class TrackLineView extends Component {
     handleLyrics(event) {
         console.log(event);
         this.setState( {displayLyrics : !this.state.displayLyrics})
-
-        axios({
-            method: 'get',
-            url: process.env.REACT_APP_API_URL+'/api/lyrics/'+this.state.track.artists[0].name+
-            " "+this.state.track.name,
-            headers: {
-                Authorization: this.state.token,
-            }
-        }).then((response) => {
-            console.log(response.data);
-            this.setState({lyrics : response.data})
-        });
+        if(this.state.lyrics.length === 0){
+            axios({
+                method: 'get',
+                url: process.env.REACT_APP_API_URL+'/api/lyrics/'+this.state.track.artists[0].name+
+                " "+this.state.track.name,
+                headers: {
+                    Authorization: this.state.token,
+                }
+            }).then((response) => {
+                console.log(response.data);
+                this.setState({lyrics : response.data})
+            });
+        }
     }
 
     render() {
         return (
             <div className="row justify-content-between hover">
                 <div className={!this.state.displayLyrics ? 'd-none' : ''}>
-                    <p>Lyrics</p>
+                    <div className="d-flex justify-content-between">
+                        <p>Lyrics</p>
+                        <button className="btn-close btn-close-white btn-sm"
+                         onClick={this.handleLyrics.bind(this)}>
+                        </button>
+                    </div>
+                    {(this.state.lyrics.length === 0) ?
+                    <div className="d-flex">
+                        <div className="wave"></div>
+                        <div className="wave"></div>
+                        <div className="wave"></div>
+                        <div className="wave"></div>
+                        <div className="wave"></div>
+                        <div className="wave"></div>
+                        <div className="wave"></div>
+                        <div className="wave"></div>
+                        <div className="wave"></div>
+                        <div className="wave"></div>
+                    </div> : 
                     <div dangerouslySetInnerHTML={{ __html: this.state.lyrics}}></div>
+                 }
                 </div>
                 <div className="col">
                     <div className="d-flex align-items-center">
@@ -48,6 +68,7 @@ class TrackLineView extends Component {
                         <div className="flex-grow-1 text-white-50">
                             <ChatSquareText
                                 onClick={this.handleLyrics.bind(this)}
+                                style={{cursor: 'pointer'}}
                             />
                         </div>
                         {!this.state.isAlbum ? (

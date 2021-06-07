@@ -7,6 +7,7 @@ class AlbumView extends Component {
     constructor(props) {
         super(props);
         this.state = { id: props.id };
+        console.log("test");
     }
     render() {
         return (
@@ -14,7 +15,6 @@ class AlbumView extends Component {
                 <Album id={this.state.id}>
                     {({ data }) =>
                         data ? (
-                            
                             <div>
                                 <div className="d-flex align-items-center rounded mb-5">
                                           <div className="flex-shrink-0">
@@ -42,7 +42,6 @@ class AlbumView extends Component {
                                         {data.release_date}
                                     </Moment>
                                               </p>
-                                             
                                           </div>
                                       </div>
                                 <AlbumTracks id={this.state.id}>

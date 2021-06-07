@@ -17,7 +17,7 @@ const routes = {
     '/releases': () => <Releases />,
     '/playlist': () => <Playlists />,
     '/playlist/:id': ({ id }) => <PlaylistView id={id} />,
-    '/album/:id': ({ id }) => <AlbumView id={id} />,
+    '/album/:id*': ({ id }) => <AlbumView id={id} />,
     '/artist/:id': ({ id }) => <ArtistView id={id} />,
 };
 

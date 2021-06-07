@@ -8,6 +8,7 @@ import Error from './components/main/Error';
 import Sidebar from './components/sidebar/Sidebar';
 import Releases from './components/main/Releases';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './spinner.css';
 import './fonts/No Added Sugar.woff';
 import './App.css';
 import './SoundifyBootstrap.css';
@@ -48,7 +49,6 @@ const App = () => {
                                         {console.log(
                                             getWorkingPath() === '/releases'
                                         )}
-                                        <p id="lyricsPage">Lyrics</p>
                                         <Releases />
                                     </div>
                                 </ScrollbarsCustom>
