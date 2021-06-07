@@ -38,7 +38,7 @@ class TrackLineView extends Component {
             <div className="row justify-content-between hover">
                 <div className={!this.state.displayLyrics ? 'd-none' : ''}>
                     <p>Lyrics</p>
-                    {this.state.lyrics}
+                    <div dangerouslySetInnerHTML={{ __html: this.state.lyrics}}></div>
                 </div>
                 <div className="col">
                     <div className="d-flex align-items-center">
