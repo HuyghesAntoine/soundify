@@ -208,6 +208,7 @@ class PostForm extends Component {
                             showPreview={false}
                             showSkinTones={false}
                             onSelect={this.handleSelect}
+                            style={{ resize: 'none', position: 'absolute', zIndex: '10'}}
                         />
                     ) : null}
                     {this.state.displayPickerGif ? (
