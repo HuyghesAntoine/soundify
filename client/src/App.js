@@ -38,7 +38,7 @@ const App = () => {
 
                             <div
                                 className={
-                                    'col-2 text-break border-start border-primary border-3 p-0 ' +
+                                    'd-print-none col-2 text-break border-start border-primary border-3 p-0 ' +
                                     (getWorkingPath() === '/releases'
                                         ? 'd-none'
                                         : 'd-none d-sm-block')

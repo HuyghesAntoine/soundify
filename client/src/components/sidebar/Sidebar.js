@@ -21,7 +21,7 @@ class Sidebar extends Component {
 
     render() {
         return (
-            <div className="vh-100 pt-3 d-flex flex-column justify-content-between col-2 border-end border-3 border-primary bg-dark">
+            <div className="d-print-none vh-100 pt-3 d-flex flex-column justify-content-between col-2 border-end border-3 border-primary bg-dark">
                 <section className="d-flex flex-column text-center">
                     <User>
                         {({ data }) => {
