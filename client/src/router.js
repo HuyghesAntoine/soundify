@@ -8,6 +8,7 @@ import PlaylistView from './components/main/PlaylistView';
 import AlbumView from './components/main/AlbumView';
 import ArtistView from './components/main/ArtistView';
 import Releases from './components/main/Releases';
+import SearchView from './components/main/SearchView';
 
 const routes = {
     '/': () => <Home />,
@@ -19,6 +20,7 @@ const routes = {
     '/playlist/:id': ({ id }) => <PlaylistView id={id} />,
     '/album/:id*': ({ id }) => <AlbumView id={id} />,
     '/artist/:id': ({ id }) => <ArtistView id={id} />,
+    '/search': () => <SearchView />,
 };
 
 export default routes;

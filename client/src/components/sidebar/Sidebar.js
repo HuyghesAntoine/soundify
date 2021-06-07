@@ -9,6 +9,7 @@ import {
     MusicNoteList,
     Person,
     Disc,
+    Search,
 } from 'react-bootstrap-icons';
 import { Ghost } from 'react-kawaii';
 
@@ -119,6 +120,19 @@ class Sidebar extends Component {
                                     <Disc className="d-block d-sm-none fs-3 mb-2 me-2" />{' '}
                                     <span className="visually-hidden">
                                         Releases
+                                    </span>
+                                </div>
+                            </A>
+                        </li>
+                        <li>
+                            <A
+                                className="text text-reset text-decoration-none"
+                                href="/search"
+                            >
+                                <div className="d-flex rounded-pill hover px-2">
+                                    <Search className="d-block d-sm-none d-xl-block fs-3 mb-2 me-2" />{' '}
+                                    <span className="d-none d-sm-block">
+                                        Search
                                     </span>
                                 </div>
                             </A>
