@@ -4,7 +4,7 @@ import Moment from 'react-moment';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { Track } from 'react-spotify-api';
-import { EmojiSmile } from 'react-bootstrap-icons';
+import { EmojiSmile, EmojiSmileFill, EmojiAngryFill, EmojiDizzyFill, EmojiFrownFill, EmojiSmileUpsideDownFill, EmojiHeartEyesFill, EmojiWinkFill, EmojiSunglassesFill, EmojiExpressionlessFill, EmojiLaughingFill } from 'react-bootstrap-icons';
 import TrackLineView from './TrackLineView';
 
 class Post extends Component {
@@ -27,6 +27,19 @@ class Post extends Component {
             shocked: '#fff5ea',
             ko: '#e0e4e8',
         };
+
+        this.action = [
+            { name: 'smile', icon: <EmojiSmileFill /> },
+            { name: 'angry', icon: <EmojiAngryFill /> },
+            { name: 'dizzy', icon: <EmojiDizzyFill /> },
+            { name: 'frown', icon: <EmojiFrownFill /> },
+            { name: 'upsidedown', icon: <EmojiSmileUpsideDownFill /> },
+            { name: 'heart', icon: <EmojiHeartEyesFill /> },
+            { name: 'wink', icon: <EmojiWinkFill /> },
+            { name: 'sunglasses', icon: <EmojiSunglassesFill /> },
+            { name: 'expresionless', icon: <EmojiExpressionlessFill /> },
+            { name: 'laughing', icon: <EmojiLaughingFill /> }
+        ];
 
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
@@ -93,6 +106,10 @@ class Post extends Component {
         });
     }
 
+    handleAction(event){
+        console.log(event)
+    }
+
     render() {
         return (
             <div
@@ -107,7 +124,7 @@ class Post extends Component {
                             {this.state.data.author}
                         </span>{' '}
                         <span className="text-muted">
-                            · <Moment fromNow>{this.state.data.date}</Moment>
+                            Â· <Moment fromNow>{this.state.data.date}</Moment>
                         </span>
                         <br />
                         {this.state.data.content}
@@ -147,20 +164,14 @@ class Post extends Component {
                         }
                     >
                         <div>
-                            {this.state.data.reactions.map((reaction, i) => {
+                             {this.state.data.reactions.map((reaction, i) => {
                                 if (reaction.count !== 0)
                                     return (
                                         <span
                                             key={i}
                                             className="badge position-relative m-2"
                                         >
-                                            <Ghost
-                                                size={45}
-                                                mood={reaction.mood}
-                                                color={
-                                                    this.color[reaction.mood]
-                                                }
-                                            />
+                                            <div>{reaction.icon}</div>
                                             <span
                                                 className={
                                                     'position-absolute top-0 end-0 badge rounded-pill bg-secondary ' +
@@ -198,22 +209,8 @@ class Post extends Component {
                                 (!this.state.moodPanel ? 'd-none' : '')
                             }
                         >
-                            {this.activeMoods.map((reaction, i) => {
-                                return (
-                                    <span
-                                        key={i}
-                                        className="hover ps-2 pt-1 pb-1 pe-2"
-                                        onClick={() => {
-                                            this.handleClick(reaction);
-                                        }}
-                                    >
-                                        <Ghost
-                                            size={35}
-                                            mood={reaction}
-                                            color={this.color[reaction]}
-                                        />
-                                    </span>
-                                );
+                            {this.action.map( a=> {
+                                return <button onClick={this.handleClick(a.name)}  className="btn btn-sm border-0 btn-outline-primary">{a.icon}</button>
                             })}
                         </div>
                     </div>
