@@ -48,6 +48,7 @@ const App = () => {
                                         {console.log(
                                             getWorkingPath() === '/releases'
                                         )}
+                                        <p id="lyricsPage">Lyrics</p>
                                         <Releases />
                                     </div>
                                 </ScrollbarsCustom>

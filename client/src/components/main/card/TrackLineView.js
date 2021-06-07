@@ -1,7 +1,8 @@
 import { A } from '@patched/hookrouter';
 import { Component } from 'react';
 import Moment from 'react-moment';
-import {ChatSquareText} from 'react-bootstrap-icons';
+import { ChatSquareText } from 'react-bootstrap-icons';
+import axios from 'axios';
 
 class TrackLineView extends Component {
     constructor(props) {
@@ -10,19 +11,44 @@ class TrackLineView extends Component {
             track: props.track,
             index: props.index,
             isAlbum: props.isAlbum ? props.isAlbum : false,
+            displayLyrics : false,
+            lyrics : "",
         };
+    }
+
+    handleLyrics(event) {
+        console.log(event);
+        this.setState( {displayLyrics : !this.state.displayLyrics})
+
+        axios({
+            method: 'get',
+            url: process.env.REACT_APP_API_URL+'/api/lyrics/'+this.state.track.artists[0].name+
+            " "+this.state.track.name,
+            headers: {
+                Authorization: this.state.token,
+            }
+        }).then((response) => {
+            console.log(response.data);
+            this.setState({lyrics : response.data})
+        });
     }
 
     render() {
         return (
             <div className="row justify-content-between hover">
+                <div className={!this.state.displayLyrics ? 'd-none' : ''}>
+                    <p>Lyrics</p>
+                    {this.state.lyrics}
+                </div>
                 <div className="col">
                     <div className="d-flex align-items-center">
                         <div className="flex-grow-1 text-white-50">
                             {this.state.index}
                         </div>
                         <div className="flex-grow-1 text-white-50">
-                            <ChatSquareText/>
+                            <ChatSquareText
+                                onClick={this.handleLyrics.bind(this)}
+                            />
                         </div>
                         {!this.state.isAlbum ? (
                             <div className="flex-shrink-0">

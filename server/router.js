@@ -3,6 +3,7 @@ var router = express.Router();
 
 const userController = require('./controller/userController');
 const postController = require('./controller/postController');
+const lyricsController = require('./controller/lyricsController');
 
 // API - USER
 router.put('/api/hello', userController.putUser); //méthode appelé lors de la connexion
@@ -23,5 +24,8 @@ router.get('/api/post/get/:id', postController.getPost);
 router.get('/api/timeline', postController.getTimeline); //get timeline from :id
 router.put('/api/post/:id/react/:mood', postController.putReact); //create /update reaction on post(:id)
 router.delete('/api/post/:id/react/:mood', postController.deleteReact); //create /update reaction on post(:id)
+
+// API - LYRICS
+router.get('/api/lyrics/:query', lyricsController.getLyric)
 
 module.exports = router;

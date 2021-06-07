@@ -4,8 +4,6 @@ import Post from './card/Post';
 import PostForm from './PostForm';
 import axios from 'axios';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-//import { Scrollbars } from 'react-custom-scrollbars-2';
-import ScrollbarsCustom from './ScrollbarsCustom';
 
 class Home extends Component {
     constructor(props) {
