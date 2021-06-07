@@ -69,14 +69,14 @@ class Post extends Component {
             const reactions = this.state.data.reactions;
             if (method === 'put') {
                 reactions.forEach((react) => {
-                    if (react.mood == reaction) {
+                    if (react.mood === reaction) {
                         react.user = true;
                         react.count = react.count + 1;
                     }
                 });
             } else {
                 reactions.forEach((react) => {
-                    if (react.mood == reaction) {
+                    if (react.mood === reaction) {
                         react.user = false;
                         react.count = react.count - 1;
                     }

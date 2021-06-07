@@ -8,6 +8,7 @@ class Friends extends Component {
     constructor(props) {
         super(props);
         const token = Cookies.get('spotifyAuthToken');
+
         this.state = {
             token: token,
             value: '',
@@ -18,28 +19,33 @@ class Friends extends Component {
 
         this.handleChange = this.handleChange.bind(this);
 
-        axios({
-            method: 'get',
-            url: process.env.REACT_APP_API_URL+'/api/me',
-            headers: {
-                Authorization: this.state.token,
-            },
-        }).then((response) => {
-            this.setState({ self: response.data });
-            axios({
-                method: 'get',
-                url:
-                process.env.REACT_APP_API_URL+'/api/user/' +
-                    response.data._id +
-                    '/follow',
-                headers: {
-                    Authorization: this.state.token,
-                },
-            }).then((response) => {
-                console.log(response.data);
-                this.setState({ follow: response.data });
-            });
-        });
+        setTimeout(
+            () =>
+                axios({
+                    method: 'get',
+                    url: process.env.REACT_APP_API_URL + '/api/me',
+                    headers: {
+                        Authorization: this.state.token,
+                    },
+                }).then((response) => {
+                    this.setState({ self: response.data });
+                    var self = response.data;
+                    axios({
+                        method: 'get',
+                        url:
+                            process.env.REACT_APP_API_URL +
+                            '/api/user/' +
+                            self._id +
+                            '/follow',
+                        headers: {
+                            Authorization: this.state.token,
+                        },
+                    }).then((response) => {
+                        this.setState({ follow: response.data });
+                    });
+                }),
+            1000
+        );
     }
 
     handleChange(event) {
@@ -51,12 +57,14 @@ class Friends extends Component {
             axios({
                 method: 'get',
                 url:
-                process.env.REACT_APP_API_URL+'/api/user/search?query=' +
+                    process.env.REACT_APP_API_URL +
+                    '/api/user/search?query=' +
                     event.target.value,
                 headers: {
                     Authorization: this.state.token,
                 },
             }).then((response) => {
+                console.log(response);
                 this.setState({
                     res: response.data,
                 });
@@ -90,13 +98,15 @@ class Friends extends Component {
                         </div>
                     </div>
                 </div>
-                {this.state.res.map((user) => (
-                    <User
-                        user={user}
-                        self={user._id === this.state.self._id}
-                        follow={this.state.self.follow.includes(user._id)}
-                    />
-                ))}
+                {this.state.self
+                    ? this.state.res.map((user) => (
+                          <User
+                              user={user}
+                              self={user._id === this.state.self._id}
+                              follow={this.state.self.follow.includes(user._id)}
+                          />
+                      ))
+                    : null}
                 <hr />
                 {this.state.follow.map((user) => (
                     <User user={user} self={false} follow={true} />
