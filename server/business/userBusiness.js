@@ -90,6 +90,8 @@ exports.getFollow = async function (query, id) {
     if (_.isEqual(user, JSON.parse('[]')))
         return error.errorReturn(401, 'unauthorized', 'oauth introuvable');
     const res = await apiModel.getFollow(id);
+    if(_.isEqual(res, JSON.parse('[]')))
+        return []
     for (let i = 0; i < res[0].follow.length; i++)
         res[0].follow[i] = {
             _id: res[0].follow[i],

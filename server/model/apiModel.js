@@ -2,6 +2,7 @@ const apiModel = require('../model/apiModel');
 const mongoose = require('mongoose');
 const User = require('./userModel');
 const Post = require('./postModel');
+const Comment = require('./commentModel');
 const { debounce } = require('lodash');
 require('dotenv/config');
 
@@ -199,6 +200,13 @@ exports.selectReact = async function (id, id_post, mood) {
     return select;
 };
 
+exports.selectPost = async function (id_post) {
+    const select = await Post.find({
+        _id: id_post
+    });
+    return select;
+};
+
 exports.removeReact = async function (id, id_post, mood) {
     const remove = await Post.update(
         { _id: id_post },
@@ -215,15 +223,18 @@ exports.removeReact = async function (id, id_post, mood) {
 };
 
 exports.getFollow = async function (id) {
-    var get = await User.find(
-        {
-            _id: id,
-        },
-        {
-            follow: 1,
-            _id: 1,
-        }
-    );
+    var get = [];
+    try{
+        get = await User.find(
+            {
+                _id: id,
+            },
+            {
+                follow: 1,
+                _id: 1,
+            }
+        );
+    }catch(e){}
     return get;
 };
 
@@ -239,3 +250,33 @@ exports.getFollowed = async function (id) {
     );
     return get;
 };
+
+
+// ---------- COMMENT ----------
+
+exports.insertComment = async function (username, cont, gif, post){
+    const comment = new Comment({
+        post: post,
+        author: username,
+        content: cont,
+        gif: gif,
+        date: Date.now(),
+    });
+    try {
+        const newComment = await comment.save();
+        return newComment;
+    } catch (err) {
+        console.log(err);
+        return JSON.parse('{"err": "' + err + '"}');
+    }
+};
+
+exports.selectComments = async function (post) {
+    console.log(post);
+    const res = Comment.find(
+        {
+            post: post
+        }
+    );
+    return res;
+}
