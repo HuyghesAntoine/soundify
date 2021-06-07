@@ -51,9 +51,11 @@ This is the first idea that we got for our social network.
 * Add new friends 
 * Add a word about you in your soundify profile
 * Get your favorite artists/playlists/albums in 1 click
+* Print your playlists 
 * Share your favorite sound of the moment with your friends
 * Add emojis, gifs, and songs to your posts
 * Find the most recent releases at any moment
+* Search for any musics, albums or artists 
 ---
 ## References
 
