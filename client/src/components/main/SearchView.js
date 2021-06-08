@@ -3,6 +3,7 @@ import { Search as SearchIcon } from 'react-bootstrap-icons';
 import { Search } from 'react-spotify-api';
 import { A } from '@patched/hookrouter';
 import TrackLineView from './card/TrackLineView';
+import { Ghost } from 'react-kawaii';
 
 class SearchView extends Component {
     constructor(props) {
@@ -52,8 +53,22 @@ class SearchView extends Component {
                         {({ data }) =>
                             data ? (
                                 <div className="row">
+                                    {!data.albums.items.length &&
+                                    !data.tracks.items.length &&
+                                    !data.artists.items.length ? (
+                                        <div className="m-auto text-center">
+                                            <p>
+                                                We searched for "
+                                                {this.state.value}" but found
+                                                absolutely nothing{' '}
+                                            </p>
+                                            <Ghost size="80px" mood="ko" />
+                                        </div>
+                                    ) : null}
                                     <div className="col">
-                                        <p className="fs-2">Albums</p>
+                                        {data.albums.items.length ? (
+                                            <p className="fs-2">Albums</p>
+                                        ) : null}
                                         {data.albums.items.map((album) => (
                                             <A
                                                 className="text text-reset text-decoration-none"
@@ -90,7 +105,11 @@ class SearchView extends Component {
                                             </A>
                                         ))}
                                     </div>
+
                                     <div className="col">
+                                        {data.tracks.items.length ? (
+                                            <p className="fs-2">Tracks</p>
+                                        ) : null}
                                         {data.tracks
                                             ? data.tracks.items.map(
                                                   (track, i) => (
@@ -102,7 +121,9 @@ class SearchView extends Component {
                                               )
                                             : null}
 
-                                        <p className="fs-2">Artists</p>
+                                        {data.artists.items.length ? (
+                                            <p className="fs-2">Artists</p>
+                                        ) : null}
                                         {data.artists.items.map((artist) => (
                                             <A
                                                 className="text text-reset text-decoration-none"
