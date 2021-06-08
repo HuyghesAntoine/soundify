@@ -4,7 +4,19 @@ import Moment from 'react-moment';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { Track } from 'react-spotify-api';
-import { EmojiSmile, EmojiSmileFill, EmojiAngryFill, EmojiDizzyFill, EmojiFrownFill, EmojiSmileUpsideDownFill, EmojiHeartEyesFill, EmojiWinkFill, EmojiSunglassesFill, EmojiExpressionlessFill, EmojiLaughingFill } from 'react-bootstrap-icons';
+import {
+    EmojiSmile,
+    EmojiSmileFill,
+    EmojiAngryFill,
+    EmojiDizzyFill,
+    EmojiFrownFill,
+    EmojiSmileUpsideDownFill,
+    EmojiHeartEyesFill,
+    EmojiWinkFill,
+    EmojiSunglassesFill,
+    EmojiExpressionlessFill,
+    EmojiLaughingFill,
+} from 'react-bootstrap-icons';
 import TrackLineView from './TrackLineView';
 
 class Post extends Component {
@@ -29,7 +41,7 @@ class Post extends Component {
             { name: 'wink', icon: <EmojiWinkFill /> },
             { name: 'sunglasses', icon: <EmojiSunglassesFill /> },
             { name: 'expresionless', icon: <EmojiExpressionlessFill /> },
-            { name: 'laughing', icon: <EmojiLaughingFill /> }
+            { name: 'laughing', icon: <EmojiLaughingFill /> },
         ];
 
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
@@ -62,7 +74,8 @@ class Post extends Component {
         axios({
             method: method,
             url:
-            process.env.REACT_APP_API_URL+'/api/post/' +
+                process.env.REACT_APP_API_URL +
+                '/api/post/' +
                 this.state.data._id +
                 '/react/' +
                 reaction,
@@ -97,14 +110,13 @@ class Post extends Component {
         });
     }
 
-    getEquivalence(reaction){
+    getEquivalence(reaction) {
         try {
-            let res = this.action.find(({name}) => name === reaction)
-            return res.icon
+            let res = this.action.find(({ name }) => name === reaction);
+            return res.icon;
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-
     }
 
     render() {
@@ -161,14 +173,18 @@ class Post extends Component {
                         }
                     >
                         <div>
-                             {this.state.data.reactions.map((reaction, i) => {
+                            {this.state.data.reactions.map((reaction, i) => {
                                 if (reaction.count !== 0)
                                     return (
                                         <span
                                             key={i}
                                             className="badge position-relative mb-1"
                                         >
-                                            <div className="fs-6">{this.getEquivalence(reaction.reaction)}</div>
+                                            <div className="fs-6">
+                                                {this.getEquivalence(
+                                                    reaction.reaction
+                                                )}
+                                            </div>
                                             <span
                                                 className={
                                                     'position-absolute top-0 end-0 badge rounded-pill bg-secondary' +
@@ -206,8 +222,18 @@ class Post extends Component {
                                 (!this.state.reactionPanel ? 'd-none' : '')
                             }
                         >
-                            {this.action.map( a=> {
-                                return <button onClick={this.handleClick.bind(this,a.name)}  className="btn btn-sm border-0 btn-outline-primary">{a.icon}</button>
+                            {this.action.map((a) => {
+                                return (
+                                    <button
+                                        onClick={this.handleClick.bind(
+                                            this,
+                                            a.name
+                                        )}
+                                        className="btn btn-sm border-0 btn-outline-primary"
+                                    >
+                                        {a.icon}
+                                    </button>
+                                );
                             })}
                         </div>
                     </div>
