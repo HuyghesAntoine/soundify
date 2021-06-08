@@ -40,3 +40,32 @@ exports.getComments = async function(post, query) {
     const res = await apiModel.selectComments(post);
     return res;
 }
+
+exports.putReact = async function (id, react, headers){
+    const token = headers.authorization;
+    const user = await apiModel.getUserWithToken(token);
+    if (_.isEqual(user, JSON.parse('[]')))
+        return error.errorReturn(
+            401,
+            "unauthorized",
+            "oauth introuvable"
+        );
+    const post = await apiModel.selectComment(id);
+    console.log(id);
+    if(_.isEqual(post, JSON.parse('[]')))
+        return error.errorReturn(
+            404,
+            "not found",
+            "comment not found"
+        );
+    if(react == "UPVOTE")
+        return await apiModel.addUpvote(id, user[0]._id);
+    else if (react == "DOWNVOTE")
+        return await apiModel.addDownvote(id, user[0]._id);
+    else
+        return error.errorReturn(
+            404,
+            "not found",
+            "reaction not found"
+        );
+}

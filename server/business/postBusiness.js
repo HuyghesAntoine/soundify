@@ -22,7 +22,9 @@ exports.putPost = async function (data, query) {
 };
 
 exports.getPost = async function (id) {
-    const res = await apiModel.searchPostWithId(id);
+    var res = await apiModel.searchPostWithId(id);
+    console.log(res);
+    res.push( await apiModel.selectComments(id));
     return res;
 };
 

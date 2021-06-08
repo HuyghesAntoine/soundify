@@ -279,4 +279,52 @@ exports.selectComments = async function (post) {
         }
     );
     return res;
+};
+
+exports.selectComment = async function (id) {
+    var res;
+    try{
+        res = await Comment.find(
+            {
+                _id: id
+            }
+        );
+    }catch(e){
+        return JSON.parse('[]');
+    }
+    return res;
+};
+
+exports.addUpvote = async function(id_comm, id_user){
+    var update;
+    try{
+        update = await Comment.updateOne(
+            { _id: id_comm },
+            {
+                $push: {
+                    upvote: id_user,
+                },
+            }
+        );
+    }catch(e){
+        return JSON.parse('[]');
+    }
+    return update;
+}
+
+exports.addUpvote = async function(id_comm, id_user){
+    var update;
+    try{
+        update = await Comment.updateOne(
+            { _id: id_comm },
+            {
+                $push: {
+                    downvote: id_user,
+                },
+            }
+        );
+    }catch(e){
+        return JSON.parse('[]');
+    }
+    return update;
 }
