@@ -16,16 +16,7 @@ class Post extends Component {
             data: props.data,
             token: token,
             hover: false,
-            moodPanel: false,
-        };
-        this.activeMoods = ['lovestruck', 'happy', 'shocked', 'sad', 'ko'];
-
-        this.color = {
-            lovestruck: '#f39189',
-            happy: '#efbbcf',
-            sad: '#f2dcbb',
-            shocked: '#fff5ea',
-            ko: '#e0e4e8',
+            reactionPanel: false,
         };
 
         this.action = [
@@ -53,18 +44,18 @@ class Post extends Component {
     handleMouseLeave() {
         this.setState({
             hover: false,
-            moodPanel: false,
+            reactionPanel: false,
         });
     }
 
     handleDisplayReactPaneClick() {
-        this.setState({ moodPanel: true });
+        this.setState({ reactionPanel: true });
     }
 
     handleClick(reaction) {
         const method =
             this.state.data.reactions.filter(
-                (react) => react.mood === reaction && react.user === true
+                (react) => react.reaction === reaction && react.user === true
             ).length === 0
                 ? 'put'
                 : 'delete';
@@ -82,14 +73,14 @@ class Post extends Component {
             const reactions = this.state.data.reactions;
             if (method === 'put') {
                 reactions.forEach((react) => {
-                    if (react.mood === reaction) {
+                    if (react.reaction === reaction) {
                         react.user = true;
                         react.count = react.count + 1;
                     }
                 });
             } else {
                 reactions.forEach((react) => {
-                    if (react.mood === reaction) {
+                    if (react.reaction === reaction) {
                         react.user = false;
                         react.count = react.count - 1;
                     }
@@ -101,13 +92,19 @@ class Post extends Component {
                     ...prevState.data,
                     reactions: reactions,
                 },
-                moodPanel: false,
+                reactionPanel: false,
             }));
         });
     }
 
-    handleAction(event){
-        console.log(event)
+    getEquivalence(reaction){
+        try {
+            let res = this.action.find(({name}) => name === reaction)
+            return res.icon
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 
     render() {
@@ -169,12 +166,12 @@ class Post extends Component {
                                     return (
                                         <span
                                             key={i}
-                                            className="badge position-relative m-2"
+                                            className="badge position-relative mb-1"
                                         >
-                                            <div>{reaction.icon}</div>
+                                            <div className="fs-6">{this.getEquivalence(reaction.reaction)}</div>
                                             <span
                                                 className={
-                                                    'position-absolute top-0 end-0 badge rounded-pill bg-secondary ' +
+                                                    'position-absolute top-0 end-0 badge rounded-pill bg-secondary' +
                                                     (reaction.user
                                                         ? 'text-warning'
                                                         : '')
@@ -206,11 +203,11 @@ class Post extends Component {
                         <div
                             className={
                                 'position-absolute top-100 start-50 translate-middle d-flex border rounded bg-dark ' +
-                                (!this.state.moodPanel ? 'd-none' : '')
+                                (!this.state.reactionPanel ? 'd-none' : '')
                             }
                         >
                             {this.action.map( a=> {
-                                return <button onClick={this.handleClick(a.name)}  className="btn btn-sm border-0 btn-outline-primary">{a.icon}</button>
+                                return <button onClick={this.handleClick.bind(this,a.name)}  className="btn btn-sm border-0 btn-outline-primary">{a.icon}</button>
                             })}
                         </div>
                     </div>

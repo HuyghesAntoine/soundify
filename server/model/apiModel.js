@@ -172,13 +172,13 @@ exports.getTimeline = async function (id) {
     return res;
 };
 
-exports.updateReact = async function (id, id_post, mood) {
+exports.updateReact = async function (id, id_post, reaction) {
     const update = await Post.updateOne(
         { _id: id_post },
         {
             $push: {
                 reactions: {
-                    mood: mood,
+                    reaction: reaction,
                     user: id,
                 },
             },
@@ -187,12 +187,12 @@ exports.updateReact = async function (id, id_post, mood) {
     return update;
 };
 
-exports.selectReact = async function (id, id_post, mood) {
+exports.selectReact = async function (id, id_post, reaction) {
     const select = await Post.find({
         _id: id_post,
         reactions: {
             $elemMatch: {
-                mood: mood,
+                reaction: reaction,
                 user: id,
             },
         },
@@ -207,13 +207,13 @@ exports.selectPost = async function (id_post) {
     return select;
 };
 
-exports.removeReact = async function (id, id_post, mood) {
-    const remove = await Post.update(
+exports.removeReact = async function (id, id_post, reaction) {
+    const remove = await Post.updateOne(
         { _id: id_post },
         {
             $pull: {
                 reactions: {
-                    mood: mood,
+                    reaction: reaction,
                     user: id,
                 },
             },

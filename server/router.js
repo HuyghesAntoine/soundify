@@ -23,8 +23,8 @@ router.post('/api/post', postController.putPost); //changer en post
 router.delete('/api/post/:id', postController.deletePost);
 router.get('/api/post/get/:id', postController.getPost);
 router.get('/api/timeline', postController.getTimeline); //get timeline from :id
-router.put('/api/post/:id/react/:mood', postController.putReact); //create /update reaction on post(:id)
-router.delete('/api/post/:id/react/:mood', postController.deleteReact); //create /update reaction on post(:id)
+router.put('/api/post/:id/react/:reaction', postController.putReact); //create /update reaction on post(:id)
+router.delete('/api/post/:id/react/:reaction', postController.deleteReact); //create /update reaction on post(:id)
 
 // API - COMMENT
 router.post('/api/comment', commentController.putComment);

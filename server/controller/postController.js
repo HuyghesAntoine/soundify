@@ -41,7 +41,7 @@ exports.putReact = async function (req, res) {
     const post = await postBusiness.putReact(
         req.headers,
         req.params.id,
-        req.params.mood
+        req.params.reaction
     );
     var error;
     if (post.code) error = post.error.code;
@@ -54,7 +54,7 @@ exports.deleteReact = async function (req, res) {
     const post = await postBusiness.removeReact(
         req.headers,
         req.params.id,
-        req.params.mood
+        req.params.reaction
     );
     var error;
     if (post.code) error = post.error.code;

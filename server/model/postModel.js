@@ -25,7 +25,7 @@ const postSchema = mongoose.Schema({
     reactions: {
         type: [
             {
-                mood: {
+                reaction: {
                     type: String,
                 },
                 user: {

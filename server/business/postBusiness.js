@@ -55,21 +55,32 @@ exports.getTimeline = async function (headers) {
         );
     const res = await apiModel.getTimeline(headers.authorization);
 
-    const activeMoods = ['lovestruck', 'happy', 'shocked', 'sad', 'ko'];
+    const activeReactions = [
+        'smile',
+        'angry',
+        'dizzy',
+        'frown',
+        'upsidedown',
+        'heart',
+        'wink',
+        'sunglasses',
+        'expresionless',
+        'laughing',
+    ];
     for (let i = 0; i < res.length; i++) {
         let reactions = [];
-        activeMoods.forEach((mood) => {
+        activeReactions.forEach((reaction) => {
             const count = res[i].reactions.filter(
-                (react) => react.mood == mood
+                (react) => react.reaction == reaction
             ).length;
             userValue =
                 res[i].reactions.filter(
-                    (react) => react.mood == mood && react.user == user[0]._id
+                    (react) => react.reaction == reaction && react.user == user[0]._id
                 ).length === 1
                     ? true
                     : false;
             reactions.push({
-                mood: mood,
+                reaction: reaction,
                 count: count,
                 user: userValue,
             });
@@ -81,7 +92,7 @@ exports.getTimeline = async function (headers) {
     return res;
 };
 
-exports.putReact = async function (headers, id, mood) {
+exports.putReact = async function (headers, id, reaction) {
     const token = headers.authorization;
     const user = await apiModel.getUserWithToken(token);
     if (_.isEqual(user, JSON.parse('[]')))
@@ -92,7 +103,7 @@ exports.putReact = async function (headers, id, mood) {
         );
     var react;
     try {
-        react = await apiModel.selectReact(user[0]._id, id, mood);
+        react = await apiModel.selectReact(user[0]._id, id, reaction);
     } catch (e) {
         return error.errorReturn(
             403,
@@ -106,11 +117,11 @@ exports.putReact = async function (headers, id, mood) {
             "impossible React",
             "post introuvable ou react déja fait"
         );
-    const res = await apiModel.updateReact(user[0]._id, id, mood);
+    const res = await apiModel.updateReact(user[0]._id, id, reaction);
     return res;
 };
 
-exports.removeReact = async function (headers, id, mood) {
+exports.removeReact = async function (headers, id, reaction) {
     const token = headers.authorization;
     const user = await apiModel.getUserWithToken(token);
     if (_.isEqual(user, JSON.parse('[]')))
@@ -120,7 +131,7 @@ exports.removeReact = async function (headers, id, mood) {
             "oauth introuvable"
         );
     try {
-        const res = await apiModel.removeReact(user[0]._id, id, mood);
+        const res = await apiModel.removeReact(user[0]._id, id, reaction);
         return res;
     } catch (e) {
         return error.errorReturn(
