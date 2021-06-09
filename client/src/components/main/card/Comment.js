@@ -2,9 +2,7 @@ import { Component } from 'react';
 import Moment from 'react-moment';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { Track } from 'react-spotify-api';
 import { HandThumbsUpFill, HandThumbsDownFill } from 'react-bootstrap-icons';
-import TrackLineView from '../view/TrackLineView';
 
 class Comment extends Component {
     constructor(props) {
@@ -81,7 +79,7 @@ class Comment extends Component {
     render() {
         return (
             <div
-                className="position-relative border border-1 rounded mb-3 hover bg-dark shadow-lg"
+                className=" col-8 position-relative border border-1 rounded mb-3 hover bg-dark shadow-lg"
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
             >
@@ -108,35 +106,23 @@ class Comment extends Component {
                         ) : null}
                     </div>
 
-                    {this.state.data.track ? (
-                        <div className="border-top p-2">
-                            <Track id={this.state.data.track}>
-                                {({ data }) =>
-                                    data ? (
-                                        <TrackLineView track={data} index={1} />
-                                    ) : null
-                                }
-                            </Track>
-                        </div>
-                    ) : null}
-
-                    <div className="position-absolute top-100 start-0 translate-middle-y d-flex border rounded bg-dark">
+                    <div className="position-absolute top-50 start-100 translate-middle-y v-flex border-0 rounded">
                         {this.action.map((a, i) => {
                             return (
                                 <span
                                     key={i}
-                                    className="badge position-relative mb-1"
+                                    className="badge position-relative mb-0 "
                                 >
                                     <button
                                         onClick={this.handleClick.bind(
                                             this,
                                             a.name
                                         )}
-                                        className="btn btn-sm border-0 btn-outline-primary"
+                                        className="btn btn-sm border-0 btn-outline-primary pb-0 pt-0"
                                     >
                                         {a.icon}
                                     </button>
-                                    <span className="position-absolute top-0 end-0 badge rounded-pill bg-secondary">
+                                    <span className="position-absolute top-50 start-75 badge translate-middle rounded-pill bg-secondary">
                                         {this.state.data[a.name].length}
                                         <span className="visually-hidden">
                                             number of {a.name}

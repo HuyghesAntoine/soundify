@@ -19,7 +19,7 @@ class SearchView extends Component {
         return (
             <div>
                 <div className="d-flex justify-content-between mt-3">
-                    <h1 className="sh">Search</h1>
+                    <h1 className="sh">Search your musics </h1>
 
                     <div>
                         <div className="input-group mb-3">

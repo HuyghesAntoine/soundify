@@ -31,10 +31,11 @@ class Home extends Component {
             <div>
                 {this.state.post ? (
                     <div>
-                        <Post data={this.state.post} />
-                        <CommentForm id={this.state.post._id} />
+                         <h1 className="text-center sh">Comment the post</h1>
+                         <CommentForm id={this.state.post._id} />
+                         <Post data={this.state.post} />
                         {this.state.post.comments.map((comment) => (
-                            <Comment data={comment} />
+                            <Comment className="" data={comment} />
                         ))}
                     </div>
                 ) : (

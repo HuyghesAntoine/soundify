@@ -6,7 +6,6 @@ import { Picker } from 'emoji-mart';
 import {
     ArrowRight,
     EmojiSmile,
-    MusicNoteBeamed,
     Stickies,
 } from 'react-bootstrap-icons';
 import PickerGif from '@progresso/react-giphy-picker-https';
@@ -21,8 +20,6 @@ class CommentForm extends Component {
             token: token,
             postId: props.id,
             gifPreview: null,
-            searchValue: '',
-            trackPreview: null,
         };
 
         this.state.displayPicker = false;
@@ -31,8 +28,6 @@ class CommentForm extends Component {
         this.handleSelect = this.handleSelect.bind(this);
         this.handleEmojiDisplay = this.handleEmojiDisplay.bind(this);
         this.handleGifDisplay = this.handleGifDisplay.bind(this);
-        this.handleMusicSearchDisplay =
-            this.handleMusicSearchDisplay.bind(this);
     }
 
     handleSelectGif(gif) {
@@ -44,9 +39,7 @@ class CommentForm extends Component {
         this.setState({ gifPreview: null });
     }
 
-    removeTrack() {
-        this.setState({ trackPreview: null });
-    }
+  
 
     handleChange(event) {
         this.setState({ value: event.target.value });
@@ -56,15 +49,7 @@ class CommentForm extends Component {
         this.setState({ searchValue: event.target.value });
     }
 
-    handleSelectTrack(event) {
-        console.log(event);
-        this.setState({
-            trackPreview: {
-                id: event.target.id,
-                string: event.target.textContent,
-            },
-        });
-    }
+ 
 
     handleSubmit(event) {
         event.preventDefault();
@@ -120,13 +105,6 @@ class CommentForm extends Component {
         });
     }
 
-    handleMusicSearchDisplay() {
-        this.setState({
-            displayPicker: false,
-            displayPickerGif: false,
-            displayMusicSearch: !this.state.displayMusicSearch,
-        });
-    }
 
     render() {
         return (
@@ -158,17 +136,7 @@ class CommentForm extends Component {
                                 />
                             </div>
                         ) : null}
-                        {this.state.trackPreview ? (
-                            <div className="w-100">
-                                <button
-                                    type="button"
-                                    class="btn-close btn-close-white float-end"
-                                    aria-label="Close"
-                                    onClick={this.removeTrack.bind(this)}
-                                ></button>
-                                <p>{this.state.trackPreview.string}</p>
-                            </div>
-                        ) : null}
+
                     </div>
                     <div className="d-flex justify-content-between border-primary border-top">
                         <button
@@ -184,13 +152,6 @@ class CommentForm extends Component {
                             onClick={this.handleGifDisplay}
                         >
                             <Stickies />
-                        </button>
-                        <button
-                            type="button"
-                            className="col-2 btn btn-sm border-0 btn-outline-primary"
-                            onClick={this.handleMusicSearchDisplay}
-                        >
-                            <MusicNoteBeamed />
                         </button>
                         <button
                             type="submit"
@@ -226,54 +187,6 @@ class CommentForm extends Component {
                             style={{ 'background-color': '#29343d' }}
                             width="1000px"
                         />
-                    ) : null}
-
-                    {this.state.displayMusicSearch ? (
-                        <div>
-                            <div className="input-group">
-                                <input
-                                    type="text"
-                                    className="form-control bg-dark text-light"
-                                    placeholder="Search your music"
-                                    aria-label="Search"
-                                    aria-describedby="searchMusic"
-                                    onChange={this.handleChangeSearch.bind(
-                                        this
-                                    )}
-                                />
-                                <button
-                                    className="btn btn-outline-light"
-                                    id="searchMusic"
-                                >
-                                    Search
-                                </button>
-                            </div>
-                            <Search
-                                query={this.state.searchValue}
-                                track
-                                options={{ limit: 5 }}
-                            >
-                                {({ data }) =>
-                                    data ? (
-                                        <div>
-                                            {data.tracks.items.map((track) => (
-                                                <p
-                                                    className="hover ps-2"
-                                                    key={track.id}
-                                                    id={track.id}
-                                                    onClick={this.handleSelectTrack.bind(
-                                                        this
-                                                    )}
-                                                >
-                                                    {track.artists[0].name} -{' '}
-                                                    {track.name}
-                                                </p>
-                                            ))}
-                                        </div>
-                                    ) : null
-                                }
-                            </Search>
-                        </div>
                     ) : null}
                 </form>
             </div>
