@@ -108,9 +108,9 @@ class Friends extends Component {
                       ))
                     : null}
                 <hr />
-                {this.state.follow.map((user) => (
+                {this.state.follow ? this.state.follow.map((user) => (
                     <User user={user} self={false} follow={true} />
-                ))}
+                )) : null}
             </div>
         );
     }
