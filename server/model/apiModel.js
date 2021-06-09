@@ -301,7 +301,7 @@ exports.addUpvote = async function(id_comm, id_user){
         update = await Comment.updateOne(
             { _id: id_comm },
             {
-                $push: {
+                $addToSet: {
                     upvote: id_user,
                 },
             }
@@ -312,13 +312,13 @@ exports.addUpvote = async function(id_comm, id_user){
     return update;
 }
 
-exports.addUpvote = async function(id_comm, id_user){
+exports.addDownvote = async function(id_comm, id_user){
     var update;
     try{
         update = await Comment.updateOne(
             { _id: id_comm },
             {
-                $push: {
+                $addToSet: {
                     downvote: id_user,
                 },
             }
