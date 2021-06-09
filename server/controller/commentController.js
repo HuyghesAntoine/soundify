@@ -27,3 +27,12 @@ exports.putReaction = async function(req, res) {
     res.status(error).send(react);
     return res;
 }
+
+exports.removeReaction = async function(req, res) {
+    const react = await commentBusiness.removeReact(req.params.id, req.params.reaction, req.headers);
+    var error;
+    if (react.code) error = react.error.code;
+    else error = 200;
+    res.status(error).send(react);
+    return res;
+}

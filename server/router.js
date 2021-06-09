@@ -30,6 +30,7 @@ router.delete('/api/post/:id/react/:reaction', postController.deleteReact); //cr
 router.post('/api/comment', commentController.putComment);
 router.get('/api/comment/:post', commentController.getComments);
 router.put('/api/comment/:id/react/:reaction', commentController.putReaction);
+router.delete('/api/comment/:id/react/:reaction', commentController.removeReaction);
 
 // API - LYRICS
 router.get('/api/lyrics/:query', lyricsController.getLyric)

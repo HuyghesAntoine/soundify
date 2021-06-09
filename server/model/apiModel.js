@@ -328,3 +328,37 @@ exports.addDownvote = async function(id_comm, id_user){
     }
     return update;
 }
+
+exports.deleteUpvote = async function(id_comm, id_user){
+    var update;
+    try{
+        update = await Comment.updateOne(
+            { _id: id_comm },
+            {
+                $pull: {
+                    upvote: id_user,
+                },
+            }
+        );
+    }catch(e){
+        return JSON.parse('[]');
+    }
+    return update;
+}
+
+exports.deleteDownvote = async function(id_comm, id_user){
+    var update;
+    try{
+        update = await Comment.updateOne(
+            { _id: id_comm },
+            {
+                $pull: {
+                    downvote: id_user,
+                },
+            }
+        );
+    }catch(e){
+        return JSON.parse('[]');
+    }
+    return update;
+}
