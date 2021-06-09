@@ -1,12 +1,15 @@
 import { A } from '@patched/hookrouter';
 import { Component } from 'react';
 import Moment from 'react-moment';
-import { ChatSquareText } from 'react-bootstrap-icons';
+import { ChatSquareText, PlayFill } from 'react-bootstrap-icons';
 import axios from 'axios';
+import PlayerContext from '../../PlayerContext'
 
 class TrackLineView extends Component {
+    static contextType = PlayerContext;
     constructor(props) {
         super(props);
+        
         this.state = {
             track: props.track,
             index: props.index,
@@ -38,7 +41,12 @@ class TrackLineView extends Component {
         }
     }
 
+
+
+
     render() {
+        const { current, setCurrent } = this.context;
+
         return (
             <div className="row justify-content-between hover">
                 <div className={!this.state.displayLyrics ? 'd-none' : ''}>
@@ -74,6 +82,12 @@ class TrackLineView extends Component {
                     <div className="d-flex align-items-center">
                         <div className="flex-grow-1 text-white-50">
                             {this.state.index}
+                        </div>
+                        <div className="flex-grow-1 text-white-50">
+                            <PlayFill
+                                onClick={() => setCurrent(this.state.track.uri)}
+                                style={{ cursor: 'pointer' }}
+                            />
                         </div>
                         <div className="flex-grow-1 text-white-50">
                             <ChatSquareText
