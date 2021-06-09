@@ -12,14 +12,14 @@ import {
 import PickerGif from '@progresso/react-giphy-picker-https';
 import { Search } from 'react-spotify-api';
 
-class PostForm extends Component {
+class CommentForm extends Component {
     constructor(props) {
         super(props);
         const token = Cookies.get('spotifyAuthToken');
         this.state = {
             value: '',
             token: token,
-            lastPost: [],
+            postId: props.id,
             gifPreview: null,
             searchValue: '',
             trackPreview: null,
@@ -73,14 +73,17 @@ class PostForm extends Component {
         } else {
             axios({
                 method: 'post',
-                url: process.env.REACT_APP_API_URL+'/api/post',
+                url: process.env.REACT_APP_API_URL + '/api/comment/',
                 headers: {
                     Authorization: this.state.token,
                 },
                 data: {
+                    post: this.state.postId,
                     content: this.state.value,
                     gif: this.state.gifPreview,
-                    track: this.state.trackPreview ? this.state.trackPreview.id : null,
+                    track: this.state.trackPreview
+                        ? this.state.trackPreview.id
+                        : null,
                 },
             }).then((response) => {
                 console.log(response.data);
@@ -138,7 +141,7 @@ class PostForm extends Component {
                             value={this.state.value}
                             onChange={this.handleChange}
                             className="w-100 bg-dark border-0 text-light"
-                            style={{ resize: 'none', textIndent:"1%" }}
+                            style={{ resize: 'none', textIndent: '1%' }}
                         />
 
                         {this.state.gifPreview ? (
@@ -208,7 +211,11 @@ class PostForm extends Component {
                             showPreview={false}
                             showSkinTones={false}
                             onSelect={this.handleSelect}
-                            style={{ resize: 'none', position: 'absolute', zIndex: '10'}}
+                            style={{
+                                resize: 'none',
+                                position: 'absolute',
+                                zIndex: '10',
+                            }}
                         />
                     ) : null}
                     {this.state.displayPickerGif ? (
@@ -274,4 +281,4 @@ class PostForm extends Component {
     }
 }
 
-export default PostForm;
+export default CommentForm;

@@ -4,7 +4,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { Track } from 'react-spotify-api';
 import { HandThumbsUpFill, HandThumbsDownFill } from 'react-bootstrap-icons';
-import TrackLineView from './TrackLineView';
+import TrackLineView from '../view/TrackLineView';
 import { A } from '@patched/hookrouter/dist/Link';
 
 class Comment extends Component {
@@ -24,10 +24,9 @@ class Comment extends Component {
     }
 
     handleClick(reaction) {
-        const method =
-            !this.state.data[reaction].includes(this.state.user)
-                ? 'put'
-                : 'delete';
+        const method = !this.state.data[reaction].includes(this.state.user)
+            ? 'put'
+            : 'delete';
         axios({
             method: method,
             url:
@@ -107,7 +106,7 @@ class Comment extends Component {
                     ) : null}
 
                     <div className="position-absolute top-100 start-0 translate-middle-y d-flex border rounded bg-dark">
-                        {this.action.map((a,i) => {
+                        {this.action.map((a, i) => {
                             return (
                                 <span
                                     key={i}
@@ -122,11 +121,7 @@ class Comment extends Component {
                                     >
                                         {a.icon}
                                     </button>
-                                    <span
-                                        className=
-                                            'position-absolute top-0 end-0 badge rounded-pill bg-secondary'
-                                            
-                                    >
+                                    <span className="position-absolute top-0 end-0 badge rounded-pill bg-secondary">
                                         {this.state.data[a.name].length}
                                         <span className="visually-hidden">
                                             number of {a.name}

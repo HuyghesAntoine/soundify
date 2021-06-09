@@ -1,7 +1,7 @@
 import { A } from '@patched/hookrouter';
 import { Component } from 'react';
 import { UserAlbums, UserArtists } from 'react-spotify-api';
-import BioForm from './BioForm';
+import BioForm from './form/BioForm';
 
 class Profile extends Component {
     constructor(props) {

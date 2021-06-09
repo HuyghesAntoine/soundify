@@ -11,25 +11,29 @@ class TrackLineView extends Component {
             track: props.track,
             index: props.index,
             isAlbum: props.isAlbum ? props.isAlbum : false,
-            displayLyrics : false,
-            lyrics : "",
+            displayLyrics: false,
+            lyrics: '',
         };
     }
 
     handleLyrics(event) {
         console.log(event);
-        this.setState( {displayLyrics : !this.state.displayLyrics})
-        if(this.state.lyrics.length === 0){
+        this.setState({ displayLyrics: !this.state.displayLyrics });
+        if (this.state.lyrics.length === 0) {
             axios({
                 method: 'get',
-                url: process.env.REACT_APP_API_URL+'/api/lyrics/'+this.state.track.artists[0].name+
-                " "+this.state.track.name,
+                url:
+                    process.env.REACT_APP_API_URL +
+                    '/api/lyrics/' +
+                    this.state.track.artists[0].name +
+                    ' ' +
+                    this.state.track.name,
                 headers: {
                     Authorization: this.state.token,
-                }
+                },
             }).then((response) => {
                 console.log(response.data);
-                this.setState({lyrics : response.data})
+                this.setState({ lyrics: response.data });
             });
         }
     }
@@ -40,25 +44,31 @@ class TrackLineView extends Component {
                 <div className={!this.state.displayLyrics ? 'd-none' : ''}>
                     <div className="d-flex justify-content-between">
                         <p>Lyrics</p>
-                        <button className="btn-close btn-close-white btn-sm"
-                         onClick={this.handleLyrics.bind(this)}>
-                        </button>
+                        <button
+                            className="btn-close btn-close-white btn-sm"
+                            onClick={this.handleLyrics.bind(this)}
+                        ></button>
                     </div>
-                    {(this.state.lyrics.length === 0) ?
-                    <div className="d-flex">
-                        <div className="wave"></div>
-                        <div className="wave"></div>
-                        <div className="wave"></div>
-                        <div className="wave"></div>
-                        <div className="wave"></div>
-                        <div className="wave"></div>
-                        <div className="wave"></div>
-                        <div className="wave"></div>
-                        <div className="wave"></div>
-                        <div className="wave"></div>
-                    </div> : 
-                    <div dangerouslySetInnerHTML={{ __html: this.state.lyrics}}></div>
-                 }
+                    {this.state.lyrics.length === 0 ? (
+                        <div className="d-flex">
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                            <div className="wave"></div>
+                        </div>
+                    ) : (
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html: this.state.lyrics,
+                            }}
+                        ></div>
+                    )}
                 </div>
                 <div className="col">
                     <div className="d-flex align-items-center">
@@ -68,7 +78,7 @@ class TrackLineView extends Component {
                         <div className="flex-grow-1 text-white-50">
                             <ChatSquareText
                                 onClick={this.handleLyrics.bind(this)}
-                                style={{cursor: 'pointer'}}
+                                style={{ cursor: 'pointer' }}
                             />
                         </div>
                         {!this.state.isAlbum ? (

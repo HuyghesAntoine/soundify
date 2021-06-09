@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { A } from '@patched/hookrouter';
 import { Artist, ArtistTracks, ArtistAlbums } from 'react-spotify-api';
-import TrackLineView from './card/TrackLineView';
+import TrackLineView from './TrackLineView';
 
 class ArtistView extends Component {
     constructor(props) {

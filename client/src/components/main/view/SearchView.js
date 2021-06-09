@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { Search as SearchIcon } from 'react-bootstrap-icons';
 import { Search } from 'react-spotify-api';
 import { A } from '@patched/hookrouter';
-import TrackLineView from './card/TrackLineView';
+import TrackLineView from './TrackLineView';
 import { Ghost } from 'react-kawaii';
 
 class SearchView extends Component {

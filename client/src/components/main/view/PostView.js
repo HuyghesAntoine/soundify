@@ -1,21 +1,21 @@
 import Cookies from 'js-cookie';
 import { Component } from 'react';
-import Post from './card/Post';
-import CommentForm from './CommentForm'
+import Post from '../card/Post';
+import CommentForm from '../form/CommentForm';
 import axios from 'axios';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import Comment from './card/Comment';
+import Comment from '../card/Comment';
 
 class Home extends Component {
     constructor(props) {
         super(props);
         const token = Cookies.get('spotifyAuthToken');
-        const id = props.id
-        this.state = { id : id,  post: null };
+        const id = props.id;
+        this.state = { id: id, post: null };
 
         axios({
             method: 'get',
-            url: process.env.REACT_APP_API_URL+'/api/post/' + id,
+            url: process.env.REACT_APP_API_URL + '/api/post/' + id,
             headers: {
                 Authorization: token,
             },
@@ -29,13 +29,15 @@ class Home extends Component {
     render() {
         return (
             <div>
-                {this.state.post ? 
+                {this.state.post ? (
                     <div>
-                    <Post data={this.state.post} />
-                    <CommentForm id={this.state.post._id} />
-                     { this.state.post.comments.map( comment => <Comment data={comment} /> ) }
+                        <Post data={this.state.post} />
+                        <CommentForm id={this.state.post._id} />
+                        {this.state.post.comments.map((comment) => (
+                            <Comment data={comment} />
+                        ))}
                     </div>
-                 : (
+                ) : (
                     <div>
                         <SkeletonTheme
                             color="#bbb"

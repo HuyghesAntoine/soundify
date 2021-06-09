@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import { Component } from 'react';
 import Post from './card/Post';
-import PostForm from './PostForm';
+import PostForm from './form/PostForm';
 import axios from 'axios';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
@@ -13,7 +13,7 @@ class Home extends Component {
 
         axios({
             method: 'get',
-            url: process.env.REACT_APP_API_URL+'/api/timeline',
+            url: process.env.REACT_APP_API_URL + '/api/timeline',
             headers: {
                 Authorization: token,
             },

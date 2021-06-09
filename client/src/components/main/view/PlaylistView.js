@@ -1,6 +1,6 @@
-import { Component } from "react";
-import { Playlist, PlaylistTracks } from "react-spotify-api";
-import TrackLineView from "./card/TrackLineView";
+import { Component } from 'react';
+import { Playlist, PlaylistTracks } from 'react-spotify-api';
+import TrackLineView from './TrackLineView';
 
 class PlaylistView extends Component {
     constructor(props) {

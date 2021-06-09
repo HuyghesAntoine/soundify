@@ -18,7 +18,7 @@ class BioForm extends Component {
 
         axios({
             method: 'get',
-            url: process.env.REACT_APP_API_URL+'/api/me',
+            url: process.env.REACT_APP_API_URL + '/api/me',
             headers: {
                 Authorization: this.state.token,
             },
@@ -37,7 +37,7 @@ class BioForm extends Component {
         event.preventDefault();
         axios({
             method: 'put',
-            url: process.env.REACT_APP_API_URL+'/api/user/bio',
+            url: process.env.REACT_APP_API_URL + '/api/user/bio',
             headers: {
                 Authorization: this.state.token,
             },
@@ -62,7 +62,7 @@ class BioForm extends Component {
                         onChange={this.handleChange}
                         placeholder=" Nothing in your bio. Change that now!"
                         className="w-100 bg-secondary text-light border border-1 rounded"
-                        style={{ resize: 'none', textIndent:"1%" }}
+                        style={{ resize: 'none', textIndent: '1%' }}
                     />
                 </div>
                 <div className="d-grid">
