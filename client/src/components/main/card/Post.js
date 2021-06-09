@@ -18,6 +18,7 @@ import {
     EmojiLaughingFill,
 } from 'react-bootstrap-icons';
 import TrackLineView from './TrackLineView';
+import { A } from '@patched/hookrouter/dist/Link';
 
 class Post extends Component {
     constructor(props) {
@@ -126,14 +127,16 @@ class Post extends Component {
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
             >
+                
                 <div className="m-0">
+                <A href={"/post/"+this.state.data._id} className="text-decoration-none text-white">
                     <div className="m-2">
                         {' '}
                         <span className="text-primary fw-bold">
                             {this.state.data.author}
                         </span>{' '}
                         <span className="text-muted">
-                            Â· <Moment fromNow>{this.state.data.date}</Moment>
+                            · <Moment fromNow>{this.state.data.date}</Moment>
                         </span>
                         <br />
                         {this.state.data.content}
@@ -147,7 +150,7 @@ class Post extends Component {
                                 </div>
                             </div>
                         ) : null}
-                    </div>
+                    </div></A>
 
                     {this.state.data.track ? (
                         <div className="border-top p-2">
@@ -160,7 +163,7 @@ class Post extends Component {
                             </Track>
                         </div>
                     ) : null}
-                    <div
+                    {this.state.data.reactions ? <div
                         id="reactList"
                         className={
                             'd-flex justify-content-between align-self-center ' +
@@ -236,7 +239,7 @@ class Post extends Component {
                                 );
                             })}
                         </div>
-                    </div>
+                    </div> : null }
                 </div>
             </div>
         );

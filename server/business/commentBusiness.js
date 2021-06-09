@@ -9,7 +9,7 @@ exports.putComment = async function (data, query) {
         return error.errorReturn(
             404,
             "not found",
-            "post to comment not found"
+            `post '${data.post}' to comment not found`
         );
     const token = query.authorization;
     const user = await apiModel.getUserWithToken(token);
@@ -58,9 +58,9 @@ exports.putReact = async function (id, react, headers){
             "not found",
             "comment not found"
         );
-    if(react == "UPVOTE")
+    if(react == "upvote")
         return await apiModel.addUpvote(id, user[0]._id);
-    else if (react == "DOWNVOTE")
+    else if (react == "downvote")
         return await apiModel.addDownvote(id, user[0]._id);
     else
         return error.errorReturn(

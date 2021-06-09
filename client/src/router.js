@@ -6,6 +6,7 @@ import LogoutPage from './components/LogoutPage';
 import Playlists from './components/main/Playlists';
 import PlaylistView from './components/main/PlaylistView';
 import AlbumView from './components/main/AlbumView';
+import PostView from './components/main/PostView';
 import ArtistView from './components/main/ArtistView';
 import Releases from './components/main/Releases';
 import SearchView from './components/main/SearchView';
@@ -17,9 +18,10 @@ const routes = {
     '/logout': () => <LogoutPage />,
     '/releases': () => <Releases />,
     '/playlist': () => <Playlists />,
-    '/playlist/:id': ({ id }) => <PlaylistView id={id} />,
+    '/playlist/:id*': ({ id }) => <PlaylistView id={id} />,
     '/album/:id*': ({ id }) => <AlbumView id={id} />,
-    '/artist/:id': ({ id }) => <ArtistView id={id} />,
+    '/artist/:id*': ({ id }) => <ArtistView id={id} />,
+    '/post/:id*': ({ id }) => <PostView id={id} />,
     '/search': () => <SearchView />,
 };
 

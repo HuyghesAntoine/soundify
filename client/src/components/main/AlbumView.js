@@ -7,7 +7,6 @@ class AlbumView extends Component {
     constructor(props) {
         super(props);
         this.state = { id: props.id };
-        console.log("test");
     }
     render() {
         return (

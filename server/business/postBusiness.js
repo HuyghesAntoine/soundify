@@ -22,9 +22,10 @@ exports.putPost = async function (data, query) {
 };
 
 exports.getPost = async function (id) {
-    var res = await apiModel.searchPostWithId(id);
-    console.log(res);
-    res.push( await apiModel.selectComments(id));
+    let res = await apiModel.searchPostWithId(id);
+    res = res[0].toObject()
+    coms = await apiModel.selectComments(id);
+    res.comments = coms
     return res;
 };
 
