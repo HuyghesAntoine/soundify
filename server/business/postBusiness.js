@@ -62,7 +62,6 @@ exports.getTimeline = async function (headers) {
             "oauth introuvable"
         );
     const res = await apiModel.getTimeline(headers.authorization);
-
     const activeReactions = [
         'smile',
         'angry',
@@ -76,6 +75,7 @@ exports.getTimeline = async function (headers) {
         'laughing',
     ];
     for (let i = 0; i < res.length; i++) {
+        res[i] = res[i].toObject()
         let reactions = [];
         activeReactions.forEach((reaction) => {
             const count = res[i].reactions.filter(
@@ -93,9 +93,7 @@ exports.getTimeline = async function (headers) {
                 user: userValue,
             });
         });
-        for (let j = 0; j < res[i].reactions.length; j++)
-            res[i].reactions.pop();
-        Object.assign(res[i].reactions, reactions);
+        res[i].reactions = reactions
     }
     return res;
 };
