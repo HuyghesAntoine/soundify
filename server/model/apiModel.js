@@ -362,3 +362,16 @@ exports.deleteDownvote = async function(id_comm, id_user){
     }
     return update;
 }
+
+exports.getNbComms = async function(id){
+    var update;
+    try{
+        update = await Comment.find(
+            { post: id }
+        ).count();
+    }catch(e){
+        update = 0;
+    }
+    console.log(update);
+    return update;
+}
