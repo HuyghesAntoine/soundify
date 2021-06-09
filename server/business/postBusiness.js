@@ -23,7 +23,9 @@ exports.putPost = async function (data, query) {
 
 exports.getPost = async function (id) {
     let res = await apiModel.searchPostWithId(id);
-    res = res[0].toObject()
+    res = res[0].toObject();
+    let user0 = await apiModel.getUserWithId(res.author);
+    res.username = user0[0].username;
     coms = await apiModel.selectComments(id);
     res.comments = coms;
     for(let i = 0; i<res.comments.length; i++){
