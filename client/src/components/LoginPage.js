@@ -3,6 +3,7 @@ import { SpotifyAuth, Scopes } from 'react-spotify-auth';
 import 'react-spotify-auth/dist/index.css';
 import { navigate } from '@patched/hookrouter';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 class LoginPage extends React.Component {
     render() {
@@ -53,7 +54,18 @@ class LoginPage extends React.Component {
                                         Authorization: token,
                                     },
                                 }).then((response) => {
-                                    this.setState({ internal: response.data });
+                                    console.log("inlogin")
+                                    console.log(response)
+                                    axios({
+                                        method: 'get',
+                                        url: process.env.REACT_APP_API_URL+'/api/me',
+                                        headers: {
+                                            Authorization: token,
+                                        },
+                                    }).then((response) => {
+                                        console.log("inlogin")
+                                        Cookies.set("userId",response.data._id,{expires:1})
+                                    });
                                 });
                                 navigate('/friends', true);
                             }}

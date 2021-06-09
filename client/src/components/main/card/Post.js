@@ -134,7 +134,7 @@ class Post extends Component {
                         <div className="m-2">
                             {' '}
                             <span className="text-primary fw-bold">
-                                {this.state.data.author}
+                                {this.state.data.username ? this.state.data.username : this.state.data.author}
                             </span>{' '}
                             <span className="text-muted">
                                 ·{' '}

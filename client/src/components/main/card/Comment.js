@@ -5,16 +5,17 @@ import Cookies from 'js-cookie';
 import { Track } from 'react-spotify-api';
 import { HandThumbsUpFill, HandThumbsDownFill } from 'react-bootstrap-icons';
 import TrackLineView from '../view/TrackLineView';
-import { A } from '@patched/hookrouter/dist/Link';
 
 class Comment extends Component {
     constructor(props) {
         super(props);
         const token = Cookies.get('spotifyAuthToken');
+        const userId = Cookies.get('userId');
 
         this.state = {
             data: props.data,
             token: token,
+            userId: userId,
         };
 
         this.action = [
@@ -24,9 +25,10 @@ class Comment extends Component {
     }
 
     handleClick(reaction) {
-        const method = !this.state.data[reaction].includes(this.state.user)
+        const method = !this.state.data[reaction].includes(this.state.userId)
             ? 'put'
             : 'delete';
+        console.log(method);
         axios({
             method: method,
             url:
@@ -40,17 +42,30 @@ class Comment extends Component {
             },
         }).then((response) => {
             console.log(response.data);
-            /*const reactions = this.state.data.reactions;
-        
+            console.log(method);
+            if (response.data.nModified === 1) {
+                if (method === 'put') {
+                    const reactions = this.state.data[reaction];
+                    reactions.push(this.state.userId)
+                    this.setState((prevState) => ({
+                        data: {
+                            ...prevState.data,
+                            [reaction]: reactions,
+                        },
+                    }));
+                } else if (method === 'delete') {
+                    const reactions = this.state.data[reaction];
+                    const eq = (element) => element === this.state.userId;
+                    reactions.pop(reactions.findIndex(eq))
+                    this.setState((prevState) => ({
+                        data: {
+                            ...prevState.data,
+                            [reaction]: reactions,
+                        },
+                    }));
+                }
             }
-
-            this.setState((prevState) => ({
-                data: {
-                    ...prevState.data,
-                    reactions: reactions,
-                },
-                reactionPanel: false,
-            }));*/
+            console.log(this.state)
         });
     }
 
@@ -74,7 +89,7 @@ class Comment extends Component {
                     <div className="m-2">
                         {' '}
                         <span className="text-primary fw-bold">
-                            {this.state.data.author}
+                            {this.state.data.username}
                         </span>{' '}
                         <span className="text-muted">
                             · <Moment fromNow>{this.state.data.date}</Moment>
