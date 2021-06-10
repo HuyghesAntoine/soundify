@@ -3,6 +3,19 @@ const spotifyRepository = require('../httpRepository/SpotifyRepository');
 const _ = require('lodash');
 const error = require('./errorBusiness');
 
+const activeReactions = [
+    'smile',
+    'angry',
+    'dizzy',
+    'frown',
+    'upsidedown',
+    'heart',
+    'wink',
+    'sunglasses',
+    'expresionless',
+    'laughing',
+];
+
 exports.putPost = async function (data, query) {
     const token = query.authorization;
     const user = await apiModel.getUserWithToken(token);
@@ -33,6 +46,24 @@ exports.getPost = async function (id) {
         var user = await apiModel.getUserWithId(res.comments[i].author);
         res.comments[i].username = user[0].username;
     };
+    let reactions = [];
+    activeReactions.forEach((reaction) => {
+        const count = res.reactions.filter(
+            (react) => react.reaction == reaction
+        ).length;
+        userValue =
+            res.reactions.filter(
+                (react) => react.reaction == reaction && react.user == user0._id
+            ).length === 1
+                ? true
+                : false;
+        reactions.push({
+            reaction: reaction,
+            count: count,
+            user: userValue,
+        });
+    });
+    res.reactions = reactions;
     return res;
 };
 
@@ -64,18 +95,6 @@ exports.getTimeline = async function (headers) {
             "oauth introuvable"
         );
     const res = await apiModel.getTimeline(headers.authorization);
-    const activeReactions = [
-        'smile',
-        'angry',
-        'dizzy',
-        'frown',
-        'upsidedown',
-        'heart',
-        'wink',
-        'sunglasses',
-        'expresionless',
-        'laughing',
-    ];
     for (let i = 0; i < res.length; i++) {
         res[i] = res[i].toObject()
         let reactions = [];
