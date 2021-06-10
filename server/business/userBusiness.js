@@ -119,9 +119,11 @@ exports.getProfil = async function (query, id){
     res = res[0].toObject();
     const nb_post = await apiModel.getNbPost(id);
     const nb_comm = await apiModel.getNbComms(id);
+    const nb_followers = await apiModel.getNbfollowers(id);
     res.nbPost = nb_post;
     res.nbFollow = res.follow.length;
     res.nbComms = nb_comm;
+    res.nbFollowers = nb_followers;
     console.log(res);
     return res;
 }
