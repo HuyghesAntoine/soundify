@@ -19,7 +19,7 @@ import { ArrowLeft } from 'react-bootstrap-icons';
 const App = () => {
     const routeResult = useRoutes(routes);
     const token = Cookies.get('spotifyAuthToken');
-    let history = 0;
+
 
     return (
         <div className="app vh-100 mb-5">
@@ -30,9 +30,9 @@ const App = () => {
                             <Sidebar />
 
                             <div className="vh-100 overflow-hidden col p-1">
-                                {console.log(window.history)}
-                                { window.history.length-history > 1 ? <ArrowLeft className="text-primary ms-4" onClick={() => {window.history.back();history++} }/> : null }
                                 <ScrollbarsCustom>
+
+                                { window.history.length !== 1 ? <ArrowLeft className="float-start text-primary mt-4 ms-4" onClick={ () => window.history.back()} /> : null }
                                     <div className="p-4">
                                         {routeResult || <Error />}
                                         <Player token={token} />
