@@ -1,0 +1,11 @@
+/ /
+/profile /profile
+/friends /friends
+/logout /logout
+/releases /releases
+/playlist /playlist
+/search /search
+/post/:id* /post/:id*
+/artist/:id* /artist/:id*
+/album/:id* /album/:id*
+/playlist/:id* /playlist/:id*
