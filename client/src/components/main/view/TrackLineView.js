@@ -76,7 +76,7 @@ class TrackLineView extends Component {
                         <div className="flex-grow-1 text-white-50">
                             <ChatSquareText
                                 onClick={this.handleLyrics.bind(this)}
-                                style={{ cursor: 'pointer' }}
+                                className="cp"
                             />
                         </div>
                         {!this.state.isAlbum ? (
