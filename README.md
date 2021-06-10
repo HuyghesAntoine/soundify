@@ -1,6 +1,6 @@
 <center>
 <h1> Soundify </h1>
-<img src="img/soundIfyDroite.png" width="400" height="400" />
+<img src="img/soundIfyReadme.png" width="400" height="400" />
 </center>
 
 # projetWS
