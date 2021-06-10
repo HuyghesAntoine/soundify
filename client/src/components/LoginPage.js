@@ -6,9 +6,9 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 class LoginPage extends React.Component {
-    constructor(props){
-        super(props)
-        Cookies.set("r",true,{expires:1})
+    constructor(props) {
+        super(props);
+        Cookies.set('r', true, { expires: 1 });
     }
 
     render() {
@@ -54,19 +54,27 @@ class LoginPage extends React.Component {
                             onAccessToken={(token) => {
                                 axios({
                                     method: 'put',
-                                    url: process.env.REACT_APP_API_URL+'/api/hello',
+                                    url:
+                                        process.env.REACT_APP_API_URL +
+                                        '/api/hello',
                                     headers: {
                                         Authorization: token,
                                     },
                                 }).then((response) => {
                                     axios({
                                         method: 'get',
-                                        url: process.env.REACT_APP_API_URL+'/api/me',
+                                        url:
+                                            process.env.REACT_APP_API_URL +
+                                            '/api/me',
                                         headers: {
                                             Authorization: token,
                                         },
                                     }).then((response) => {
-                                        Cookies.set("userId",response.data._id,{expires:1})
+                                        Cookies.set(
+                                            'userId',
+                                            response.data._id,
+                                            { expires: 1 }
+                                        );
                                     });
                                 });
                                 navigate('/friends', true);

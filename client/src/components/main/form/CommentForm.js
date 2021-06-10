@@ -3,13 +3,8 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
-import {
-    ArrowRight,
-    EmojiSmile,
-    Stickies,
-} from 'react-bootstrap-icons';
+import { ArrowRight, EmojiSmile, Stickies } from 'react-bootstrap-icons';
 import PickerGif from '@progresso/react-giphy-picker-https';
-import { Search } from 'react-spotify-api';
 
 class CommentForm extends Component {
     constructor(props) {
@@ -38,8 +33,6 @@ class CommentForm extends Component {
         this.setState({ gifPreview: null });
     }
 
-  
-
     handleChange(event) {
         this.setState({ value: event.target.value });
     }
@@ -47,8 +40,6 @@ class CommentForm extends Component {
     handleChangeSearch(event) {
         this.setState({ searchValue: event.target.value });
     }
-
- 
 
     handleSubmit(event) {
         event.preventDefault();
@@ -103,7 +94,6 @@ class CommentForm extends Component {
         });
     }
 
-
     render() {
         return (
             <div>
@@ -134,7 +124,6 @@ class CommentForm extends Component {
                                 />
                             </div>
                         ) : null}
-
                     </div>
                     <div className="d-flex justify-content-between border-primary border-top">
                         <button

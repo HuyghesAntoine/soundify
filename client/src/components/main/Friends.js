@@ -18,18 +18,14 @@ class Friends extends Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
-        if(Cookies.get('r')==="true")
-        setTimeout(
-            () =>
-                this.getFriends(),
-            1000
-        );
-        else{
-            this.getFriends()
+        if (Cookies.get('r') === 'true')
+            setTimeout(() => this.getFriends(), 1000);
+        else {
+            this.getFriends();
         }
     }
 
-    getFriends(){
+    getFriends() {
         axios({
             method: 'get',
             url: process.env.REACT_APP_API_URL + '/api/me',
@@ -51,9 +47,9 @@ class Friends extends Component {
                 },
             }).then((response) => {
                 this.setState({ follow: response.data });
-                Cookies.set('r',false)
+                Cookies.set('r', false);
             });
-        })
+        });
     }
 
     handleChange(event) {
@@ -115,9 +111,11 @@ class Friends extends Component {
                       ))
                     : null}
                 <hr />
-                {this.state.follow ? this.state.follow.map((user) => (
-                    <User user={user} self={false} follow={true} />
-                )) : null}
+                {this.state.follow
+                    ? this.state.follow.map((user) => (
+                          <User user={user} self={false} follow={true} />
+                      ))
+                    : null}
             </div>
         );
     }

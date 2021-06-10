@@ -41,7 +41,7 @@ class Comment extends Component {
             if (response.data.nModified === 1) {
                 if (method === 'put') {
                     const reactions = this.state.data[reaction];
-                    reactions.push(this.state.userId)
+                    reactions.push(this.state.userId);
                     this.setState((prevState) => ({
                         data: {
                             ...prevState.data,
@@ -51,7 +51,7 @@ class Comment extends Component {
                 } else if (method === 'delete') {
                     const reactions = this.state.data[reaction];
                     const eq = (element) => element === this.state.userId;
-                    reactions.pop(reactions.findIndex(eq))
+                    reactions.pop(reactions.findIndex(eq));
                     this.setState((prevState) => ({
                         data: {
                             ...prevState.data,
