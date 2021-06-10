@@ -1,8 +1,14 @@
 import axios from 'axios';
 import { Component } from 'react';
-import { PersonCheck, PersonPlus, PersonX } from 'react-bootstrap-icons';
+import {
+    InfoCircle,
+    PersonCheck,
+    PersonPlus,
+    PersonX,
+} from 'react-bootstrap-icons';
 import { Planet } from 'react-kawaii';
 import Cookies from 'js-cookie';
+import { User as UserSpotify } from 'react-spotify-api';
 
 class User extends Component {
     constructor(props) {
@@ -14,6 +20,7 @@ class User extends Component {
             self: props.self,
             follow: props.follow,
             hover: false,
+            info: null,
         };
 
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
@@ -30,16 +37,11 @@ class User extends Component {
     }
 
     handleClick(event) {
-        console.log(
-            process.env.REACT_APP_API_URL+'/api/' +
-                (this.state.follow ? 'unfollow' : 'follow') +
-                '/' +
-                this.state.user._id
-        );
         axios({
             method: 'put',
             url:
-            process.env.REACT_APP_API_URL+'/api/' +
+                process.env.REACT_APP_API_URL +
+                '/api/' +
                 (this.state.follow ? 'unfollow' : 'follow') +
                 '/' +
                 this.state.user._id,
@@ -53,6 +55,26 @@ class User extends Component {
             this.setState({
                 res: response.data,
                 follow: !this.state.follow,
+            });
+        });
+    }
+
+    displayInfo() {
+        axios({
+            method: 'get',
+            url:
+                process.env.REACT_APP_API_URL +
+                '/api/user/profil/' +
+                this.state.user._id,
+            headers: {
+                Authorization: this.token,
+            },
+            data: {
+                content: this.state.value,
+            },
+        }).then((response) => {
+            this.setState({
+                info: response.data,
             });
         });
     }
@@ -83,15 +105,27 @@ class User extends Component {
                     <span>
                         {this.state.user.username}{' '}
                         {this.state.self ? (
-                            <span className="text-muted">(you)</span>
+                            <span className="text-muted fs-6 pe-1">(you)</span>
                         ) : null}
+                        <InfoCircle onClick={this.displayInfo.bind(this)} />
                     </span>
+                    <div>
+                        {this.state.info ? (
+                            <div className="fs-6">
+                                Bio : {this.state.info.bio} <br />{' '}
+                                {this.state.info.nbPost} post{this.state.info.nbPost > 1 ? 's' : null} ·{' '}
+                                {this.state.info.nbComms} comment{this.state.info.nbComms > 1 ? 's' : null} ·{' '}
+                                {this.state.info.nbFollow} follow ·{' '}
+                                {this.state.info.nbFollowers} follower{this.state.info.nbFollowers > 1 ? 's' : null}
+                            </div>
+                        ) : null}
+                    </div>
                 </div>
 
                 {!this.state.self ? (
                     <button
                         className={
-                            'btn btn-outline-light fs-4 p-0 ps-1 pe-1 ' +
+                            'btn btn-outline-light fs-4 m-0 p-0 ps-1 pe-1 ' +
                             (this.state.follow
                                 ? !this.state.hover
                                     ? 'border-success'

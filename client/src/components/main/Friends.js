@@ -18,34 +18,38 @@ class Friends extends Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
+        if (Cookies.get('r') === 'true')
+            setTimeout(() => this.getFriends(), 1000);
+        else {
+            this.getFriends();
+        }
+    }
 
-        setTimeout(
-            () =>
-                axios({
-                    method: 'get',
-                    url: process.env.REACT_APP_API_URL + '/api/me',
-                    headers: {
-                        Authorization: this.state.token,
-                    },
-                }).then((response) => {
-                    this.setState({ self: response.data });
-                    var self = response.data;
-                    axios({
-                        method: 'get',
-                        url:
-                            process.env.REACT_APP_API_URL +
-                            '/api/user/' +
-                            self._id +
-                            '/follow',
-                        headers: {
-                            Authorization: this.state.token,
-                        },
-                    }).then((response) => {
-                        this.setState({ follow: response.data });
-                    });
-                }),
-            1000
-        );
+    getFriends() {
+        axios({
+            method: 'get',
+            url: process.env.REACT_APP_API_URL + '/api/me',
+            headers: {
+                Authorization: this.state.token,
+            },
+        }).then((response) => {
+            this.setState({ self: response.data });
+            var self = response.data;
+            axios({
+                method: 'get',
+                url:
+                    process.env.REACT_APP_API_URL +
+                    '/api/user/' +
+                    self._id +
+                    '/follow',
+                headers: {
+                    Authorization: this.state.token,
+                },
+            }).then((response) => {
+                this.setState({ follow: response.data });
+                Cookies.set('r', false);
+            });
+        });
     }
 
     handleChange(event) {
@@ -64,7 +68,6 @@ class Friends extends Component {
                     Authorization: this.state.token,
                 },
             }).then((response) => {
-                console.log(response);
                 this.setState({
                     res: response.data,
                 });
@@ -108,9 +111,11 @@ class Friends extends Component {
                       ))
                     : null}
                 <hr />
-                {this.state.follow ? this.state.follow.map((user) => (
-                    <User user={user} self={false} follow={true} />
-                )) : null}
+                {this.state.follow
+                    ? this.state.follow.map((user) => (
+                          <User user={user} self={false} follow={true} />
+                      ))
+                    : null}
             </div>
         );
     }

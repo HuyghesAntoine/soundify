@@ -26,7 +26,6 @@ class Comment extends Component {
         const method = !this.state.data[reaction].includes(this.state.userId)
             ? 'put'
             : 'delete';
-        console.log(method);
         axios({
             method: method,
             url:
@@ -39,12 +38,10 @@ class Comment extends Component {
                 Authorization: this.state.token,
             },
         }).then((response) => {
-            console.log(response.data);
-            console.log(method);
             if (response.data.nModified === 1) {
                 if (method === 'put') {
                     const reactions = this.state.data[reaction];
-                    reactions.push(this.state.userId)
+                    reactions.push(this.state.userId);
                     this.setState((prevState) => ({
                         data: {
                             ...prevState.data,
@@ -54,7 +51,7 @@ class Comment extends Component {
                 } else if (method === 'delete') {
                     const reactions = this.state.data[reaction];
                     const eq = (element) => element === this.state.userId;
-                    reactions.pop(reactions.findIndex(eq))
+                    reactions.pop(reactions.findIndex(eq));
                     this.setState((prevState) => ({
                         data: {
                             ...prevState.data,
@@ -63,7 +60,6 @@ class Comment extends Component {
                     }));
                 }
             }
-            console.log(this.state)
         });
     }
 

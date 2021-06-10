@@ -17,7 +17,6 @@ class TrackLineView extends Component {
     }
 
     handleLyrics(event) {
-        console.log(event);
         this.setState({ displayLyrics: !this.state.displayLyrics });
         if (this.state.lyrics.length === 0) {
             axios({
@@ -32,7 +31,6 @@ class TrackLineView extends Component {
                     Authorization: this.state.token,
                 },
             }).then((response) => {
-                console.log(response.data);
                 this.setState({ lyrics: response.data });
             });
         }
@@ -78,7 +76,7 @@ class TrackLineView extends Component {
                         <div className="flex-grow-1 text-white-50">
                             <ChatSquareText
                                 onClick={this.handleLyrics.bind(this)}
-                                style={{ cursor: 'pointer' }}
+                                className="cp"
                             />
                         </div>
                         {!this.state.isAlbum ? (

@@ -38,3 +38,7 @@ body,
     fill: #fff;
     padding-right: 0.5rem;
 }
+
+.cp {
+    cursor: pointer;
+}

@@ -14,10 +14,12 @@ import './App.css';
 import './SoundifyBootstrap.css';
 import Player from './components/main/Player';
 import ScrollbarsCustom from './components/main/ScrollbarsCustom';
+import { ArrowLeft } from 'react-bootstrap-icons';
 
 const App = () => {
     const routeResult = useRoutes(routes);
     const token = Cookies.get('spotifyAuthToken');
+
 
     return (
         <div className="app vh-100 mb-5">
@@ -29,6 +31,8 @@ const App = () => {
 
                             <div className="vh-100 overflow-hidden col p-1">
                                 <ScrollbarsCustom>
+
+                                { window.history.length !== 1 ? <ArrowLeft className="float-start text-primary mt-4 ms-4" onClick={ () => window.history.back()} /> : null }
                                     <div className="p-4">
                                         {routeResult || <Error />}
                                         <Player token={token} />
@@ -46,9 +50,6 @@ const App = () => {
                             >
                                 <ScrollbarsCustom>
                                     <div className="p-4 bg-dark">
-                                        {console.log(
-                                            getWorkingPath() === '/releases'
-                                        )}
                                         <Releases />
                                     </div>
                                 </ScrollbarsCustom>

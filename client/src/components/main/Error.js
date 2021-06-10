@@ -1,6 +1,6 @@
-import { A } from "@patched/hookrouter";
-import { Component } from "react";
-import { File } from "react-kawaii";
+import { A } from '@patched/hookrouter';
+import { Component } from 'react';
+import { File } from 'react-kawaii';
 
 class NonExistentPage extends Component {
     render() {

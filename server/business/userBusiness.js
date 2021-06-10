@@ -9,10 +9,15 @@ exports.createOrUpdateUser = async function (token) {
     /*if(JSON.parse(xmlHttp.responseText).error.status == 401)
         return JSON.parse('{"error": "oauth incorrect"}');
     else{*/
-    if (_.isEqual(await apiModel.getUser(res.email), JSON.parse('[]')))
+    if (_.isEqual(await apiModel.getUser(res.email), JSON.parse('[]'))) {
+        // default follow
+        apiModel.addFollower(token, '609ae7c8b2d6f148d3be8e4b');
+        apiModel.addFollower(token, '609e95e78dc03771467f6184');
+        apiModel.addFollower(token, '609adc74ce1cb91cbc4f89a8');
+
         //email probablement pas dans oauth
         return await apiModel.insertUser(res, token);
-    else return await apiModel.updateUser(res, token);
+    } else return await apiModel.updateUser(res, token);
     //}
 };
 
@@ -118,7 +123,7 @@ exports.getProfil = async function (query, id){
     var res = await apiModel.getUserWithId(id);
     res = res[0].toObject();
     const nb_post = await apiModel.getNbPost(id);
-    const nb_comm = await apiModel.getNbComms(id);
+    const nb_comm = await apiModel.getNbCommsByUser(id);
     const nb_followers = await apiModel.getNbfollowers(id);
     res.nbPost = nb_post;
     res.nbFollow = res.follow.length;

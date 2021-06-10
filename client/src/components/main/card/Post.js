@@ -135,19 +135,27 @@ class Post extends Component {
                         <div className="m-2">
                             <div className="d-flex justify-content-between">
                                 <div>
-                                        <span className="text-primary fw-bold">
-                                        {this.state.data.username ? this.state.data.username : this.state.data.author}
+                                    <span className="text-primary fw-bold">
+                                        {this.state.data.username
+                                            ? this.state.data.username
+                                            : this.state.data.author}
                                     </span>{' '}
                                     <span className="text-muted">
                                         ·{' '}
-                                        <Moment fromNow>{this.state.data.date}</Moment>
+                                        <Moment fromNow>
+                                            {this.state.data.date}
+                                        </Moment>
                                     </span>
                                 </div>
-                                { this.state.data.nb_comm ? <div>
-                                    <span className="text-muted">{this.state.data.nb_comm} <Chat /></span>
-                                </div> : null }
+                                {this.state.data.nb_comm ? (
+                                    <div>
+                                        <span className="text-muted">
+                                            {this.state.data.nb_comm} <Chat />
+                                        </span>
+                                    </div>
+                                ) : null}
                             </div>
-                            
+
                             {this.state.data.content}
                             {this.state.data.gif ? (
                                 <div className="row justify-content-center">
@@ -202,7 +210,7 @@ class Post extends Component {
                                                     </div>
                                                     <span
                                                         className={
-                                                            'position-absolute top-0 end-0 badge rounded-pill bg-secondary' +
+                                                            'position-absolute top-0 end-0 badge rounded-pill bg-secondary ' +
                                                             (reaction.user
                                                                 ? 'text-warning'
                                                                 : '')

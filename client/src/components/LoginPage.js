@@ -6,6 +6,11 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 class LoginPage extends React.Component {
+    constructor(props) {
+        super(props);
+        Cookies.set('r', true, { expires: 1 });
+    }
+
     render() {
         return (
             <div className="position-relative vh-100 bg-secondary">
@@ -49,22 +54,31 @@ class LoginPage extends React.Component {
                             onAccessToken={(token) => {
                                 axios({
                                     method: 'put',
-                                    url: process.env.REACT_APP_API_URL+'/api/hello',
+                                    url:
+                                        process.env.REACT_APP_API_URL +
+                                        '/api/hello',
                                     headers: {
                                         Authorization: token,
                                     },
                                 }).then((response) => {
-                                    console.log("inlogin")
-                                    console.log(response)
                                     axios({
                                         method: 'get',
-                                        url: process.env.REACT_APP_API_URL+'/api/me',
+                                        url:
+                                            process.env.REACT_APP_API_URL +
+                                            '/api/me',
                                         headers: {
                                             Authorization: token,
                                         },
                                     }).then((response) => {
-                                        console.log("inlogin")
-                                        Cookies.set("userId",response.data._id,{expires:1})
+                                        Cookies.set(
+                                            'userId',
+                                            response.data._id,
+                                            { expires: 1 }
+                                        );
+                                        Cookies.set(
+                                            'username',
+                                            response.data.username
+                                        );
                                     });
                                 });
                                 navigate('/friends', true);

@@ -27,7 +27,6 @@ class Sidebar extends Component {
                         {({ data }) => {
                             return data ? (
                                 <div>
-                                    {console.log(data)}
                                     <div>
                                         {data.images[0] ? (
                                             <img

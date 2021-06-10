@@ -4,6 +4,8 @@ import Post from './card/Post';
 import PostForm from './form/PostForm';
 import axios from 'axios';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import redirect from '@patched/hookrouter/dist/redirect';
+import { navigate } from '@patched/hookrouter';
 
 class Home extends Component {
     constructor(props) {
@@ -18,7 +20,8 @@ class Home extends Component {
                 Authorization: token,
             },
         }).then((response) => {
-            console.log(response.data);
+            if(response.data.error && response.data.error.code === 401)
+                navigate('/logout')
             this.setState({
                 timeline: response.data,
             });

@@ -11,6 +11,7 @@ import {
 } from 'react-bootstrap-icons';
 import PickerGif from '@progresso/react-giphy-picker-https';
 import { Search } from 'react-spotify-api';
+import Post from '../card/Post';
 
 class PostForm extends Component {
     constructor(props) {
@@ -36,7 +37,6 @@ class PostForm extends Component {
     }
 
     handleSelectGif(gif) {
-        console.log(gif);
         this.setState({ gifPreview: gif.original.webp });
     }
 
@@ -57,7 +57,6 @@ class PostForm extends Component {
     }
 
     handleSelectTrack(event) {
-        console.log(event);
         this.setState({
             trackPreview: {
                 id: event.target.id,
@@ -85,11 +84,14 @@ class PostForm extends Component {
                         : null,
                 },
             }).then((response) => {
-                console.log(response.data);
+                let a = this.state.lastPost
+                response.data.author = Cookies.get('username')
+                a.push(response.data)
+                console.log(response.data)
                 this.setState({
                     value: '',
-                    res: response.data,
                     displayPicker: false,
+                    lastPost : a,
                     displayMusicSearch: false,
                     displayPickerGif: false,
                     gifPreview: null,
@@ -130,7 +132,6 @@ class PostForm extends Component {
     render() {
         return (
             <div>
-                {' '}
                 <form
                     onSubmit={this.handleSubmit}
                     className="w-75 mx-auto mt-3 mb-5 border border-2 rounded bg-dark"
@@ -275,6 +276,10 @@ class PostForm extends Component {
                         </div>
                     ) : null}
                 </form>
+
+                {this.state.lastPost.map( post => 
+                    <Post data={post} /> )
+                }
             </div>
         );
     }
