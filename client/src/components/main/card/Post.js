@@ -15,6 +15,7 @@ import {
     EmojiSunglassesFill,
     EmojiExpressionlessFill,
     EmojiLaughingFill,
+    Chat,
 } from 'react-bootstrap-icons';
 import TrackLineView from '../view/TrackLineView';
 import { A } from '@patched/hookrouter/dist/Link';
@@ -132,15 +133,21 @@ class Post extends Component {
                         className="text-decoration-none text-white"
                     >
                         <div className="m-2">
-                            {' '}
-                            <span className="text-primary fw-bold">
-                                {this.state.data.username ? this.state.data.username : this.state.data.author}
-                            </span>{' '}
-                            <span className="text-muted">
-                                ·{' '}
-                                <Moment fromNow>{this.state.data.date}</Moment>
-                            </span>
-                            <br />
+                            <div className="d-flex justify-content-between">
+                                <div>
+                                        <span className="text-primary fw-bold">
+                                        {this.state.data.username ? this.state.data.username : this.state.data.author}
+                                    </span>{' '}
+                                    <span className="text-muted">
+                                        ·{' '}
+                                        <Moment fromNow>{this.state.data.date}</Moment>
+                                    </span>
+                                </div>
+                                { this.state.data.nb_comm ? <div>
+                                    <span className="text-muted">{this.state.data.nb_comm} <Chat /></span>
+                                </div> : null }
+                            </div>
+                            
                             {this.state.data.content}
                             {this.state.data.gif ? (
                                 <div className="row justify-content-center">

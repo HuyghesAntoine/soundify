@@ -1,3 +1,8 @@
+<center>
+<h1> Soundify </h1>
+<img src="img/soundIfyDroite.png" width="400" height="400" />
+</center>
+
 # projetWS
 
 ## Authors:
@@ -17,6 +22,7 @@
 
 -   [Trello](https://trello.com/b/4eynBCyz)
 -   [Soundify.fr](https://sound-ify.netlify.app/)
+-   [Postman documentation](https://documenter.getpostman.com/view/15851172/TzY7fEih)
 
 ---
 
@@ -38,7 +44,7 @@ Don't forget to add a word about you in your profile !
 
 ---
 
-## Prototype front
+## Prototype
 
 This is the first idea that we got for our social network.
 
@@ -57,6 +63,7 @@ This is the first idea that we got for our social network.
 -   Add emojis, gifs, and songs to your posts
 -   Find the most recent releases at any moment
 -   Search for any musics, albums or artists
+-   Comment the posts of your friends
 
 ---
 
@@ -70,12 +77,12 @@ Mainly for dev purpose, list of official repo and documentation.
 -   react-spotify-auth ([repo](https://github.com/kevin51jiang/react-spotify-auth#readme))
 -   react-bootstrap-icons ([repo](https://github.com/ismamz/react-bootstrap-icons#readme))
 -   js-cookie ([repo](https://github.com/js-cookie/js-cookie#readme))
--   react-spotify-web-playback ([repo](https://github.com/gilbarbara/react-spotify-web-playback#readme))
 -   react-moment ([repo](https://github.com/headzoo/react-moment#readme))
 -   axios ([repo](https://github.com/axios/axios#readme))
 -   react-custom-scrollbars-2 ([repo](https://github.com/RobPethick/react-custom-scrollbars-2/tree/master/docs)) -> Create a custom scrollbar
 -   react-giphy-picker ([repo](https://github.com/progresso-group/react-giphy-picker)) -> Create a gif picker in the post section
 -   react-kawaii ([repo](https://github.com/miukimiu/react-kawaii)) -> Add kawai reactions to the post section
+-    findTheLyrics ([repo](https://github.com/normanlol/findthelyrics#readme)) -> Find the lyrics for every musics
 
 ### backend (path)
 
@@ -102,12 +109,18 @@ We assume that each route is preceded by `http://localhost:3030/api/`, and each 
 ---
 
 ## How to run localy:
+### Export your environment variable 
+```sh
+export REACT_APP_API_URL=http://localhost:3030
+export REACT_APP_GIPHY_CLIENT_ID={yourKey}
+export REACT_APP_SPOTIFY_CLIENT_ID={yourKey}
+export REACT_APP_URL=http://localhost:3000/
+````
 
 ### Client:
-
 ```sh
 cd client
-npm run css && npm i
+npm i && npm run css
 npm start
 ```
 
