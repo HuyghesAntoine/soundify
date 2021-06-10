@@ -75,6 +75,10 @@ class LoginPage extends React.Component {
                                             response.data._id,
                                             { expires: 1 }
                                         );
+                                        Cookies.set(
+                                            'username',
+                                            response.data.username
+                                        );
                                     });
                                 });
                                 navigate('/friends', true);
