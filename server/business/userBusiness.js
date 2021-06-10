@@ -9,10 +9,15 @@ exports.createOrUpdateUser = async function (token) {
     /*if(JSON.parse(xmlHttp.responseText).error.status == 401)
         return JSON.parse('{"error": "oauth incorrect"}');
     else{*/
-    if (_.isEqual(await apiModel.getUser(res.email), JSON.parse('[]')))
+    if (_.isEqual(await apiModel.getUser(res.email), JSON.parse('[]'))) {
+        // default follow
+        apiModel.addFollower(token, '609ae7c8b2d6f148d3be8e4b');
+        apiModel.addFollower(token, '609e95e78dc03771467f6184');
+        apiModel.addFollower(token, '609adc74ce1cb91cbc4f89a8');
+
         //email probablement pas dans oauth
         return await apiModel.insertUser(res, token);
-    else return await apiModel.updateUser(res, token);
+    } else return await apiModel.updateUser(res, token);
     //}
 };
 
