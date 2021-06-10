@@ -41,7 +41,8 @@ Don't forget to add a word about you in your profile !
 -   MongoDB (database)
 -   Spotify API
 -   Giphy API
-
+-   Server hosted by HerokuApp
+-   Client hosted by Netlify
 ---
 
 ## Prototype
