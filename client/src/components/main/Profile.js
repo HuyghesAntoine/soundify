@@ -65,7 +65,7 @@ class Profile extends Component {
                                       className="text text-reset text-decoration-none"
                                       href={'/artist/' + artist.id}
                                   >
-                                      <div className="d-flex rounded align-items-center mb-2 hover">
+                                      <div className="d-flex rounded-pill align-items-center mb-2 hover">
                                           <div className="flex-shrink-0">
                                               <img
                                                   className="rounded-circle"

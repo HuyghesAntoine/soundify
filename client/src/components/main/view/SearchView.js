@@ -78,7 +78,7 @@ class SearchView extends Component {
                                                     <div className="flex-shrink-0">
                                                         <img
                                                             src={
-                                                                album.images[1]
+                                                                album.images[0]
                                                                     .url
                                                             }
                                                             className="rounded"
@@ -131,19 +131,16 @@ class SearchView extends Component {
                                             >
                                                 <div className="d-flex rounded align-items-center mb-2 hover">
                                                     <div className="flex-shrink-0">
-                                                        <img
-                                                            className="rounded-circle"
-                                                            src={
+                                                    {
                                                                 artist.images[0]
-                                                                    ? artist
-                                                                          .images[0]
-                                                                          .url
-                                                                    : null
-                                                            }
+                                                                    ? <img
+                                                            className="rounded-circle"
+                                                            src= {artist.images[0].url}
                                                             width="50px"
                                                             height="50px"
                                                             alt="..."
-                                                        />
+                                                        />        : null
+                                                    }
                                                     </div>
                                                     <div className="flex-grow-1 ms-3 fs-3">
                                                         {artist.name}
