@@ -368,8 +368,8 @@ exports.deleteDownvote = async function(id_comm, id_user){
     }
     return update;
 }
-/*
-exports.getNbComms = async function(id){
+
+exports.getNbCommsByPost = async function(id){
     var update;
     try{
         update = await Comment.find(
@@ -380,7 +380,7 @@ exports.getNbComms = async function(id){
     }
     console.log(update);
     return update;
-}*/
+}
 
 exports.getNbPost = async function(id){
     var update;
@@ -395,7 +395,7 @@ exports.getNbPost = async function(id){
     return update;
 }
 
-exports.getNbComms = async function(id){
+exports.getNbCommsByUser = async function(id){
     var update;
     try{
         update = await Comment.find(

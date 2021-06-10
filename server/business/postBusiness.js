@@ -96,7 +96,7 @@ exports.getTimeline = async function (headers) {
             });
         });
         res[i].reactions = reactions;
-        res[i].nb_comm = await apiModel.getNbComms(res[i]._id);
+        res[i].nb_comm = await apiModel.getNbCommsByPost(res[i]._id);
         console.log(res[i]._id)
     }
     console.log(res);
