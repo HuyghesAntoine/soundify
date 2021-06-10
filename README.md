@@ -135,3 +135,39 @@ npm run dev
 Once you have run **both** the client and the server, go to **https://localhost:3000**
 
 ---
+
+# Some stats
+
+Total : 53 files,  12879 codes, 83 comments, 1535 blanks, all 14497 lines
+
+## Languages
+| language | files | code | comment | blank | total |
+| :--- | ---: | ---: | ---: | ---: | ---: |
+| CSS | 3 | 9,229 | 27 | 1,206 | 10,462 |
+| JavaScript | 44 | 3,481 | 32 | 288 | 3,801 |
+| Markdown | 1 | 103 | 0 | 36 | 139 |
+| JSON | 1 | 25 | 0 | 1 | 26 |
+| HTML | 1 | 20 | 23 | 1 | 44 |
+| YAML | 1 | 14 | 0 | 1 | 15 |
+| SCSS | 1 | 6 | 1 | 2 | 9 |
+| XML | 1 | 1 | 0 | 0 | 1 |
+
+## Directories
+| path | files | code | comment | blank | total |
+| :--- | ---: | ---: | ---: | ---: | ---: |
+| . | 53 | 12,879 | 83 | 1,535 | 14,497 |
+| client | 36 | 11,618 | 72 | 1,380 | 13,070 |
+| client\public | 2 | 45 | 23 | 2 | 70 |
+| client\scss | 1 | 6 | 1 | 2 | 9 |
+| client\src | 33 | 11,567 | 48 | 1,376 | 12,991 |
+| client\src\components | 23 | 2,224 | 14 | 151 | 2,389 |
+| client\src\components\main | 20 | 1,969 | 14 | 140 | 2,123 |
+| client\src\components\main\card | 3 | 528 | 1 | 34 | 563 |
+| client\src\components\main\form | 3 | 516 | 0 | 40 | 556 |
+| client\src\components\main\view | 6 | 482 | 0 | 28 | 510 |
+| client\src\components\sidebar | 1 | 150 | 0 | 5 | 155 |
+| server | 15 | 1,144 | 11 | 118 | 1,273 |
+| server\business | 4 | 396 | 6 | 32 | 434 |
+| server\controller | 4 | 189 | 0 | 25 | 214 |
+| server\httpRepository | 1 | 12 | 0 | 1 | 13 |
+| server\model | 4 | 491 | 1 | 44 | 536 |
