@@ -18,7 +18,6 @@ class Friends extends Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
-        console.log(Cookies.get('r')==="true")
         if(Cookies.get('r')==="true")
         setTimeout(
             () =>
@@ -73,7 +72,6 @@ class Friends extends Component {
                     Authorization: this.state.token,
                 },
             }).then((response) => {
-                console.log(response);
                 this.setState({
                     res: response.data,
                 });

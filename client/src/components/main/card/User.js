@@ -72,7 +72,6 @@ class User extends Component {
                 content: this.state.value,
             },
         }).then((response) => {
-            console.log(response.data);
             this.setState({
                 info: response.data,
             });

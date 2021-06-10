@@ -46,9 +46,6 @@ const App = () => {
                             >
                                 <ScrollbarsCustom>
                                     <div className="p-4 bg-dark">
-                                        {console.log(
-                                            getWorkingPath() === '/releases'
-                                        )}
                                         <Releases />
                                     </div>
                                 </ScrollbarsCustom>

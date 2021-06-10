@@ -18,7 +18,6 @@ class Home extends Component {
                 Authorization: token,
             },
         }).then((response) => {
-            console.log(response.data);
             this.setState({
                 timeline: response.data,
             });

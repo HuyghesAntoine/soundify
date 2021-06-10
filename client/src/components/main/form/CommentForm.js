@@ -31,7 +31,6 @@ class CommentForm extends Component {
     }
 
     handleSelectGif(gif) {
-        console.log(gif);
         this.setState({ gifPreview: gif.original.webp });
     }
 
@@ -71,7 +70,6 @@ class CommentForm extends Component {
                         : null,
                 },
             }).then((response) => {
-                console.log(response.data);
                 this.setState({
                     value: '',
                     res: response.data,

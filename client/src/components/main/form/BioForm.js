@@ -23,7 +23,6 @@ class BioForm extends Component {
                 Authorization: this.state.token,
             },
         }).then((response) => {
-            console.log(response.data);
             this.setState({
                 value: response.data.bio,
             });
@@ -45,7 +44,6 @@ class BioForm extends Component {
                 content: this.state.value,
             },
         }).then((response) => {
-            console.log(response.data);
             this.setState({
                 res: response.data,
                 inputDisplay: 'd-none',

@@ -17,7 +17,6 @@ class TrackLineView extends Component {
     }
 
     handleLyrics(event) {
-        console.log(event);
         this.setState({ displayLyrics: !this.state.displayLyrics });
         if (this.state.lyrics.length === 0) {
             axios({
@@ -32,7 +31,6 @@ class TrackLineView extends Component {
                     Authorization: this.state.token,
                 },
             }).then((response) => {
-                console.log(response.data);
                 this.setState({ lyrics: response.data });
             });
         }

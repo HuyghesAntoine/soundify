@@ -36,7 +36,6 @@ class PostForm extends Component {
     }
 
     handleSelectGif(gif) {
-        console.log(gif);
         this.setState({ gifPreview: gif.original.webp });
     }
 
@@ -57,7 +56,6 @@ class PostForm extends Component {
     }
 
     handleSelectTrack(event) {
-        console.log(event);
         this.setState({
             trackPreview: {
                 id: event.target.id,
@@ -85,7 +83,6 @@ class PostForm extends Component {
                         : null,
                 },
             }).then((response) => {
-                console.log(response.data);
                 this.setState({
                     value: '',
                     res: response.data,
