@@ -1,6 +1,11 @@
 import axios from 'axios';
 import { Component } from 'react';
-import { PersonCheck, PersonPlus, PersonX } from 'react-bootstrap-icons';
+import {
+    InfoCircle,
+    PersonCheck,
+    PersonPlus,
+    PersonX,
+} from 'react-bootstrap-icons';
 import { Planet } from 'react-kawaii';
 import Cookies from 'js-cookie';
 
@@ -14,6 +19,7 @@ class User extends Component {
             self: props.self,
             follow: props.follow,
             hover: false,
+            info: null,
         };
 
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
@@ -30,16 +36,11 @@ class User extends Component {
     }
 
     handleClick(event) {
-        console.log(
-            process.env.REACT_APP_API_URL+'/api/' +
-                (this.state.follow ? 'unfollow' : 'follow') +
-                '/' +
-                this.state.user._id
-        );
         axios({
             method: 'put',
             url:
-            process.env.REACT_APP_API_URL+'/api/' +
+                process.env.REACT_APP_API_URL +
+                '/api/' +
                 (this.state.follow ? 'unfollow' : 'follow') +
                 '/' +
                 this.state.user._id,
@@ -53,6 +54,27 @@ class User extends Component {
             this.setState({
                 res: response.data,
                 follow: !this.state.follow,
+            });
+        });
+    }
+
+    displayInfo() {
+        axios({
+            method: 'get',
+            url:
+                process.env.REACT_APP_API_URL +
+                '/api/user/profil/' +
+                this.state.user._id,
+            headers: {
+                Authorization: this.token,
+            },
+            data: {
+                content: this.state.value,
+            },
+        }).then((response) => {
+            console.log(response.data);
+            this.setState({
+                info: response.data,
             });
         });
     }
@@ -85,7 +107,19 @@ class User extends Component {
                         {this.state.self ? (
                             <span className="text-muted">(you)</span>
                         ) : null}
+                        <InfoCircle onClick={this.displayInfo.bind(this)} />
                     </span>
+                    <div>
+                        {this.state.info ? (
+                            <div className="fs-6">
+                                Bio : {this.state.info.bio} <br />{' '}
+                                {this.state.info.nbPost} posts ·{' '}
+                                {this.state.info.nbComms} commentaires ·{' '}
+                                {this.state.info.nbFollow} follow ·{' '}
+                                {this.state.info.nbFollowers} followers
+                            </div>
+                        ) : null}
+                    </div>
                 </div>
 
                 {!this.state.self ? (
