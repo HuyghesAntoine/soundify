@@ -105,7 +105,6 @@ We assume that each route is preceded by `http://localhost:3030/api/`, and each 
 | `GET`    | `post/:id`                 | get post from id                                                                        |
 | `DELETE` | `post/:id`                 | delete post from post id                                                                |
 | `PUT`    | `post/:id/react/:reaction` | create/update reaction from post id                                                     |
-| `GET`    | `post/search`              | search post `params { query : String (required), limit : Int(optional, default : 10) }` |
 
 ---
 
