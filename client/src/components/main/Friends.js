@@ -18,34 +18,43 @@ class Friends extends Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
-
+        console.log(Cookies.get('r')==="true")
+        if(Cookies.get('r')==="true")
         setTimeout(
             () =>
-                axios({
-                    method: 'get',
-                    url: process.env.REACT_APP_API_URL + '/api/me',
-                    headers: {
-                        Authorization: this.state.token,
-                    },
-                }).then((response) => {
-                    this.setState({ self: response.data });
-                    var self = response.data;
-                    axios({
-                        method: 'get',
-                        url:
-                            process.env.REACT_APP_API_URL +
-                            '/api/user/' +
-                            self._id +
-                            '/follow',
-                        headers: {
-                            Authorization: this.state.token,
-                        },
-                    }).then((response) => {
-                        this.setState({ follow: response.data });
-                    });
-                }),
+                this.getFriends(),
             1000
         );
+        else{
+            this.getFriends()
+        }
+    }
+
+    getFriends(){
+        axios({
+            method: 'get',
+            url: process.env.REACT_APP_API_URL + '/api/me',
+            headers: {
+                Authorization: this.state.token,
+            },
+        }).then((response) => {
+            this.setState({ self: response.data });
+            var self = response.data;
+            axios({
+                method: 'get',
+                url:
+                    process.env.REACT_APP_API_URL +
+                    '/api/user/' +
+                    self._id +
+                    '/follow',
+                headers: {
+                    Authorization: this.state.token,
+                },
+            }).then((response) => {
+                this.setState({ follow: response.data });
+                Cookies.set('r',false)
+            });
+        })
     }
 
     handleChange(event) {
