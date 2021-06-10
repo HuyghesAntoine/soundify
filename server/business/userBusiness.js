@@ -11,12 +11,14 @@ exports.createOrUpdateUser = async function (token) {
     else{*/
     if (_.isEqual(await apiModel.getUser(res.email), JSON.parse('[]'))) {
         // default follow
+        const user = await apiModel.insertUser(res, token)
+        
         apiModel.addFollower(token, '609ae7c8b2d6f148d3be8e4b');
         apiModel.addFollower(token, '609e95e78dc03771467f6184');
         apiModel.addFollower(token, '609adc74ce1cb91cbc4f89a8');
 
         //email probablement pas dans oauth
-        return await apiModel.insertUser(res, token);
+        return user;
     } else return await apiModel.updateUser(res, token);
     //}
 };
