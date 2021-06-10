@@ -210,7 +210,7 @@ class Post extends Component {
                                                     </div>
                                                     <span
                                                         className={
-                                                            'position-absolute top-0 end-0 badge rounded-pill bg-secondary' +
+                                                            'position-absolute top-0 end-0 badge rounded-pill bg-secondary ' +
                                                             (reaction.user
                                                                 ? 'text-warning'
                                                                 : '')
