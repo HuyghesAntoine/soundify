@@ -109,3 +109,19 @@ exports.getFollower = async function (query, id) {
     const res = await apiModel.getFollowed(id);
     return res;
 };
+
+exports.getProfil = async function (query, id){
+    const token = query.authorization;
+    const user = await apiModel.getUserWithToken(token);
+    if (_.isEqual(user, JSON.parse('[]')))
+        return error.errorReturn(401, 'unauthorized', 'oauth introuvable');
+    var res = await apiModel.getUserWithId(id);
+    res = res[0].toObject();
+    const nb_post = await apiModel.getNbPost(id);
+    const nb_comm = await apiModel.getNbComms(id);
+    res.nbPost = nb_post;
+    res.nbFollow = res.follow.length;
+    res.nbComms = nb_comm;
+    console.log(res);
+    return res;
+}

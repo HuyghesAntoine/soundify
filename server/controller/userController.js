@@ -20,6 +20,15 @@ exports.getUser = async function (req, res) {
     return res;
 };
 
+exports.getProfil = async function (req, res) {
+    const post = await userBusiness.getProfil(req.headers, req.params.id);
+    var error;
+    if(post.error) error = post.error.code;
+    else error = 200;
+    res.status(error).send(post);
+    return res;
+};
+
 exports.getMe = async function (req, res) {
     const post = await userBusiness.getMe(req.headers.authorization);
     var error;

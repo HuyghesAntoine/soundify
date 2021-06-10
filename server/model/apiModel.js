@@ -16,7 +16,13 @@ mongoose.connect(
 
 exports.getUserWithId = async function (id) {
     try {
-        const find = await User.find({ _id: id });
+        const find = await User.find(
+            { 
+                _id: id 
+            },
+            {
+                oauth: 0
+            });
         return find;
     } catch (err) {}
     return JSON.parse('[]');
@@ -368,6 +374,32 @@ exports.getNbComms = async function(id){
     try{
         update = await Comment.find(
             { post: id }
+        ).count();
+    }catch(e){
+        update = 0;
+    }
+    console.log(update);
+    return update;
+}
+
+exports.getNbPost = async function(id){
+    var update;
+    try{
+        update = await Post.find(
+            { author: id }
+        ).count();
+    }catch(e){
+        update = 0;
+    }
+    console.log(update);
+    return update;
+}
+
+exports.getNbComms = async function(id){
+    var update;
+    try{
+        update = await Comment.find(
+            { author: id }
         ).count();
     }catch(e){
         update = 0;
