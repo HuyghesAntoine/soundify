@@ -8,6 +8,7 @@ import {
 } from 'react-bootstrap-icons';
 import { Planet } from 'react-kawaii';
 import Cookies from 'js-cookie';
+import { User as UserSpotify } from 'react-spotify-api';
 
 class User extends Component {
     constructor(props) {
@@ -104,7 +105,7 @@ class User extends Component {
                     <span>
                         {this.state.user.username}{' '}
                         {this.state.self ? (
-                            <span className="text-muted">(you)</span>
+                            <span className="text-muted fs-6 pe-1">(you)</span>
                         ) : null}
                         <InfoCircle onClick={this.displayInfo.bind(this)} />
                     </span>
@@ -112,10 +113,10 @@ class User extends Component {
                         {this.state.info ? (
                             <div className="fs-6">
                                 Bio : {this.state.info.bio} <br />{' '}
-                                {this.state.info.nbPost} posts ·{' '}
-                                {this.state.info.nbComms} commentaires ·{' '}
+                                {this.state.info.nbPost} post{this.state.info.nbPost > 1 ? 's' : null} ·{' '}
+                                {this.state.info.nbComms} comment{this.state.info.nbComms > 1 ? 's' : null} ·{' '}
                                 {this.state.info.nbFollow} follow ·{' '}
-                                {this.state.info.nbFollowers} followers
+                                {this.state.info.nbFollowers} follower{this.state.info.nbFollowers > 1 ? 's' : null}
                             </div>
                         ) : null}
                     </div>
@@ -124,7 +125,7 @@ class User extends Component {
                 {!this.state.self ? (
                     <button
                         className={
-                            'btn btn-outline-light fs-4 p-0 ps-1 pe-1 ' +
+                            'btn btn-outline-light fs-4 m-0 p-0 ps-1 pe-1 ' +
                             (this.state.follow
                                 ? !this.state.hover
                                     ? 'border-success'
